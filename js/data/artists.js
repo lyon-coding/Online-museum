@@ -33,7 +33,7 @@ export const ARTISTS = [
       },
       {
         title: 'Le Déjeuner sur l\'herbe', year: 1863, date: '1863', collection: 'Musée d\'Orsay, Paris',
-        desc: 'Rejected by the Salon and shown at the Salon des Refusés, it caused a scandal: a nude woman picnicking with two men in modern dress. The composition is borrowed from a Raphael engraving, but the harsh frontal light and flat modelling were entirely new.',
+        desc: 'Rejected by the Salon and shown at the Salon des Refusés, it caused a scandal: a nude woman picnicking with two men in modern dress, a second woman bathing behind them. The poses come from an old engraving after Raphael, but the harsh frontal light and flat modelling were entirely new.',
         files: ['Edouard Manet - Luncheon on the Grass - Google Art Project.jpg'],
         article: 'Le Déjeuner sur l\'herbe'
       },
@@ -45,7 +45,7 @@ export const ARTISTS = [
       },
       {
         title: 'The Fifer', year: 1866, date: '1866', collection: 'Musée d\'Orsay, Paris',
-        desc: 'After seeing Velázquez in Madrid in 1865, Manet set a young military musician against an empty background with almost no shadow. The Salon rejected it; the young writer Émile Zola defended Manet in print, beginning a lifelong friendship.',
+        desc: 'A boy from the Imperial Guard plays his fife against an empty grey background with no floor or horizon — only a small shadow at his feet anchors him in space. Flat areas of red, black and white, almost no modelling: Manet had just seen Velázquez in Madrid. The Salon rejected it.',
         files: ['Edouard Manet - The Fifer - Google Art Project.jpg', 'Edouard Manet - Le Fifre.jpg'],
         article: 'The Fifer'
       },
@@ -118,32 +118,32 @@ export const ARTISTS = [
       },
       {
         title: 'La Gare Saint-Lazare', year: 1877, date: '1877',
-        desc: 'One of a dozen views of the Paris railway station. Monet treated the iron, glass and steam of the modern city as a study in light and atmosphere.',
+        desc: 'Locomotives breathe clouds of steam under the glass-and-iron roof of the Paris station. One of a dozen views Monet painted there in 1877, treating the machinery of the modern city as a study in light and atmosphere.',
         files: ['Claude Monet - La Gare Saint-Lazare.jpg', 'Claude Monet - The Gare Saint-Lazare.jpg'],
         search: { q: 'Claude Monet Gare Saint-Lazare 1877', all: ['monet', 'lazare'] }
       },
       {
         title: 'Stacks of Wheat (Haystacks series)', year: 1890, date: '1890–91',
-        desc: 'From 1890 Monet painted the same stacks of wheat at different hours and seasons — his first true series. The subject barely matters; colour and light do. A Haystack canvas seen in Moscow in 1896 made the young Kandinsky realise a painting might not need an object at all.',
+        desc: 'Stacks of wheat in a field at the end of summer, glowing in warm light with violet-blue shadows. From 1890 Monet painted the same stacks again and again, at different hours and seasons — his first true series. The motif barely changes; each canvas records one particular light and atmosphere.',
         files: ['Claude Monet - Stacks of Wheat (End of Summer) - 1985.1103 - Art Institute of Chicago.jpg'],
         search: { q: 'Claude Monet Stacks of Wheat haystacks', all: ['monet', 'wheat|haystack|meules'] }
       },
       {
         title: 'Rouen Cathedral (series)', year: 1893, date: '1892–94',
-        desc: 'More than thirty views of the cathedral façade, from morning to sunset. The stone dissolves into thick, crusted paint: the building becomes a screen for changing light.',
+        desc: 'The cathedral façade in the light of the setting sun. The carved stone dissolves into thick, crusted strokes of orange, pink and blue: the building has become a screen for changing light. One of more than thirty views Monet painted from a window opposite.',
         files: ['Claude Monet - Rouen Cathedral, Facade (Sunset).JPG'],
         search: { q: 'Claude Monet Rouen Cathedral facade', all: ['monet', 'rouen'] }
       },
       {
         title: 'Bridge over a Pond of Water Lilies', year: 1899, date: '1899',
-        desc: 'Monet created his own motif: a water garden with a Japanese-style footbridge at his house in Giverny. For the rest of his life it would be almost his only subject.',
+        desc: 'A Japanese-style footbridge arches over a pond covered with water lilies, framed by dense green foliage. Monet created this motif himself, in the water garden of his house at Giverny; it would be almost his only subject for the rest of his life.',
         files: ['Claude Monet - Bridge over a Pond of Water Lilies.jpg'],
         article: 'Bridge over a Pond of Water Lilies',
         search: { q: 'Claude Monet Bridge over a Pond of Water Lilies 1899', all: ['monet', 'bridge over a pond|japanese footbridge|pont japonais', '1899'] }
       },
       {
         title: 'Water Lilies', year: 1906, date: '1906', collection: 'Art Institute of Chicago',
-        desc: 'The horizon has disappeared: only the water\'s surface, reflected sky and floating flowers remain. With no edges and no focus, these late canvases were later hailed as forerunners of abstract painting.',
+        desc: 'The horizon has disappeared: only the water\'s surface remains, with floating lilies and the reflections of sky and trees. With no edges and no single focus, the picture becomes a field of colour and light.',
         files: ['Claude Monet - Water Lilies - 1906, Ryerson.jpg'],
         search: { q: 'Claude Monet Water Lilies 1906 Art Institute', all: ['monet', 'water lil|nympheas', '1906'] }
       }
@@ -173,7 +173,7 @@ export const ARTISTS = [
       {
         title: 'La Loge', year: 1874, date: '1874', collection: 'Courtauld Gallery, London',
         search: { q: 'Renoir La Loge 1874 Courtauld', all: ['renoir', '\\bloge\\b', 'courtauld|1874|theatre box'] },
-        desc: 'Shown at the first Impressionist exhibition. A fashionable couple in a theatre box: she is on display, he looks elsewhere through his opera glasses. The black-and-white stripes are painted with a bravura that recalls Manet.',
+        desc: 'A fashionable couple in a theatre box: she faces us, on display in her striped dress, while he looks elsewhere through his opera glasses. The black-and-white stripes are painted with loose bravura. Shown at the first Impressionist exhibition in 1874.',
         files: ['Pierre-Auguste Renoir - La Loge (The Theatre Box) - Google Art Project.jpg'],
         article: 'La Loge (Renoir)'
       },
@@ -209,14 +209,14 @@ export const ARTISTS = [
       },
       {
         title: 'The Large Bathers', year: 1884, date: '1884–87', collection: 'Philadelphia Museum of Art',
-        desc: 'Renoir\'s "dry" period: sharp contours, smooth modelling, a composition borrowed from a 17th-century relief at Versailles. An Impressionist deliberately turning back to classical form — just as Cézanne and Seurat were doing.',
+        desc: 'Three nudes by a stream, drawn with sharp contours and smooth, porcelain-like modelling — Renoir\'s "dry" period. The poses come from a 17th-century relief in the gardens of Versailles: an Impressionist deliberately returning to classical drawing.',
         files: ['Pierre-Auguste Renoir, French - The Large Bathers - Google Art Project.jpg'],
         search: { q: 'Renoir Large Bathers Philadelphia', all: ['renoir', 'large bathers|grandes baigneuses'] }
       },
       {
         title: 'Young Girls at the Piano', year: 1892, date: '1892',
         search: { q: 'Renoir Young Girls at the Piano 1892', all: ['renoir', 'piano'] },
-        desc: 'Bought by the French state — Renoir\'s first official recognition. The softer, warmer late style that Matisse would later admire is already here.',
+        desc: 'Two girls lean over a music score at the piano, one fair-haired in white, one dark-haired in red. Renoir painted several versions in 1892; one was bought by the French state, his first official recognition. Soft, warm colour and rounded forms mark his late style.',
         files: ['Pierre-Auguste Renoir - Jeunes filles au piano.jpg'],
         article: 'Young Girls at the Piano'
       }
@@ -278,7 +278,7 @@ export const ARTISTS = [
       },
       {
         title: 'Blue Dancers', year: 1897, date: 'c. 1897', collection: 'Musée d\'Orsay, Paris',
-        desc: 'With failing eyesight, the late Degas worked in broad strokes of saturated colour. The dancers merge into a rhythmic pattern of blue — close to the bold colour of the next generation.',
+        desc: 'A group of dancers adjusting their costumes in the wings, seen close up and cropped by the frame. With failing eyesight, the late Degas worked in broad strokes of saturated colour; the figures merge into a rhythmic pattern of blue and green.',
         article: 'Blue Dancers',
         search: { q: 'Degas Blue Dancers', all: ['degas', 'blue dancers|danseuses bleues'] }
       }
@@ -300,12 +300,12 @@ export const ARTISTS = [
     paintings: [
       {
         title: 'Jalais Hill, Pontoise', year: 1867, date: '1867', collection: 'Metropolitan Museum of Art, New York',
-        desc: 'Sturdy blocks of houses and fields laid in with broad strokes: even before Impressionism, Pissarro built landscapes from solid planes — the lesson Cézanne would take from him.',
+        desc: 'A village on a hillside, with sturdy blocks of houses, fields and a road climbing past them, laid in with broad strokes. Even before Impressionism, Pissarro built his landscapes from solid, clearly ordered planes.',
         search: { q: 'Camille Pissarro Jalais Hill Pontoise', all: ['pissarro', 'jalais'] }
       },
       {
         title: 'The Avenue, Sydenham', year: 1871, date: '1871', collection: 'National Gallery, London',
-        desc: 'Painted in south London, where Pissarro had fled the Franco-Prussian War. Monet was there too; together they studied Turner and Constable and met the dealer Paul Durand-Ruel, who would later make the Impressionists\' fortune.',
+        desc: 'A tree-lined avenue in south London on a soft spring day, with a church at the far end and strollers on the pavement. Pissarro had fled the Franco-Prussian War to London; the grey English light shows in the painting\'s subtle, silvery tones.',
         article: 'The Avenue, Sydenham',
         search: { q: 'Pissarro The Avenue Sydenham', all: ['pissarro', 'sydenham'] }
       },
@@ -316,17 +316,17 @@ export const ARTISTS = [
       },
       {
         title: 'The Red Roofs', year: 1877, date: '1877', collection: 'Musée d\'Orsay, Paris',
-        desc: 'Village houses glimpsed through a screen of winter trees, everything woven from small, dense strokes. Painted in a year when Cézanne was again working beside Pissarro at Pontoise, sharing motifs and ideas.',
+        desc: 'The red-roofed houses of a village near Pontoise glimpsed through a screen of bare winter trees. The whole surface is woven from small, dense, crusted strokes of paint — Pissarro\'s richest Impressionist texture.',
         search: { q: 'Pissarro red roofs 1877', all: ['pissarro', 'red roofs|toits rouges'] }
       },
       {
         title: 'Apple Picking', year: 1887, date: 'c. 1886–88',
-        desc: 'In 1886 Pissarro, then 56, adopted Seurat\'s divisionist technique — the only Impressionist to do so. The fruit pickers are built from tiny touches of pure colour that vibrate in the eye.',
+        desc: 'Women gather apples under the trees of an orchard at Éragny, in bright sunlight. In 1886 Pissarro adopted the new divisionist technique of small dots of pure colour — the only one of the original Impressionists to do so — and the figures here are built from touches of colour that vibrate in the eye.',
         search: { q: 'Pissarro Apple Picking Eragny', all: ['pissarro', 'apple|pommes'] }
       },
       {
         title: 'Boulevard Montmartre, Spring', year: 1897, date: '1897',
-        desc: 'From a hotel window Pissarro painted the boulevard at different times of day and in different weather — a city series answering Monet\'s Haystacks.',
+        desc: 'The boulevard seen from a hotel window high above: carriages and crowds stream between rows of trees in fresh green leaf. Pissarro painted this same view more than a dozen times, at different hours and in different weather.',
         article: 'Boulevard Montmartre, Spring',
         search: { q: 'Pissarro Boulevard Montmartre spring', all: ['pissarro', 'montmartre', 'spring|printemps'] }
       },
@@ -410,7 +410,7 @@ export const ARTISTS = [
       },
       {
         title: 'The Bay of Marseille, Seen from L\'Estaque', year: 1885, date: 'c. 1885',
-        desc: 'From the hills above L\'Estaque the sea becomes a flat plane of blue and the houses simple cubes. In 1908 Georges Braque painted at this very spot; his views were the first pictures a critic described as made of "cubes".',
+        desc: 'Seen from the hills above L\'Estaque, the sea becomes a single flat plane of deep blue, the village a cluster of ochre cubes and the far mountains a band of grey-violet. Cézanne wrote that the view was "like a playing card: red roofs against the blue sea".',
         search: { q: 'Cézanne Bay of Marseille seen from L\'Estaque', all: ['cezanne', 'estaque'] }
       },
       {
@@ -419,14 +419,14 @@ export const ARTISTS = [
         search: { q: 'Cézanne Mont Sainte-Victoire large pine', all: ['cezanne', 'victoire', 'pine'] }
       },
       {
-        title: 'Boy in a Red Waistcoat', year: 1888, date: '1888–90',
-        desc: 'The boy\'s arm is impossibly long — Cézanne bent anatomy to balance the composition. Faithfulness to the structure of the picture has begun to matter more than faithfulness to the model.',
+        title: 'Boy in a Red Waistcoat', year: 1888, date: '1888–90', collection: 'National Gallery of Art, Washington',
+        desc: 'A young Italian model, Michelangelo di Rosa, in a red waistcoat and white shirt. Cézanne painted him four times. Limbs lengthen and lean to balance the composition: faithfulness to the structure of the picture matters more than faithfulness to the model.',
         article: 'Boy in a Red Waistcoat',
         search: { q: 'Cézanne Boy in a Red Waistcoat', all: ['cezanne', 'waistcoat|red vest|gilet rouge'] }
       },
       {
-        title: 'The Card Players', year: 1892, date: '1890–95',
-        desc: 'Peasants from around his family estate, silent and monumental as statues. Cézanne painted five versions, gradually reducing the scene from five figures to two.',
+        title: 'The Card Players', year: 1892, date: '1890–95', collection: 'Musée d\'Orsay, Paris',
+        desc: 'Two peasants face each other across a table, a bottle between them, silent and monumental as statues. Cézanne painted five versions of the subject, gradually reducing it from several figures to these two.',
         files: ['Les Joueurs de cartes, par Paul Cézanne.jpg'],
         article: 'The Card Players'
       },
@@ -438,19 +438,19 @@ export const ARTISTS = [
       },
       {
         title: 'The Large Bathers', year: 1898, date: '1898–1905', collection: 'Philadelphia Museum of Art',
-        desc: 'His largest painting, worked on for seven years: nudes and trees form a great triangular architecture. Its geometry and distortions fed directly into the revolution of Picasso and Braque in 1907.',
+        desc: 'His largest painting, worked on for seven years: nude bathers beneath trees that lean together like the arches of a cathedral, forming one great triangle. Bodies are simplified and distorted to serve that architecture.',
         files: ['Paul Cézanne, French - The Large Bathers - Google Art Project.jpg'],
         search: { q: 'Cézanne The Large Bathers Philadelphia', all: ['cezanne', 'bathers|baigneuses', 'philadelphia|google art'] }
       },
       {
         title: 'Still Life with Apples and Oranges', year: 1899, date: 'c. 1899', collection: 'Musée d\'Orsay, Paris',
-        desc: 'A heaped, tilting arrangement of fruit, jug and cloth. Cézanne advised treating nature "by means of the cylinder, the sphere and the cone" — when that letter was published in 1907, the young Cubists read it as a manifesto.',
+        desc: 'Apples, oranges, a flowered jug and a white cloth heaped on a tilting table, seen from several heights at once; the cloth spills forward like a mountain landscape. Cézanne advised treating nature "by means of the cylinder, the sphere and the cone".',
         article: 'Still Life with Apples and Oranges',
         search: { q: 'Cézanne Still Life with Apples and Oranges', all: ['cezanne', 'apples and oranges|pommes et oranges'] }
       },
       {
         title: 'Mont Sainte-Victoire (late version)', year: 1904, date: '1904–06',
-        desc: 'In the late versions the landscape becomes a mosaic of separate colour patches, with parts of the canvas left bare. Seen at the 1907 memorial retrospective, these pictures showed the next generation how to break a view into planes.',
+        desc: 'The mountain rises above a plain laid in as a mosaic of separate patches of green, ochre and violet, with parts of the canvas left bare. Near and far are no longer separated by perspective; both are built from the same blocks of colour.',
         search: { q: 'Cézanne Mont Sainte-Victoire 1904 1906', all: ['cezanne', 'victoire', '190[4-6]'] }
       }
     ]
@@ -507,7 +507,7 @@ export const ARTISTS = [
       },
       {
         title: 'The Channel of Gravelines, Grand Fort-Philippe', year: 1890, date: '1890', collection: 'Musée de l\'Annonciade, Saint-Tropez',
-        desc: 'Seurat spent his summers on the Channel coast. Emptied of people, these seascapes are made of light alone — some of his most serene works.',
+        desc: 'A quiet harbour on the Channel coast — quays, a few boats, still water under a pale sky — built from small, regular dots of colour. Emptied of people, Seurat\'s seascapes are made of light alone, among his most serene works.',
         files: ['Seurat-Gravelines-Annonciade.jpg'],
         search: { q: 'Seurat Gravelines Annonciade', all: ['seurat', 'gravelines'] }
       },
@@ -602,7 +602,7 @@ export const ARTISTS = [
       },
       {
         title: 'The Night Café', year: 1888.7, date: '1888', collection: 'Yale University Art Gallery',
-        desc: '"I have tried to express the terrible passions of humanity by means of red and green," he wrote to his brother Theo. Colour used for emotion rather than description — the core idea of Expressionism.',
+        desc: 'An all-night café in Arles: blood-red walls, a green ceiling, a billiard table and lamps with glaring halos. "I have tried to express the terrible passions of humanity by means of red and green," he wrote to his brother Theo — colour used for emotion rather than description.',
         article: 'The Night Café',
         search: { q: 'Van Gogh The Night Café', all: ['gogh', 'night cafe|cafe de nuit'] }
       },
@@ -691,7 +691,7 @@ export const ARTISTS = [
       },
       {
         title: 'Two Tahitian Women', year: 1899, date: '1899', collection: 'Metropolitan Museum of Art, New York',
-        desc: 'Monumental, calm figures, one carrying mango blossoms. This simplification of the body into broad volumes fascinated the young Picasso and Matisse.',
+        desc: 'Two women stand close to the picture surface like figures in a classical relief, one holding a tray of red mango blossoms. Calm, monumental and simplified, they embody Gauguin\'s late vision of an earthly paradise.',
         article: 'Two Tahitian Women',
         search: { q: 'Gauguin Two Tahitian Women 1899', all: ['gauguin', 'two tahitian women'] }
       }
@@ -721,7 +721,7 @@ export const ARTISTS = [
       },
       {
         title: 'Starry Night', year: 1893, date: '1893', collection: 'J. Paul Getty Museum, Los Angeles',
-        desc: 'The shoreline at Åsgårdstrand under a glowing night sky — a landscape turned into a mood, clearly answering Van Gogh.',
+        desc: 'The shore at Åsgårdstrand under a deep blue night sky: a rounded mass of trees, a white fence, and the light of a star reflected in the water. Munch turns a landscape into a state of mind — melancholy and longing.',
         article: 'Starry Night (Munch)',
         search: { q: 'Edvard Munch Starry Night 1893', all: ['munch', 'starry night|stjernenatt'] }
       },
@@ -802,13 +802,13 @@ export const ARTISTS = [
       },
       {
         title: 'Le Bonheur de Vivre (The Joy of Life)', year: 1906, date: '1905–06', collection: 'Barnes Foundation, Philadelphia',
-        desc: 'A pastoral golden age in pure, flat colour and flowing contours. It challenged the young Picasso, who answered it a year later with a very different painting.',
+        desc: 'Nudes dance, play music and embrace in a glade of pure, flat colour — pink, orange, green, violet — bound together by long, flowing contours. Matisse\'s vision of a golden age, and one of the largest pictures of the Fauve years.',
         article: 'Le Bonheur de Vivre',
         search: { q: 'Henri Matisse Le bonheur de vivre', all: ['matisse', 'bonheur de vivre|joy of life'] }
       },
       {
         title: 'Blue Nude (Souvenir of Biskra)', year: 1907, date: '1907', collection: 'Baltimore Museum of Art',
-        desc: 'A reclining nude modelled in harsh blue and distorted like African sculpture — painted in the year of the great Cézanne retrospective.',
+        desc: 'A reclining nude modelled with harsh blue contours, her body twisted and enlarged like carved sculpture; the palm fronds recall Matisse\'s trip to the Algerian oasis of Biskra. He worked out the same pose in a clay sculpture.',
         article: 'Blue Nude (Souvenir of Biskra)',
         search: { q: 'Henri Matisse Blue Nude Souvenir of Biskra', all: ['matisse', 'biskra|blue nude|nu bleu'] }
       },
@@ -864,7 +864,7 @@ export const ARTISTS = [
       },
       {
         title: 'Charing Cross Bridge', year: 1906, date: '1906',
-        desc: 'Sent to London to paint the city Monet had made famous, Derain answered Monet\'s misty Thames with blazing, unnatural colour.',
+        desc: 'The railway bridge over the Thames, with boats and quays, painted in blazing unmixed blue, green and orange instead of London\'s famous grey fog. The dealer Ambroise Vollard had sent Derain to London to paint the city.',
         search: { q: 'André Derain Charing Cross Bridge', all: ['derain', 'charing cross'] }
       },
       {
@@ -884,7 +884,7 @@ export const ARTISTS = [
       },
       {
         title: 'Bathers', year: 1907, date: '1907',
-        desc: 'After the 1907 Cézanne retrospective Derain turned to solid, simplified volumes and muted colour — the same turn that led his friends Picasso and Braque toward Cubism.',
+        desc: 'Heavy, simplified nudes in a landscape of muted greens and ochres. Here Derain leaves Fauve colour behind for solid volume and firm structure.',
         search: { q: 'André Derain Bathers 1907 baigneuses', all: ['derain', 'bathers|baigneuses'] }
       }
     ]
@@ -997,7 +997,7 @@ export const ARTISTS = [
       },
       {
         title: 'Deer in the Forest', year: 1913.5, date: '1913–14',
-        desc: 'Deer curled in sleep, the forest splintered into luminous, transparent planes — the influence of Delaunay\'s prismatic colour is clear.',
+        desc: 'Deer curl up asleep in a forest splintered into luminous, transparent planes of colour, like light passing through a prism. The animals and the forest seem made of the same crystalline substance.',
         search: { q: 'Franz Marc Deer in the Forest Rehe im Walde', all: ['marc', 'deer in the forest|rehe im walde'] }
       },
       {
@@ -1052,12 +1052,12 @@ export const ARTISTS = [
       },
       {
         title: 'Portrait of Josette', year: 1916, date: '1916', collection: 'Museo Reina Sofía, Madrid',
-        desc: 'His partner Josette, rebuilt from simple, sombre planes. Gris described his method as the reverse of Cézanne\'s: Cézanne turned a bottle into a cylinder; he began with a cylinder and made a bottle of it.',
+        desc: 'His partner Josette, seated, rebuilt from a few large, sombre planes of grey, black and brown. Gris said he started from abstract shapes and only then turned them into an object: "I make a bottle out of a cylinder."',
         search: { q: 'Juan Gris Portrait of Josette 1916', all: ['juan gris', 'josette'] }
       },
       {
         title: 'Harlequin with Guitar', year: 1917, date: 'c. 1917–19',
-        desc: 'Like Picasso, Gris returned to the figure of Harlequin, the melancholy clown of the commedia dell\'arte, here assembled from crisp, interlocking flat shapes.',
+        desc: 'Harlequin, the melancholy clown of the commedia dell\'arte, holding a guitar — assembled from crisp, interlocking flat shapes in a few strong colours.',
         search: { q: 'Juan Gris Harlequin with Guitar', all: ['juan gris', 'harlequin|arlequin'] }
       }
     ]
@@ -1083,7 +1083,7 @@ export const ARTISTS = [
       },
       {
         title: 'Eiffel Tower', year: 1910.5, date: '1910–11',
-        desc: 'The tower, symbol of modern Paris, seen from several viewpoints at once and broken apart as if shaken by its own energy. Delaunay showed this subject at the first Blaue Reiter exhibition in Munich in 1911.',
+        desc: 'The tower, symbol of modern Paris, seen from several viewpoints at once and broken apart as if shaken by its own energy, with the surrounding buildings collapsing around it.',
         search: { q: 'Robert Delaunay Tour Eiffel 1911', all: ['robert delaunay', 'eiffel', '1910|1911'] }
       },
       {
@@ -1098,7 +1098,7 @@ export const ARTISTS = [
       },
       {
         title: 'Circular Forms, Moon No. 3', year: 1913, date: '1913',
-        desc: 'Sun and moon reduced to concentric rings of contrasting colour — among the first entirely non-figurative paintings made in Paris.',
+        desc: 'The moon and its halo reduced to concentric rings and segments of contrasting colour. No object remains — among the first entirely non-figurative paintings made in Paris.',
         files: ['Robert Delaunay - Circular Forms, Moon No. 3 - 1913 - Private collection.jpg'],
         search: { q: 'Robert Delaunay Formes circulaires lune', all: ['robert delaunay', 'circular|circulaire'] }
       },
@@ -1131,13 +1131,13 @@ export const ARTISTS = [
       },
       {
         title: 'Evening; Red Tree', year: 1908.5, date: '1908–10', collection: 'Kunstmuseum Den Haag',
-        desc: 'A twisting tree in red against a blue dusk, painted with the expressive energy of Van Gogh — the first of a series of trees that leads, within four years, to abstraction.',
+        desc: 'A twisting tree in red against a deep blue dusk, its branches spreading like veins across the sky. Mondrian painted trees again and again over the next four years; this is where the series begins, in expressive colour.',
         article: 'Evening; Red Tree',
         search: { q: 'Mondriaan Avond de rode boom', all: ['mondria', 'red tree|rode boom'] }
       },
       {
         title: 'Gray Tree', year: 1911, date: '1911', collection: 'Kunstmuseum Den Haag',
-        desc: 'Colour has drained away; the branches become a network of curving lines spread evenly across the surface. Mondrian had just seen Cubist works by Picasso and Braque in Amsterdam.',
+        desc: 'Colour has drained away to greys and black; the branches become a network of curving lines spread evenly across the surface. The tree is turning into a structure — Mondrian was absorbing the Cubism he had just discovered.',
         article: 'Gray Tree',
         search: { q: 'Mondriaan De grijze boom', all: ['mondria', 'gr[ae]y tree|grijze boom'] }
       },
@@ -1186,7 +1186,7 @@ export const ARTISTS = [
     paintings: [
       {
         title: 'Morning in the Village after Snowstorm', year: 1912, date: '1912', collection: 'Solomon R. Guggenheim Museum, New York',
-        desc: 'Peasants and houses built from shining metallic cones and cylinders: Cézanne\'s geometry and Léger\'s tubular forms applied to Russian village life.',
+        desc: 'Peasants trudge through the snow among houses and trees built from shining metallic cones and cylinders: the Russian village turned into a world of geometric, machine-like forms.',
         search: { q: 'Malevich Morning in the Village after Snowstorm', all: ['malevi|malewi', 'morning|snowstorm'] }
       },
       {
