@@ -11,6 +11,12 @@ import {
   plaqueTexture,
   placeholderTexture,
   skylightTexture,
+  aoGradient,
+  canvasWeave,
+  ornamentBump,
+  wainscotTextures,
+  ventTexture,
+  dustSprite,
   isDark,
   shade,
   SERIF,
@@ -39,7 +45,7 @@ function box(w, h, d, mat) {
  * A wall in local space: runs along x from -L/2..L/2, inner face at z=0 facing +z,
  * thickness behind it (negative z). Openings: [{c, w, h}].
  */
-function buildWall(L, openings, mat, trimMat, baseMat) {
+function buildWall(L, openings, mat, trimMat, baseMat, deco = {}) {
   const g = new THREE.Group();
   const ops = openings.slice().sort((a, b) => a.c - b.c);
   let x = -L / 2;
@@ -54,6 +60,27 @@ function buildWall(L, openings, mat, trimMat, baseMat) {
     const m = box(x1 - x0, 0.16, 0.03, baseMat);
     m.position.set((x0 + x1) / 2, 0.08, 0.015);
     g.add(m);
+    // a thin moulded cap on the skirting board
+    const cap = box(x1 - x0, 0.025, 0.04, baseMat);
+    cap.position.set((x0 + x1) / 2, 0.165, 0.02);
+    g.add(cap);
+    if (deco.wain) {
+      // raised panels below a chair rail (classic rooms)
+      const len = x1 - x0;
+      const map = deco.wain.map.clone();
+      const bump = deco.wain.bump.clone();
+      for (const t of [map, bump]) {
+        t.repeat.set(Math.max(1, Math.round(len / deco.wain.panelWidth)), 1);
+        t.wrapS = t.wrapT = THREE.RepeatWrapping;
+        t.needsUpdate = true;
+      }
+      const panel = new THREE.Mesh(new THREE.PlaneGeometry(len, 0.76), new THREE.MeshStandardMaterial({ map, bumpMap: bump, bumpScale: 1.2, roughness: 0.7 }));
+      panel.position.set((x0 + x1) / 2, 0.18 + 0.38, 0.006);
+      g.add(panel);
+      const rail = box(len, 0.05, 0.045, deco.railMat);
+      rail.position.set((x0 + x1) / 2, 0.96, 0.022);
+      g.add(rail);
+    }
   };
   let prevEnd = -L / 2;
   for (const o of ops) {
@@ -76,10 +103,17 @@ function buildWall(L, openings, mat, trimMat, baseMat) {
   }
   seg(x, L / 2, 0, H);
   base(prevEnd, L / 2);
-  // crown moulding
+  // two-step cornice
   const crown = box(L, 0.18, 0.06, baseMat);
   crown.position.set(0, H - 0.09, 0.03);
-  g.add(crown);
+  const crown2 = box(L, 0.07, 0.035, baseMat);
+  crown2.position.set(0, H - 0.215, 0.018);
+  g.add(crown, crown2);
+  if (deco.pictureRail) {
+    const pr = box(L, 0.045, 0.035, deco.railMat);
+    pr.position.set(0, H - 0.6, 0.018);
+    g.add(pr);
+  }
   return g;
 }
 
@@ -156,9 +190,16 @@ function frameMaterials(style) {
   }
 }
 
-function buildFrame(w, h, style) {
+function buildFrame(w, h, style, high = false) {
   const g = new THREE.Group();
   const f = frameMaterials(style);
+  if (high && style === 'gilt') {
+    // carved, chased-gold relief on the moulding
+    f.outer.bumpMap = ornamentBump();
+    f.outer.bumpScale = 2;
+    f.inner.bumpMap = ornamentBump();
+    f.inner.bumpScale = 1.5;
+  }
   if (f.b === 0) {
     // stretched canvas without frame
     const c = box(w, h, f.d, f.outer);
@@ -322,7 +363,9 @@ export function buildRoom(opts) {
   const hd = D / 2;
 
   // ── materials ──
-  const wallMat = std(style.wall, 0.92, { map: wallTexture(style.wall) });
+  const wallTex = wallTexture(style.wall);
+  const wallMat = std(style.wall, 0.92, { map: wallTex, bumpMap: wallTex, bumpScale: 0.4 });
+  const classic = isLobby || style.frame === 'gilt' || style.frame === 'wood';
   const dark = isDark(style.wall);
   const trimMat = std(dark ? shade(style.wall, -0.1) : '#f4f1ea', 0.6);
   const baseMat = std(dark ? shade(style.wall, -0.15) : shade(style.wall, -0.25), 0.6);
@@ -330,39 +373,163 @@ export function buildRoom(opts) {
   const floorMap = fl.map.clone();
   floorMap.needsUpdate = true;
   floorMap.repeat.set(W / fl.tile, D / fl.tile);
-  const floorMat = std('#ffffff', fl.roughness, { map: floorMap, envMapIntensity: 0.6 });
+  const floorMat = std('#ffffff', fl.roughness, { map: floorMap, bumpMap: floorMap, bumpScale: 0.6, envMapIntensity: 0.6 });
 
   // ── floor & ceiling ──
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(W, D), floorMat);
   floor.rotation.x = -Math.PI / 2;
   floor.userData.action = { type: 'floor' };
   group.add(floor);
+  if (['parquet', 'herringbone', 'darkwood', 'marble', 'stone', 'terracotta'].includes(style.floor)) {
+    // an inlaid border band running around the room
+    const inlay = std(shade(style.floor === 'marble' || style.floor === 'stone' ? '#8f877a' : style.floor === 'terracotta' ? '#7a3b28' : '#3b2416', 0), 0.45);
+    const inset = 0.55;
+    const bw = 0.16;
+    for (const [x, z, w, d] of [[0, hd - inset, W - 2 * inset + bw, bw], [0, -hd + inset, W - 2 * inset + bw, bw], [hw - inset, 0, bw, D - 2 * inset], [-hw + inset, 0, bw, D - 2 * inset]]) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), inlay);
+      m.rotation.x = -Math.PI / 2;
+      m.position.set(x, 0.002, z);
+      m.userData.noShadow = true;
+      m.receiveShadow = true;
+      group.add(m);
+    }
+  }
   interactives.push(floor);
 
-  const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(W, D), std('#f3f1ec', 0.95));
-  ceiling.rotation.x = Math.PI / 2;
-  ceiling.position.y = H;
-  group.add(ceiling);
+  // Ceiling with a recessed skylight well (the ceiling is built around the opening).
   const skyColor = style.sky || '#fffaf0';
   const cw = Math.max(2, W * 0.42);
   const cd = Math.max(2, D * 0.55);
-  const sky = new THREE.Mesh(new THREE.PlaneGeometry(cw, cd), new THREE.MeshBasicMaterial({ map: skylightTexture(skyColor), color: '#d9d5cc' }));
-  sky.rotation.x = Math.PI / 2;
-  sky.position.y = H - 0.01;
-  group.add(sky);
-  // coffer around the skylight
-  const cofferMat = std('#e9e6df', 0.9);
-  for (const [x, z, w, d] of [[0, cd / 2 + 0.1, cw + 0.4, 0.2], [0, -cd / 2 - 0.1, cw + 0.4, 0.2], [cw / 2 + 0.1, 0, 0.2, cd], [-cw / 2 - 0.1, 0, 0.2, cd]]) {
-    const m = box(w, 0.35, d, cofferMat);
-    m.position.set(x, H - 0.175, z);
+  const WELL = 0.9;
+  const ceilMat = std('#f3f1ec', 0.95);
+  const ceilPart = (x, z, w, d) => {
+    if (w <= 0 || d <= 0) return;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), ceilMat);
+    m.rotation.x = Math.PI / 2;
+    m.position.set(x, H, z);
+    m.userData.noShadow = true;
     group.add(m);
+  };
+  ceilPart(0, (cd / 2 + hd) / 2, W, hd - cd / 2);
+  ceilPart(0, -(cd / 2 + hd) / 2, W, hd - cd / 2);
+  ceilPart((cw / 2 + hw) / 2, 0, hw - cw / 2, cd);
+  ceilPart(-(cw / 2 + hw) / 2, 0, hw - cw / 2, cd);
+  // the well's four inner walls
+  const wellMat = std('#ece9e2', 0.95, { side: THREE.DoubleSide });
+  for (const [x, z, w, ry] of [[0, cd / 2, cw, Math.PI], [0, -cd / 2, cw, 0], [cw / 2, 0, cd, -Math.PI / 2], [-cw / 2, 0, cd, Math.PI / 2]]) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, WELL), wellMat);
+    m.position.set(x, H + WELL / 2, z);
+    m.rotation.y = ry;
+    m.userData.noShadow = true;
+    group.add(m);
+  }
+  const sky = new THREE.Mesh(new THREE.PlaneGeometry(cw, cd), new THREE.MeshBasicMaterial({ map: skylightTexture(skyColor), color: '#e3dfd6' }));
+  sky.rotation.x = Math.PI / 2;
+  sky.position.y = H + WELL;
+  sky.userData.noShadow = true;
+  group.add(sky);
+  // a moulded lip around the opening
+  const cofferMat = std('#e9e6df', 0.9);
+  for (const [x, z, w, d] of [[0, cd / 2 + 0.06, cw + 0.24, 0.12], [0, -cd / 2 - 0.06, cw + 0.24, 0.12], [cw / 2 + 0.06, 0, 0.12, cd], [-cw / 2 - 0.06, 0, 0.12, cd]]) {
+    const m = box(w, 0.1, d, cofferMat);
+    m.position.set(x, H - 0.05, z);
+    m.userData.noShadow = true;
+    group.add(m);
+  }
+  // smoke detectors on the ceiling
+  for (const sz of [-1, 1]) {
+    const det = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.04, 20), std('#f4f4f2', 0.5));
+    det.position.set(cw / 2 + (hw - cw / 2) / 2, H - 0.02, sz * (cd / 2 + (hd - cd / 2) / 2));
+    det.userData.noShadow = true;
+    group.add(det);
+    const led = new THREE.Mesh(new THREE.SphereGeometry(0.008, 6, 4), new THREE.MeshBasicMaterial({ color: '#7cff7c' }));
+    led.position.copy(det.position).add(new THREE.Vector3(0.04, -0.022, 0));
+    group.add(led);
   }
 
   // ── lights ──
   const wallL = new THREE.Color(style.wall).getHSL({}).l;
   const bright = wallL > 0.75;
-  const hemi = new THREE.HemisphereLight(skyColor, shade(style.wall, -0.2), bright ? 0.45 : wallL < 0.3 ? 1.5 : 0.8);
+  const high = opts.quality === 'high';
+  const hemiI = bright ? 0.45 : wallL < 0.3 ? 1.5 : 0.8;
+  const hemi = new THREE.HemisphereLight(skyColor, shade(style.wall, -0.2), high ? hemiI * 0.75 : hemiI);
   group.add(hemi);
+  if (high) {
+    // daylight falling through the skylight, casting soft shadows
+    const sun = new THREE.DirectionalLight(skyColor, bright ? 0.9 : 1.3);
+    sun.position.set(cw * 0.3, H + 8, cd * 0.15);
+    sun.target.position.set(0, 0, 0);
+    sun.castShadow = true;
+    const ext = Math.max(W, D) * 0.6;
+    Object.assign(sun.shadow.camera, { left: -ext, right: ext, top: ext, bottom: -ext, near: 1, far: H + 20 });
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.bias = -0.0004;
+    sun.shadow.normalBias = 0.03;
+    sun.shadow.radius = 4;
+    group.add(sun, sun.target);
+    // faint shafts of light under the skylight
+    // Soft volume: brightest when looking through a face, fading at face edges and toward the floor.
+    const shaftMat = new THREE.ShaderMaterial({
+      uniforms: { color: { value: new THREE.Color(skyColor) }, strength: { value: 0.06 } },
+      vertexShader: `
+        varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+        void main() {
+          vUv = uv;
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          vN = normalize(normalMatrix * normal);
+          vV = normalize(-mv.xyz);
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader: `
+        uniform vec3 color; uniform float strength;
+        varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+        void main() {
+          float facing = abs(dot(vN, vV));
+          float edge = sin(3.14159 * vUv.x);
+          float height = pow(smoothstep(0.25, 1.0, vUv.y), 2.0);
+          float a = strength * facing * facing * edge * edge * height;
+          gl_FragColor = vec4(color * a, 1.0);
+        }`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    });
+    const shaft = new THREE.Mesh(new THREE.BoxGeometry(cw * 0.95, H, cd * 0.95, 1, 1, 1), [shaftMat]);
+    // remove top/bottom faces so only the soft sides remain
+    shaft.geometry.clearGroups();
+    shaft.geometry.addGroup(0, 12, 0);
+    shaft.geometry.addGroup(24, 12, 0);
+    shaft.position.set(0, H / 2, 0);
+    shaft.userData.noShadow = true;
+    shaft.renderOrder = 2;
+    group.add(shaft);
+    // dust drifting in the light
+    const N = 260;
+    const pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * cw;
+      pos[i * 3 + 1] = 0.4 + Math.random() * (H - 0.6);
+      pos[i * 3 + 2] = (Math.random() - 0.5) * cd;
+    }
+    const dustGeo = new THREE.BufferGeometry();
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const dust = new THREE.Points(
+      dustGeo,
+      new THREE.PointsMaterial({ map: dustSprite(), size: 0.016, color: '#fff6e0', transparent: true, opacity: 0.35, depthWrite: false, blending: THREE.AdditiveBlending })
+    );
+    dust.userData.noShadow = true;
+    group.add(dust);
+    animate.push((dt, t) => {
+      const a = dustGeo.attributes.position.array;
+      for (let i = 0; i < N; i++) {
+        a[i * 3 + 1] -= dt * (0.015 + (i % 7) * 0.003);
+        a[i * 3] += Math.sin(t * 0.3 + i) * dt * 0.02;
+        if (a[i * 3 + 1] < 0.3) a[i * 3 + 1] = H - 0.3;
+      }
+      dustGeo.attributes.position.needsUpdate = true;
+    });
+  }
   for (const z of [-D / 4, D / 4]) {
     const p = new THREE.PointLight(style.light, bright ? 4 : wallL < 0.3 ? 14 : 8, 14, 1.6);
     p.position.set(0, H - 0.8, z);
@@ -417,7 +584,10 @@ export function buildRoom(opts) {
   const wallGroups = {};
   for (const name of ['back', 'front', 'left', 'right']) {
     const xf = wallXf[name];
-    const wg = buildWall(xf.len, openings[name], wallMat, trimMat, baseMat);
+    const deco = classic
+      ? { wain: wainscotTextures(shade(style.wall, dark ? 0.04 : -0.03)), railMat: trimMat, pictureRail: true }
+      : {};
+    const wg = buildWall(xf.len, openings[name], wallMat, trimMat, baseMat, deco);
     wg.position.set(...xf.pos);
     wg.rotation.y = xf.rot;
     group.add(wg);
@@ -442,6 +612,10 @@ export function buildRoom(opts) {
       sign.userData.action = { type: 'door', link: o.link };
       wg.add(sign);
       interactives.push(sign);
+      // stone threshold under the doorway
+      const sill = box(DW + 0.04, 0.014, T + 0.08, std('#cfc8ba', 0.5));
+      sill.position.set(o.c, 0.007, -T / 2);
+      wg.add(sill);
       const [wx, wz] = xf.toWorld(o.c);
       doors.push({ wall: name, x: wx, z: wz, link: o.link });
       // world-space opening range along the wall for collision
@@ -451,6 +625,83 @@ export function buildRoom(opts) {
       if (name === 'front') walls.front.push({ a, b, link: o.link });
       if (name === 'left') walls.left.push({ a: -b, b: -a, link: o.link });
       if (name === 'right') walls.right.push({ a, b, link: o.link });
+    }
+  }
+
+  // ── contact shading: soft dark gradients where walls meet floor, ceiling and each other ──
+  {
+    const ao = aoGradient();
+    const aoMat = (opacity) =>
+      new THREE.MeshBasicMaterial({ color: '#000', alphaMap: ao, transparent: true, opacity, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
+    const floorAo = aoMat(dark ? 0.35 : 0.28);
+    const ceilAo = aoMat(0.22);
+    const cornerAo = aoMat(0.16);
+    // A plane whose normal faces `n` and whose dark edge points along `d`.
+    const strip = (mat, w, h, pos, n, d) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
+      const z = new THREE.Vector3(...n);
+      const y = new THREE.Vector3(...d);
+      const x = new THREE.Vector3().crossVectors(y, z);
+      m.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(x, y, z));
+      m.position.set(...pos);
+      m.userData.noShadow = true;
+      m.renderOrder = 1;
+      group.add(m);
+    };
+    const fw = 0.75;
+    const cwid = 0.6;
+    for (const [len, axis, sign] of [[W, 'z', -1], [W, 'z', 1], [D, 'x', -1], [D, 'x', 1]]) {
+      const d = axis === 'z' ? [0, 0, sign] : [sign, 0, 0];
+      const off = (axis === 'z' ? hd : hw) - fw / 2;
+      const offC = (axis === 'z' ? hd : hw) - cwid / 2;
+      const at = (o, y) => (axis === 'z' ? [0, y, sign * o] : [sign * o, y, 0]);
+      strip(floorAo, len, fw, at(off, 0.004), [0, 1, 0], d); // along the floor
+      strip(ceilAo, len, cwid, at(offC, H - 0.003), [0, -1, 0], d); // along the ceiling
+    }
+    // vertical room corners
+    for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      strip(cornerAo, H, 0.5, [sx * (hw - 0.003), H / 2, sz * (hd - 0.25)], [-sx, 0, 0], [0, 0, sz]);
+      strip(cornerAo, H, 0.5, [sx * (hw - 0.25), H / 2, sz * (hd - 0.003)], [0, 0, -sz], [sx, 0, 0]);
+    }
+  }
+
+  // ── small museum fixtures ──
+  {
+    const vent = new THREE.MeshStandardMaterial({ map: ventTexture(), roughness: 0.5, metalness: 0.3 });
+    for (const sx of [-1, 1]) {
+      const v = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.22), vent);
+      v.position.set(sx * (hw - 0.9), 0.4, hd - 0.012);
+      v.rotation.y = Math.PI;
+      v.userData.noShadow = true;
+      group.add(v);
+    }
+    if (opts.quality === 'high') {
+      // a security camera in a far corner and a climate sensor on a wall
+      const cam = new THREE.Group();
+      const camMat = std('#e6e4df', 0.4);
+      cam.add(box(0.1, 0.1, 0.06, camMat));
+      const arm = box(0.03, 0.03, 0.18, camMat);
+      arm.position.set(0, 0, 0.1);
+      cam.add(arm);
+      const body = box(0.09, 0.08, 0.22, camMat);
+      body.position.set(0, -0.05, 0.22);
+      body.rotation.x = 0.35;
+      cam.add(body);
+      const lens = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.02, 16), std('#111', 0.2, { metalness: 0.5 }));
+      lens.rotation.x = Math.PI / 2 + 0.35;
+      lens.position.set(0, -0.09, 0.33);
+      cam.add(lens);
+      cam.position.set(-hw + 0.25, H - 0.45, -hd + 0.06);
+      cam.rotation.y = Math.PI / 4;
+      group.add(cam);
+      const sensor = box(0.1, 0.14, 0.03, std('#f2f1ee', 0.5));
+      sensor.position.set(hw - 0.016, 1.5, hd - 0.7);
+      sensor.rotation.y = -Math.PI / 2;
+      group.add(sensor);
+      const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.06, 0.03), new THREE.MeshBasicMaterial({ color: '#9fd2c4' }));
+      scr.position.set(hw - 0.033, 1.53, hd - 0.7);
+      scr.rotation.y = -Math.PI / 2;
+      group.add(scr);
     }
   }
 
@@ -588,14 +839,25 @@ export function buildRoom(opts) {
     const aspect = wk.info && wk.info.w && wk.info.h ? wk.info.w / wk.info.h : 1.25;
     const { w, h } = paintingSize(aspect);
     const pg = new THREE.Group();
-    const frame = buildFrame(w, h, style.frame);
+    const frame = buildFrame(w, h, style.frame, opts.quality === 'high');
     pg.add(frame.group);
-    const mat = new THREE.MeshStandardMaterial({
+    // canvas weave relief, scaled to the painting's size
+    const weave = canvasWeave().clone();
+    weave.wrapS = weave.wrapT = THREE.RepeatWrapping;
+    weave.repeat.set(w * 14, h * 14);
+    weave.needsUpdate = true;
+    const matOpts = {
       map: placeholderTexture({ title: wk.painting.title, color: shade(style.wall, dark ? 0.15 : -0.15), label: opts.placeholderLabel || '' }),
-      roughness: 0.75,
+      roughness: 0.72,
+      bumpMap: weave,
+      bumpScale: 0.35,
       emissive: '#ffffff',
       emissiveIntensity: 0.22
-    });
+    };
+    // on computers: a thin varnish layer that catches the spotlight
+    const mat = opts.quality === 'high'
+      ? new THREE.MeshPhysicalMaterial({ ...matOpts, clearcoat: 0.35, clearcoatRoughness: 0.45 })
+      : new THREE.MeshStandardMaterial(matOpts);
     mat.emissiveMap = mat.map;
     const canvasMesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
     canvasMesh.position.z = style.frame === 'none' ? frame.depth + 0.003 : frame.depth * 0.5 + 0.004;
@@ -622,6 +884,29 @@ export function buildRoom(opts) {
     pl.userData.action = { type: 'painting', index: k };
     pg.add(pl);
     interactives.push(pl);
+    const plBack = box(0.52, 0.23, 0.01, std(dark ? '#0e0e0e' : '#d6d0c5', 0.6));
+    plBack.position.set(pl.position.x, pl.position.y, 0.006);
+    pg.add(plBack);
+    if (classic && opts.quality === 'high') {
+      // two brass wires from the picture rail to the top of the frame
+      const fb = frameMaterials(style.frame).b;
+      const topY = h / 2 + fb;
+      const railY = H - 0.6 - 1.85;
+      const wireMat = std('#b59a5e', 0.3, { metalness: 0.9 });
+      for (const sx of [-1, 1]) {
+        const a = new THREE.Vector3(sx * w * 0.32, topY - 0.02, 0.02);
+        const b = new THREE.Vector3(sx * w * 0.12, railY, 0.02);
+        const len = a.distanceTo(b);
+        const wire = new THREE.Mesh(new THREE.CylinderGeometry(0.0035, 0.0035, len, 5), wireMat);
+        wire.position.copy(a).add(b).multiplyScalar(0.5);
+        wire.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
+        wire.userData.noShadow = true;
+        pg.add(wire);
+        const hook = box(0.03, 0.05, 0.03, wireMat);
+        hook.position.copy(b);
+        pg.add(hook);
+      }
+    }
 
     // the painting hangs on a side wall, facing into the room
     if (side === 'left') {
@@ -753,6 +1038,16 @@ export function buildRoom(opts) {
         }
         m.dispose();
       }
+    });
+  }
+
+  if (opts.quality === 'high') {
+    group.traverse((o) => {
+      if (!o.isMesh) return;
+      const m = Array.isArray(o.material) ? o.material[0] : o.material;
+      const basic = m && (m.isMeshBasicMaterial || m.transparent);
+      o.receiveShadow = !basic;
+      o.castShadow = !basic && !o.userData.noShadow && o !== floor;
     });
   }
 

@@ -18,12 +18,19 @@ const $ = (s) => document.querySelector(s);
 const canvas = $('#scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 const coarse = matchMedia('(pointer: coarse)').matches;
+// Detail level: phones and tablets get a lighter version; ?quality=high|low overrides.
+const QUALITY = ['high', 'low'].includes(params.get('quality')) ? params.get('quality') : coarse ? 'low' : 'high';
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, coarse ? 1.5 : 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.0;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-setMaxAnisotropy(Math.min(8, renderer.capabilities.getMaxAnisotropy()));
+setMaxAnisotropy(Math.min(QUALITY === 'high' ? 16 : 8, renderer.capabilities.getMaxAnisotropy()));
+if (QUALITY === 'high') {
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.autoUpdate = false; // refreshed a few times per second (see the render loop)
+}
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1816');
@@ -207,8 +214,10 @@ function enterRoom(id, { from = null, via = null } = {}) {
     movement: movementOf(id),
     movements: MOVEMENTS,
     getTexture,
+    quality: QUALITY,
     placeholderLabel: PLACEHOLDERS ? 'DEVELOPER PLACEHOLDER' : ''
   });
+  renderer.shadowMap.needsUpdate = true;
   scene.add(room.group);
   scene.background = new THREE.Color(artist.room.wall).multiplyScalar(0.25);
   currentId = id;
@@ -549,6 +558,7 @@ const clock = new THREE.Clock();
 let elapsed = 0;
 let bob = 0;
 let stuckTime = 0;
+let frameCount = 0;
 function frame() {
   const dt = Math.min(0.05, clock.getDelta());
   elapsed += dt;
@@ -579,6 +589,8 @@ function frame() {
     marker.scale.setScalar(1 + (1 - markerT) * 0.6);
   }
   processHover();
+  // shadows only change when props move: refresh them about 8 times per second
+  if (QUALITY === 'high' && (frameCount++ % 8 === 0)) renderer.shadowMap.needsUpdate = true;
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }

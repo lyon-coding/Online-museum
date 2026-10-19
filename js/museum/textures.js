@@ -567,3 +567,157 @@ export function skylightTexture(color = '#ffffff') {
 }
 
 export { shade, isDark };
+
+// ───────────────────────── realism details ─────────────────────────
+
+const detailCache = new Map();
+function cached(key, make) {
+  if (!detailCache.has(key)) {
+    const t = make();
+    t.userData.shared = true;
+    detailCache.set(key, t);
+  }
+  return detailCache.get(key);
+}
+
+/** Soft dark gradient (opaque at v=0) used as alpha map for contact shadows along walls. */
+export function aoGradient() {
+  return cached('ao', () => {
+    const c = canvas(4, 256);
+    const ctx = c.getContext('2d');
+    const g = ctx.createLinearGradient(0, 0, 0, 256);
+    g.addColorStop(0, '#fff');
+    g.addColorStop(0.25, '#888');
+    g.addColorStop(0.6, '#222');
+    g.addColorStop(1, '#000');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 4, 256);
+    return finish(c, { srgb: false });
+  });
+}
+
+/** Fine canvas weave, used as a bump map on paintings. */
+export function canvasWeave() {
+  return cached('weave', () => {
+    const S = 128;
+    const c = canvas(S, S);
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#808080';
+    ctx.fillRect(0, 0, S, S);
+    const rand = rng(77);
+    for (let y = 0; y < S; y += 2) {
+      for (let x = 0; x < S; x += 2) {
+        const over = ((x >> 1) + (y >> 1)) % 2 === 0;
+        const v = (over ? 150 : 105) + (rand() - 0.5) * 30;
+        ctx.fillStyle = `rgb(${v},${v},${v})`;
+        ctx.fillRect(x, y, 2, 2);
+      }
+    }
+    const t = finish(c, { srgb: false, repeat: [1, 1] });
+    return t;
+  });
+}
+
+/** Chased-gold ornament relief for gilt frames. */
+export function ornamentBump() {
+  return cached('ornament', () => {
+    const S = 256;
+    const c = canvas(S, S);
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#808080';
+    ctx.fillRect(0, 0, S, S);
+    const rand = rng(11);
+    for (let i = 0; i < 700; i++) {
+      const x = rand() * S;
+      const y = rand() * S;
+      const r = 1 + rand() * 4;
+      const v = 110 + rand() * 120;
+      ctx.fillStyle = `rgb(${v},${v},${v})`;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // beaded bands
+    for (const y of [24, S - 24]) {
+      for (let x = 6; x < S; x += 12) {
+        ctx.fillStyle = '#eee';
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    return finish(c, { srgb: false, repeat: [1, 1] });
+  });
+}
+
+/** Raised wall panels below the chair rail (colour + matching bump map). */
+export function wainscotTextures(color, panelWidth = 1.4) {
+  const key = 'wain' + color;
+  if (detailCache.has(key)) return detailCache.get(key);
+  const W = 512;
+  const H = 256;
+  const make = (bump) => {
+    const c = canvas(W, H);
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = bump ? '#808080' : color;
+    ctx.fillRect(0, 0, W, H);
+    const m = 34;
+    const hi = bump ? '#c8c8c8' : shade(color, 0.08);
+    const lo = bump ? '#3a3a3a' : shade(color, -0.12);
+    // panel: light top/left edges, dark bottom/right edges (bevel)
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = hi;
+    ctx.beginPath();
+    ctx.moveTo(m, H - m);
+    ctx.lineTo(m, m);
+    ctx.lineTo(W - m, m);
+    ctx.stroke();
+    ctx.strokeStyle = lo;
+    ctx.beginPath();
+    ctx.moveTo(W - m, m);
+    ctx.lineTo(W - m, H - m);
+    ctx.lineTo(m, H - m);
+    ctx.stroke();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = lo;
+    ctx.strokeRect(m + 14, m + 14, W - 2 * m - 28, H - 2 * m - 28);
+    if (!bump) noise(ctx, W, H, 6, rng(5), 2);
+    return finish(c, { srgb: !bump, repeat: [1, 1] });
+  };
+  const res = { map: make(false), bump: make(true), panelWidth };
+  res.map.userData.shared = res.bump.userData.shared = true;
+  detailCache.set(key, res);
+  return res;
+}
+
+/** Metal air-vent grille. */
+export function ventTexture() {
+  return cached('vent', () => {
+    const c = canvas(256, 64);
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#b9b6b0';
+    ctx.fillRect(0, 0, 256, 64);
+    for (let x = 10; x < 246; x += 9) {
+      ctx.fillStyle = '#3c3b39';
+      ctx.fillRect(x, 10, 4, 44);
+    }
+    ctx.strokeStyle = '#8e8b86';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(2, 2, 252, 60);
+    return finish(c);
+  });
+}
+
+/** Soft round sprite for dust motes. */
+export function dustSprite() {
+  return cached('dust', () => {
+    const c = canvas(32, 32);
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    g.addColorStop(0, 'rgba(255,255,255,1)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 32, 32);
+    return finish(c);
+  });
+}

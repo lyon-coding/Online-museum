@@ -44,6 +44,14 @@ body {
 #scene.dragging {
   cursor: grabbing;
 }
+/* soft lens vignette for a more photographic, immersive view */
+#vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(10, 8, 6, 0.32) 100%);
+  z-index: 1;
+}
 
 button {
   font: inherit;

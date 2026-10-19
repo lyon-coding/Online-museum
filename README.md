@@ -62,6 +62,7 @@ Opening `index.html` straight from disk won't work, because ES modules need a we
 Useful URL options:
 
 - `#monet`, `#cezanne`… opens directly in an artist's room;
+- `?quality=high` or `?quality=low` forces a detail level. Computers get **high** by default: shadows from the skylights, varnish sheen and carved gilt, hanging wires, light shafts and dust, security cameras. Phones and tablets get **low**: paneling, corner shading, floor borders, canvas texture and recessed skylights, without the costlier effects.
 - `?placeholders=1` is developer mode: it draws labelled placeholders instead of loading images, to work on the 3D layout offline.
 
 ### Publishing on GitHub Pages
