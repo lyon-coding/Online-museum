@@ -609,7 +609,8 @@ export const ARTISTS = [
       {
         title: 'Starry Night Over the Rhône', year: 1888.75, date: '1888', collection: 'Musée d\'Orsay, Paris',
         desc: 'The gas lamps of Arles reflected in the river beneath the Great Bear, a couple strolling in the foreground. Painted outdoors, at night.',
-        search: { q: 'Van Gogh Starry Night over the Rhône', all: ['gogh|starry night over the rhone', 'rhone'] }
+        files: ['Starry Night Over the Rhone.jpg', 'Vincent van Gogh - Starry Night Over the Rhône - Google Art Project.jpg'],
+        search: { q: 'Van Gogh Starry Night over the Rhône 1888 Orsay', all: ['gogh|starry night over the rhone', 'rhone'] }
       },
       {
         title: 'Bedroom in Arles', year: 1888.8, date: '1888',

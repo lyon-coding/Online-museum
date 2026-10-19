@@ -13,7 +13,7 @@ const CACHE_KEY = 'museum-commons-cache-v1';
 const CACHE_TTL = 14 * 24 * 3600 * 1000;
 
 // File names containing these words are photos of rooms, details, studies… not the painting itself.
-const EXCLUDE = /\b(detail|details|ausschnitt|framed|frame|gallery|exhibition|installation|museum view|stamp|postcard|sketch|study|studies|etude|esquisse|copy|replica|x-ray|infrared|verso|reverse|signature|pastiche|after)\b/;
+const EXCLUDE = /\b(detail|details|ausschnitt|framed|frame|gallery|exhibition|installation|museum view|stamp|postcard|sketch|study|studies|etude|esquisse|copy|replica|x-ray|infrared|verso|reverse|signature|pastiche|after|edited|enhanced|lightballs|colori[sz]ed|colouri[sz]ed|retouched|crop|cropped|mosaic|puzzle|wikipedia)\b/;
 
 export function paintingKey(artistId, painting) {
   return `${artistId}/${painting.title}`;
