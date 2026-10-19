@@ -20,6 +20,8 @@ jobs:
         run: npm test
       - name: Check every painting on Wikimedia Commons
         run: node scripts/verify-images.mjs
+      - name: Discover series candidates (temporary)
+        run: node scripts/discover-series.mjs
       - name: Upload verified image list
         if: always()
         uses: actions/upload-artifact@v4
