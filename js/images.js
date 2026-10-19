@@ -15,6 +15,11 @@ const CACHE_TTL = 14 * 24 * 3600 * 1000;
 // File names containing these words are photos of rooms, details, studies… not the painting itself.
 const EXCLUDE = /\b(detail|details|ausschnitt|framed|frame|gallery|exhibition|installation|museum view|stamp|postcard|sketch|study|studies|etude|esquisse|copy|replica|x-ray|infrared|verso|reverse|signature|pastiche|after|edited|enhanced|lightballs|colori[sz]ed|colouri[sz]ed|retouched|crop|cropped|mosaic|puzzle|wikipedia)\b/;
 
+// Every painting of an artist: the main room and the canvases of its series wings.
+export function allPaintings(artist) {
+  return [...artist.paintings, ...(artist.series || []).flatMap((sr) => sr.works)];
+}
+
 export function paintingKey(artistId, painting) {
   return `${artistId}/${painting.title}`;
 }
@@ -198,7 +203,7 @@ async function pool(items, size, fn) {
  */
 export async function resolveImages(artists, opts = {}) {
   const jobs = [];
-  for (const a of artists) for (const p of a.paintings) jobs.push({ key: paintingKey(a.id, p), artist: a, p });
+  for (const a of artists) for (const p of allPaintings(a)) jobs.push({ key: paintingKey(a.id, p), artist: a, p });
 
   const images = {};
   let errors = 0;
@@ -279,7 +284,7 @@ function writeCache(images) {
  * Browser entry point: baked list (data/images.json) → local cache → live API.
  */
 export async function loadImages(artists, { onProgress, force } = {}) {
-  const keys = artists.flatMap((a) => a.paintings.map((p) => paintingKey(a.id, p)));
+  const keys = artists.flatMap((a) => allPaintings(a).map((p) => paintingKey(a.id, p)));
 
   let baked = {};
   try {
@@ -297,7 +302,7 @@ export async function loadImages(artists, { onProgress, force } = {}) {
   }
 
   const missing = artists
-    .map((a) => ({ ...a, paintings: a.paintings.filter((p) => !(paintingKey(a.id, p) in images)) }))
+    .map((a) => ({ ...a, series: [], paintings: allPaintings(a).filter((p) => !(paintingKey(a.id, p) in images)) }))
     .filter((a) => a.paintings.length);
 
   let errors = 0;

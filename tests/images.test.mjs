@@ -75,6 +75,20 @@ test('data integrity', () => {
     // paintings are listed in chronological order
     const years = a.paintings.map((p) => p.year);
     assert.deepEqual(years, [...years].sort((x, y) => x - y), `${a.id} chronological`);
+    // series wings: valid references, unique titles, chronological works, wing texts
+    const seriesIds = new Set((a.series || []).map((sr) => sr.id));
+    for (const p of a.paintings) if (p.series) assert.ok(seriesIds.has(p.series), `${a.id}/${p.title} refers to series ${p.series}`);
+    for (const sr of a.series || []) {
+      assert.ok(sr.title && sr.date && sr.intro && sr.look && sr.works.length, `${a.id}/${sr.id} fields`);
+      for (const p of sr.works) {
+        assert.ok(p.title && p.date && p.desc && typeof p.year === 'number', `${a.id}/${sr.id}/${p.title}`);
+        assert.ok(p.files || p.article || p.search, `${a.id}/${sr.id}/${p.title} has an image source`);
+        assert.ok(!titles.has(p.title), `duplicate title ${p.title}`);
+        titles.add(p.title);
+      }
+      const ys = sr.works.map((p) => p.year);
+      assert.deepEqual(ys, [...ys].sort((x, y) => x - y), `${a.id}/${sr.id} chronological`);
+    }
   }
   for (const e of INFLUENCES) assert.ok((ids.has(e.from) || e.from === 'lobby') && ids.has(e.to) && e.text, `edge ${e.from}->${e.to}`);
   for (const e of CONTEMPORARIES) assert.ok(ids.has(e.a) && ids.has(e.b) && e.text, `pair ${e.a}-${e.b}`);

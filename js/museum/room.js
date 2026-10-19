@@ -84,7 +84,7 @@ function buildWall(L, openings, mat, trimMat, baseMat) {
 }
 
 // Short passage behind a doorway, ending in a glowing panel naming the next room.
-function buildVestibule(link, floorMat) {
+function buildVestibule(link, floorMat, getTexture) {
   const g = new THREE.Group();
   const col = link.wall || '#cccccc';
   const wallMat = std(shade(col, -0.05), 0.9);
@@ -103,13 +103,41 @@ function buildVestibule(link, floorMat) {
   c.rotation.x = Math.PI / 2;
   c.position.set(0, DH, -T - VEST / 2);
   g.add(c);
+  const preview = link.preview && !link.preview.placeholder ? link.preview : null;
   const portal = new THREE.Mesh(
     new THREE.PlaneGeometry(DW, DH),
-    new THREE.MeshBasicMaterial({ map: portalTexture({ name: link.name, color: link.color, wall: col }), toneMapped: false })
+    new THREE.MeshBasicMaterial({ map: portalTexture({ name: link.name, color: link.color, wall: col, low: !!link.preview }), toneMapped: false })
   );
   portal.position.set(0, DH / 2, -T - VEST);
   portal.userData.action = { type: 'door', link };
   g.add(portal);
+  if (link.preview) {
+    // A glimpse of the series: its first painting hangs at the end of the passage.
+    const aspect = link.preview.w && link.preview.h ? link.preview.w / link.preview.h : 1.25;
+    let pw = DW - 0.6;
+    let ph = pw / aspect;
+    if (ph > DH * 0.55) {
+      ph = DH * 0.55;
+      pw = ph * aspect;
+    }
+    const cy = DH * 0.6;
+    const frame = box(pw + 0.12, ph + 0.12, 0.04, std(shade(col, -0.35), 0.5));
+    frame.position.set(0, cy, -T - VEST + 0.03);
+    g.add(frame);
+    const mat = new THREE.MeshBasicMaterial({ color: shade(col, -0.2) });
+    const pic = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph), mat);
+    pic.position.set(0, cy, -T - VEST + 0.055);
+    pic.userData.action = { type: 'door', link };
+    g.add(pic);
+    if (preview && getTexture) {
+      getTexture(preview).then((tex) => {
+        if (!tex) return;
+        mat.map = tex;
+        mat.color.set('#ffffff');
+        mat.needsUpdate = true;
+      });
+    }
+  }
   return { group: g, portal };
 }
 
@@ -286,9 +314,10 @@ export function buildRoom(opts) {
     kb = Math.ceil(s / 2);
     D = 2 * (MARGIN + SIDE_DOOR_HALF + kb * SLOT);
   } else D = s * SLOT + 2 * MARGIN;
-  D = Math.max(isLobby ? 18 : 13, D);
+  const isWing = !!artist.isWing;
+  D = Math.max(isLobby ? 18 : isWing ? 11 : 13, D);
   const maxDoors = Math.max(links.back.length, links.front.length);
-  const W = Math.max(isLobby ? 15 : 11.5, maxDoors * DOOR_PITCH + 6);
+  const W = Math.max(isLobby ? 15 : isWing ? 10.5 : 11.5, maxDoors * DOOR_PITCH + 6);
   const hw = W / 2;
   const hd = D / 2;
 
@@ -353,7 +382,26 @@ export function buildRoom(opts) {
     right: { pos: [hw, 0, 0], rot: -Math.PI / 2, toWorld: (lx) => [hw, lx], len: D }
   };
 
+  // Painting slots along the long walls (from the entrance towards the far wall).
+  const slotZ = [];
+  {
+    const intervals = hasSide
+      ? [[hd - MARGIN, SIDE_DOOR_HALF, kb], [-SIDE_DOOR_HALF, -hd + MARGIN, s - kb]]
+      : [[hd - MARGIN, -hd + MARGIN, s]];
+    for (const [start, end, k] of intervals) {
+      const L = start - end;
+      for (let i = 0; i < k; i++) slotZ.push(start - (L - k * SLOT) / 2 - SLOT / 2 - i * SLOT);
+    }
+  }
+  // Works alternate left/right; a series takes its slot as a doorway into its wing.
+  const placement = works.map((wk, k) => ({ side: k % 2 === 0 ? 'left' : 'right', z: slotZ[Math.floor(k / 2)] }));
+
   const openings = { back: [], front: [], left: [], right: [] };
+  works.forEach((wk, k) => {
+    if (!wk.wing) return;
+    const { side, z } = placement[k];
+    openings[side].push({ c: side === 'left' ? -z : z, w: DW, h: DH, link: wk.wing });
+  });
   const addDoorsOnWall = (wall, list, positions) => {
     list.forEach((link, i) => {
       const lx = positions[i];
@@ -375,7 +423,7 @@ export function buildRoom(opts) {
     group.add(wg);
     wallGroups[name] = wg;
     for (const o of openings[name]) {
-      const v = buildVestibule(o.link, floorMat);
+      const v = buildVestibule(o.link, floorMat, opts.getTexture);
       v.group.position.x = o.c;
       wg.add(v.group);
       interactives.push(v.portal);
@@ -475,6 +523,33 @@ export function buildRoom(opts) {
       title: 'From Realism to Abstraction',
       body: movements.map((m) => `${m.short}: ${m.start}–${m.end}`)
     });
+  } else if (isWing) {
+    const sr = artist.series;
+    const title = wallLettering({
+      title: sr.title,
+      subtitle: `A series by ${artist.parent.name} · ${sr.date}`,
+      color: dark ? '#f3ede2' : '#2a2520',
+      accent: movement ? movement.color : '#9a7b47',
+      width: W * 0.86,
+      height: 1.3
+    });
+    onWall('front', new THREE.Mesh(new THREE.PlaneGeometry(W * 0.86, 1.3), new THREE.MeshBasicMaterial({ map: title, transparent: true })), 0, H - 0.95);
+    const fp = sidePanels('front', 0);
+    panel('front', fp[0].x, fp[0].pw, 1.9, { kicker: 'The series', title: sr.title, subtitle: sr.date, body: sr.intro });
+    panel('front', fp[1].x, fp[1].pw, 1.9, { kicker: 'How to look', title: 'Same motif, different moments', body: sr.look });
+    const bp = sidePanels('back', links.back.length);
+    if (bp.length) {
+      panel('back', bp[0].x, bp[0].pw, 1.9, {
+        kicker: 'In this wing',
+        title: 'Chronology',
+        body: works.map((w, i) => `${i + 1}.  ${w.painting.date} — ${w.painting.title}`)
+      });
+      panel('back', bp[1].x, bp[1].pw, 1.9, {
+        kicker: 'Way out',
+        title: `Back to ${artist.parent.short}`,
+        body: `The door between these panels leads back to the main ${artist.parent.name} room, where the visit continues in chronological order.`
+      }, { type: 'door', link: links.back[0] });
+    }
   } else {
     // Front wall (seen when entering): name of the artist + what came next.
     const title = wallLettering({
@@ -504,21 +579,12 @@ export function buildRoom(opts) {
   }
 
   // ── paintings ──
-  const slotZ = [];
-  {
-    const intervals = hasSide
-      ? [[hd - MARGIN, SIDE_DOOR_HALF, kb], [-SIDE_DOOR_HALF, -hd + MARGIN, s - kb]]
-      : [[hd - MARGIN, -hd + MARGIN, s]];
-    for (const [start, end, k] of intervals) {
-      const L = start - end;
-      for (let i = 0; i < k; i++) slotZ.push(start - (L - k * SLOT) / 2 - SLOT / 2 - i * SLOT);
-    }
-  }
   const paintingMeshes = [];
-  works.forEach((wk, k) => {
-    const slot = Math.floor(k / 2);
-    const side = k % 2 === 0 ? 'left' : 'right';
-    const z = slotZ[slot];
+  let pIndex = -1;
+  works.forEach((wk, slotIndex) => {
+    if (wk.wing) return;
+    const k = ++pIndex;
+    const { side, z } = placement[slotIndex];
     const aspect = wk.info && wk.info.w && wk.info.h ? wk.info.w / wk.info.h : 1.25;
     const { w, h } = paintingSize(aspect);
     const pg = new THREE.Group();
@@ -589,7 +655,7 @@ export function buildRoom(opts) {
     panel(wall, 0, 2.5, 2.0, {
       kicker: 'In this room',
       title: 'Chronology',
-      body: works.map((w, i) => `${i + 1}.  ${w.painting.date} — ${w.painting.title}`)
+      body: works.map((w) => (w.wing ? `Series wing — ${w.painting.date}: ${w.wing.name} (${w.wing.count} paintings)` : `${w.painting.date} — ${w.painting.title}`))
     });
   }
 

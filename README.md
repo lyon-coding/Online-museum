@@ -12,6 +12,7 @@ The visit is organised around one question: **how does one movement become anoth
   - **side doors** in the middle of the long walls lead to **contemporaries** of the same period and movement.
 
   Every door has a sign. Tap or click it to read how the two artists are connected before you go through.
+- **Series wings**: notable series have their own wing off the artist's room — Monet's *Haystacks*, *Rouen Cathedral*, *Japanese Bridge* and *Water Lilies*, Cézanne's *Mont Sainte-Victoire* and *Card Players*, Pissarro's *Boulevard Montmartre*, Van Gogh's *Sunflowers*. In the main room, the series takes the place of its first painting as a doorway, with that painting visible at the end of the passage. Inside, the canvases hang in order, with a wall text on the series and on how to compare the canvases.
 - **Wall texts** explain each artist's sources, where their movement came from and what it became.
 - **Timeline** (button or `T`): movements as lanes, artists as bars, influences as arrows. Tap an artist to see roots, legacy and contemporaries, then jump straight to their room.
 - **Painting viewer**: click or tap any painting to see it large, with its date, collection, a short explanation, and the image's source and licence on Wikimedia Commons.
@@ -98,5 +99,6 @@ tests/                  node:test checks
 ### Adding an artist
 
 1. Add an entry to `ARTISTS` in `js/data/artists.js`: biography, roots, room style, and paintings in chronological order, each with `files`, `article` and/or `search`.
-2. Connect it with entries in `INFLUENCES` (`from` → `to`, with a sentence explaining the link) and, if relevant, `CONTEMPORARIES`.
-3. Run `npm test` and `npm run verify-images`.
+2. To give a series its own wing, add it to the artist's `series` list (title, date, `intro`, `look`, extra `works`) and mark the main painting(s) with `series: '<id>'`. A wing appears when at least two of its canvases are confirmed on Commons. `scripts/discover-series.mjs` lists candidate Commons files for a series.
+3. Connect it with entries in `INFLUENCES` (`from` → `to`, with a sentence explaining the link) and, if relevant, `CONTEMPORARIES`.
+4. Run `npm test` and `npm run verify-images`.

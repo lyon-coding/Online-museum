@@ -47,27 +47,80 @@ resize();
 
 // ───────────────────────────── data ─────────────────────────────
 let images = {};
-const works = {}; // artistId -> [{painting, info}]
+const works = {}; // roomId -> [{painting, info, wing?}] in hanging order
 let available = new Set(['lobby']);
+const wings = {}; // wingId -> pseudo-artist describing a series wing
+const roomOf = (id) => wings[id] || artistById[id];
+const paintingsIn = (id) => (works[id] || []).filter((w) => !w.wing);
+const byYear = (x, y) => x.painting.year - y.painting.year;
 
 function prepareWorks() {
   available = new Set(['lobby']);
   const aspects = [1.25, 0.8, 1.5, 0.75, 2.2, 1.0, 1.33, 0.7];
+  let n = 0;
+  const resolve = (a, p) => {
+    if (PLACEHOLDERS) return { painting: p, info: { placeholder: true, w: aspects[n++ % aspects.length] * 100, h: 100 } };
+    const info = images[paintingKey(a.id, p)];
+    return info ? { painting: p, info } : null;
+  };
   for (const a of ARTISTS) {
-    const list = a.paintings
-      .map((p, i) => {
-        if (PLACEHOLDERS) return { painting: p, info: { placeholder: true, w: aspects[i % aspects.length] * 100, h: 100 } };
-        const info = images[paintingKey(a.id, p)];
-        return info ? { painting: p, info } : null;
-      })
-      .filter(Boolean)
-      .sort((x, y) => x.painting.year - y.painting.year);
+    const m = movementById[a.movement];
+    // Series wings: the series' paintings from the main list plus the extra canvases.
+    const wingLinks = {};
+    for (const sr of a.series || []) {
+      const members = [...a.paintings.filter((p) => p.series === sr.id), ...sr.works]
+        .map((p) => resolve(a, p))
+        .filter(Boolean)
+        .sort(byYear);
+      if (members.length < 2) continue; // not enough confirmed canvases for a wing
+      const id = `${a.id}~${sr.id}`;
+      wings[id] = {
+        id,
+        isWing: true,
+        parent: a,
+        series: sr,
+        name: sr.title,
+        short: sr.short || sr.title,
+        movement: a.movement,
+        room: { ...a.room, props: ['bench'] }
+      };
+      works[id] = members;
+      wingLinks[sr.id] = {
+        id,
+        name: sr.title,
+        years: `${sr.date} · ${members.length} paintings`,
+        kind: 'Series',
+        text: sr.intro,
+        color: m.color,
+        wall: a.room.wall,
+        preview: members[0].info,
+        count: members.length
+      };
+    }
+    const list = [];
+    const placed = new Set();
+    for (const p of [...a.paintings].sort((x, y) => x.year - y.year)) {
+      const link = p.series && wingLinks[p.series];
+      if (link) {
+        // the series takes the place of its first painting, as a doorway into the wing
+        if (placed.has(p.series)) continue;
+        placed.add(p.series);
+        const sr = a.series.find((x) => x.id === p.series);
+        list.push({ painting: { title: sr.title, date: sr.date, year: p.year }, info: link.preview, wing: link });
+      } else {
+        const r = resolve(a, p);
+        if (r) list.push(r);
+      }
+    }
     works[a.id] = list;
-    if (list.length) available.add(a.id);
+    if (list.length) {
+      available.add(a.id);
+      for (const l of Object.values(wingLinks)) available.add(l.id);
+    }
   }
 }
 
-const movementOf = (id) => (id === 'lobby' ? null : movementById[artistById[id].movement]);
+const movementOf = (id) => (id === 'lobby' ? null : movementById[roomOf(id).movement]);
 
 function linkTo(id, kind, text) {
   const a = artistById[id];
@@ -84,6 +137,11 @@ function linkTo(id, kind, text) {
 }
 
 function linksFor(id) {
+  if (wings[id]) {
+    const parent = wings[id].parent;
+    const back = linkTo(parent.id, 'Main room', `Back to the ${parent.name} room, where the visit continues in chronological order.`);
+    return { back: [back], front: [], left: [], right: [] };
+  }
   const back = INFLUENCES.filter((e) => e.to === id && available.has(e.from)).map((e) => linkTo(e.from, 'Roots', e.text));
   const front = INFLUENCES.filter((e) => e.from === id && available.has(e.to)).map((e) => linkTo(e.to, id === 'lobby' ? 'Begin' : 'Legacy', e.text));
   const side = CONTEMPORARIES.filter((e) => (e.a === id || e.b === id) && available.has(e.a === id ? e.b : e.a)).map((e) => linkTo(e.a === id ? e.b : e.a, 'Contemporary', e.text));
@@ -141,7 +199,7 @@ function enterRoom(id, { from = null, via = null } = {}) {
     scene.remove(room.group);
     room.dispose();
   }
-  const artist = artistById[id];
+  const artist = roomOf(id);
   room = buildRoom({
     artist,
     works: works[id] || [],
@@ -181,7 +239,7 @@ async function go(id, opts = {}) {
 
 // ───────────────────────────── HUD ─────────────────────────────
 function updateHud() {
-  const a = artistById[currentId];
+  const a = roomOf(currentId);
   const m = movementOf(currentId);
   $('#hud-name').textContent = a.name;
   const chip = $('#hud-chip');
@@ -192,11 +250,16 @@ function updateHud() {
 let cardTimer = null;
 function showRoomCard(via) {
   const card = $('#roomcard');
-  const a = artistById[currentId];
+  const a = roomOf(currentId);
   const m = movementOf(currentId);
-  const n = (works[currentId] || []).length;
+  const n = paintingsIn(currentId).length;
   let html;
-  if (currentId === 'lobby') {
+  if (a.isWing) {
+    html = `<div class="rc-kicker" style="--c:${m.color}"><span class="dot"></span>Series · ${esc(a.parent.name)}</div>
+      <div class="rc-title">${esc(a.series.title)}</div>
+      <p>${esc(a.series.intro)}</p>
+      <div class="rc-foot">${n} paintings, ${esc(a.series.date)} · <a href="#" data-info>About this series</a></div>`;
+  } else if (currentId === 'lobby') {
     html = `<div class="rc-kicker">Entrance hall</div><div class="rc-title">From Impression to Abstraction</div>
       <p>Walk through the door ahead to begin with Manet, or open the <a href="#" data-tl>timeline</a> to jump anywhere.</p>`;
   } else {
@@ -263,29 +326,38 @@ function modalClosed() {
 function openTimeline() {
   closeAll();
   modalOpened();
-  timeline.open(currentId);
+  timeline.open(wings[currentId] ? wings[currentId].parent.id : currentId);
 }
 
 function openPainting(index) {
   closeAll();
   modalOpened();
-  viewer.open(works[currentId], index, artistById[currentId]);
+  const r = roomOf(currentId);
+  viewer.open(paintingsIn(currentId), index, r.isWing ? r.parent : r);
 }
 
 function openDoor(link) {
   closeAll();
   modalOpened();
   const box = $('#doorcard');
-  const here = artistById[currentId];
-  const kindText = { Roots: 'Roots', Legacy: 'What came next', Contemporary: 'Contemporaries', Begin: 'Begin the visit' }[link.kind] || link.kind;
+  const here = roomOf(currentId);
+  const kindText = { Roots: 'Roots', Legacy: 'What came next', Contemporary: 'Contemporaries', Begin: 'Begin the visit', Series: 'A series in its own wing', 'Main room': 'Back to the main room' }[link.kind] || link.kind;
+  const plain = currentId === 'lobby' || link.kind === 'Series' || link.kind === 'Main room';
   box.querySelector('.dc-body').innerHTML = `
     <div class="dc-kicker" style="--c:${link.color}">${esc(kindText)}</div>
-    <h3>${currentId === 'lobby' ? '' : esc(here.short) + ' <span class="arrow">' + (link.kind === 'Roots' ? '←' : link.kind === 'Contemporary' ? '↔' : '→') + '</span> '}${esc(link.name)}</h3>
+    <h3>${plain ? '' : esc(here.short) + ' <span class="arrow">' + (link.kind === 'Roots' ? '←' : link.kind === 'Contemporary' ? '↔' : '→') + '</span> '}${esc(link.name)}</h3>
     <div class="muted">${esc(link.years)}</div>
     <p>${esc(link.text)}</p>`;
   box.classList.add('open');
   const goBtn = box.querySelector('[data-go]');
-  goBtn.textContent = link.id === 'lobby' ? 'Back to the entrance hall' : `Enter ${artistById[link.id].short}'s room →`;
+  goBtn.textContent =
+    link.id === 'lobby'
+      ? 'Back to the entrance hall'
+      : link.kind === 'Series'
+        ? 'Enter the wing →'
+        : link.kind === 'Main room'
+          ? `Back to ${roomOf(link.id).short}'s room`
+          : `Enter ${roomOf(link.id).short}'s room →`;
   goBtn.onclick = () => {
     box.classList.remove('open');
     modalClosed();
@@ -297,10 +369,15 @@ function openInfo() {
   closeAll();
   modalOpened();
   const box = $('#info');
-  const a = artistById[currentId];
+  const a = roomOf(currentId);
   const m = movementOf(currentId);
   const l = linksFor(currentId);
-  const list = works[currentId] || [];
+  const list = paintingsIn(currentId);
+  const seriesLinks = (works[currentId] || []).filter((w) => w.wing).map((w) => w.wing);
+  const workList = () =>
+    `<ol class="work-list">${list
+      .map((w, i) => `<li><button data-work="${i}">${w.info && w.info.thumb && !w.info.placeholder ? `<img loading="lazy" src="${esc(w.info.thumb.replace(/\/\d+px-/, '/330px-'))}" alt="" onerror="this.remove()">` : '<span class="ph"></span>'}<span><strong>${esc(w.painting.title)}</strong><small>${esc(w.painting.date)}</small></span></button></li>`)
+      .join('')}</ol>`;
   const linkList = (title, arr) =>
     arr.length
       ? `<h4>${title}</h4>${arr
@@ -308,7 +385,17 @@ function openInfo() {
           .join('')}`
       : '';
   let html;
-  if (currentId === 'lobby') {
+  if (a.isWing) {
+    html = `<span class="chip" style="--c:${m.color}">Series · ${esc(a.parent.name)}</span>
+      <h2>${esc(a.series.title)}</h2>
+      <div class="muted">${esc(a.series.date)} · ${list.length} paintings in this wing</div>
+      <p>${esc(a.series.intro)}</p>
+      <h4>How to look</h4>
+      <p>${esc(a.series.look)}</p>
+      <h4>Paintings in this wing (${list.length})</h4>
+      ${workList()}
+      <div class="connections">${linkList('Way out', l.back)}</div>`;
+  } else if (currentId === 'lobby') {
     html = `<h2>From Impression to Abstraction</h2>
       <p>This museum follows modern painting from Manet in the 1860s to the first abstract paintings of the 1910s. Each room is dedicated to one artist, with paintings hung in chronological order.</p>
       <p>The central question: <em>how does one movement become another?</em> In every room, doors behind you lead to the artist's roots, doors ahead to the painters who followed, and side doors to contemporaries.</p>
@@ -329,15 +416,14 @@ function openInfo() {
       <p><strong>Where it came from.</strong> ${esc(m.roots)}</p>
       <p><strong>What it became.</strong> ${esc(m.became)}</p>
       <h4>Paintings in this room (${list.length})</h4>
-      <ol class="work-list">${list
-        .map((w, i) => `<li><button data-work="${i}">${w.info && w.info.thumb && !w.info.placeholder ? `<img loading="lazy" src="${esc(w.info.thumb.replace(/\/\d+px-/, '/330px-'))}" alt="" onerror="this.remove()">` : '<span class="ph"></span>'}<span><strong>${esc(w.painting.title)}</strong><small>${esc(w.painting.date)}</small></span></button></li>`)
-        .join('')}</ol>`;
+      ${workList()}
+      ${linkList('Series wings', seriesLinks)}`;
   }
   box.querySelector('.info-body').innerHTML = html;
   box.querySelectorAll('[data-go]').forEach((b) =>
     b.addEventListener('click', () => {
       const id = b.dataset.go;
-      const link = [...l.back, ...l.front, ...l.left, ...l.right].find((x) => x.id === id);
+      const link = [...l.back, ...l.front, ...l.left, ...l.right, ...seriesLinks].find((x) => x.id === id);
       closeAll();
       modalClosed();
       go(id, { from: currentId, via: link });
@@ -434,7 +520,7 @@ function processHover() {
   if (hit) {
     const a = hit.action;
     if (a.type === 'painting') {
-      const w = works[currentId][a.index];
+      const w = paintingsIn(currentId)[a.index];
       label = `${w.painting.title}, ${w.painting.date}`;
     } else if (a.type === 'door') label = `${a.link.kind === 'Begin' ? 'Begin' : a.link.kind}: ${a.link.name}`;
     else if (a.type === 'info') label = 'Read more';
@@ -544,7 +630,8 @@ async function start() {
   timeline.setData(
     ARTISTS.filter((a) => available.has(a.id)).map((a) => {
       const ys = works[a.id].map((w) => Math.floor(w.painting.year));
-      return { id: a.id, name: a.name, short: a.short, born: a.born, died: a.died, movement: a.movement, roots: a.roots, start: Math.min(...ys), end: Math.max(...ys) + 1, count: ys.length };
+      const count = works[a.id].reduce((sum, w) => sum + (w.wing ? w.wing.count : 1), 0);
+      return { id: a.id, name: a.name, short: a.short, born: a.born, died: a.died, movement: a.movement, roots: a.roots, start: Math.min(...ys), end: Math.max(...ys) + 1, count };
     }),
     INFLUENCES,
     CONTEMPORARIES
@@ -554,7 +641,7 @@ async function start() {
   enterRoom(available.has(hash) ? hash : 'lobby');
   $('#roomcard').classList.remove('show');
   btn.disabled = false;
-  btn.textContent = hash && available.has(hash) && hash !== 'lobby' ? `Enter ${artistById[hash].short}'s room` : 'Enter the museum';
+  btn.textContent = hash && available.has(hash) && hash !== 'lobby' ? `Enter ${roomOf(hash).short}` : 'Enter the museum';
   btn.addEventListener('click', () => {
     intro.classList.remove('open', 'help');
     modalClosed();

@@ -11,13 +11,13 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { ARTISTS } from '../js/data/artists.js';
-import { resolveImages, paintingKey } from '../js/images.js';
+import { resolveImages, paintingKey, allPaintings } from '../js/images.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dry = process.argv.includes('--dry-run');
 const headers = { 'User-Agent': 'OnlineMuseum/1.0 (https://github.com/lyon-coding/online-museum; image verification script)' };
 
-const total = ARTISTS.reduce((s, a) => s + a.paintings.length, 0);
+const total = ARTISTS.reduce((s, a) => s + allPaintings(a).length, 0);
 let requests = 0;
 console.log(`Resolving ${total} paintings on Wikimedia Commons…`);
 const { images, errors } = await resolveImages(ARTISTS, {
@@ -31,7 +31,7 @@ console.log(`\n${requests} API requests, ${errors} errors.\n`);
 
 let shown = 0;
 for (const a of ARTISTS) {
-  const rows = a.paintings.map((p) => ({ p, info: images[paintingKey(a.id, p)] }));
+  const rows = allPaintings(a).map((p) => ({ p, info: images[paintingKey(a.id, p)] }));
   const ok = rows.filter((r) => r.info).length;
   shown += ok;
   console.log(`${a.name} — ${ok}/${rows.length}`);

@@ -123,29 +123,225 @@ export const ARTISTS = [
         search: { q: 'Claude Monet Gare Saint-Lazare 1877', all: ['monet', 'lazare'] }
       },
       {
-        title: 'Stacks of Wheat (Haystacks series)', year: 1890, date: '1890–91',
-        desc: 'Stacks of wheat in a field at the end of summer, glowing in warm light with violet-blue shadows. From 1890 Monet painted the same stacks again and again, at different hours and seasons — his first true series. The motif barely changes; each canvas records one particular light and atmosphere.',
+        title: 'Stacks of Wheat (End of Summer)', year: 1890, date: '1890–91', collection: 'Art Institute of Chicago', series: 'haystacks',
+        desc: 'Stacks of wheat in a field at the end of summer, glowing in warm light with violet-blue shadows, the hills behind dissolving in the haze.',
         files: ['Claude Monet - Stacks of Wheat (End of Summer) - 1985.1103 - Art Institute of Chicago.jpg'],
         search: { q: 'Claude Monet Stacks of Wheat haystacks', all: ['monet', 'wheat|haystack|meules'] }
       },
       {
-        title: 'Rouen Cathedral (series)', year: 1893, date: '1892–94',
-        desc: 'The cathedral façade in the light of the setting sun. The carved stone dissolves into thick, crusted strokes of orange, pink and blue: the building has become a screen for changing light. One of more than thirty views Monet painted from a window opposite.',
+        title: 'Rouen Cathedral, Effect of Sunlight, End of Day', year: 1892, date: '1892', collection: 'Musée Marmottan Monet, Paris', series: 'rouen',
+        desc: 'The cathedral façade in the light of the setting sun. The carved stone dissolves into thick, crusted strokes of orange, pink and blue: the building has become a screen for changing light.',
         files: ['Claude Monet - Rouen Cathedral, Facade (Sunset).JPG'],
         search: { q: 'Claude Monet Rouen Cathedral facade', all: ['monet', 'rouen'] }
       },
       {
-        title: 'Bridge over a Pond of Water Lilies', year: 1899, date: '1899',
+        title: 'Bridge over a Pond of Water Lilies', year: 1899, date: '1899', collection: 'Metropolitan Museum of Art, New York', series: 'bridge',
         desc: 'A Japanese-style footbridge arches over a pond covered with water lilies, framed by dense green foliage. Monet created this motif himself, in the water garden of his house at Giverny; it would be almost his only subject for the rest of his life.',
-        files: ['Claude Monet - Bridge over a Pond of Water Lilies.jpg'],
+        files: ['Claude Monet - Bridge over a Pond of Water Lilies.jpg', 'Bridge Over a Pond of Water Lilies, Claude Monet 1899.jpg', 'Metropolitan Monet bridge.jpg'],
         article: 'Bridge over a Pond of Water Lilies',
         search: { q: 'Claude Monet Bridge over a Pond of Water Lilies 1899', all: ['monet', 'bridge over a pond|japanese footbridge|pont japonais', '1899'] }
       },
       {
-        title: 'Water Lilies', year: 1906, date: '1906', collection: 'Art Institute of Chicago',
+        title: 'Water Lilies', year: 1906, date: '1906', collection: 'Art Institute of Chicago', series: 'waterlilies',
         desc: 'The horizon has disappeared: only the water\'s surface remains, with floating lilies and the reflections of sky and trees. With no edges and no single focus, the picture becomes a field of colour and light.',
         files: ['Claude Monet - Water Lilies - 1906, Ryerson.jpg'],
         search: { q: 'Claude Monet Water Lilies 1906 Art Institute', all: ['monet', 'water lil|nympheas', '1906'] }
+      }
+    ],
+    // Notable series, each shown in its own wing off the main room.
+    series: [
+      {
+        id: 'haystacks',
+        title: 'Stacks of Wheat',
+        short: 'Haystacks',
+        date: '1890–91',
+        intro:
+          'In the autumn of 1890 Monet began painting the stacks of wheat in a field next to his house at Giverny. He worked on several canvases at once, switching from one to the next as the light changed, and went on through the winter. In May 1891 fifteen of them were shown together at Durand-Ruel\'s gallery in Paris and sold within days — his first true series.',
+        look:
+          'The motif hardly changes; everything else does — the hour, the season, the weather. Compare the shadows: violet in late summer, blue on snow, orange and pink at sunset. Monet said he was painting the "envelope": the light and air around the object, not the object itself.',
+        works: [
+          {
+            title: 'Grainstacks in Bright Sunlight', year: 1890.3, date: '1890',
+            desc: 'The stacks stand under a high summer sun. Shadows are short and coloured, and the field and hills behind shimmer in the heat.',
+            files: ['Claude Monet - Grainstacks in Bright Sunlight (1890) Google Art Project.jpg']
+          },
+          {
+            title: 'Haystacks, Midday', year: 1890.4, date: '1890', collection: 'National Gallery of Australia, Canberra',
+            desc: 'Midday light flattens the forms: the stacks become luminous masses of colour against the hills, with almost no modelling.',
+            files: ['Claude Monet - Meules, milieu du jour (Haystacks, midday) - Google Art Project.jpg']
+          },
+          {
+            title: 'Stacks of Wheat (End of Day, Autumn)', year: 1890.8, date: '1890–91', collection: 'Art Institute of Chicago',
+            desc: 'Low autumn sun at the end of the day: the stacks are lit from behind, their shadowed sides glowing with warm reds and cool blues.',
+            files: ['Claude Monet - Stacks of Wheat (End of Day, Autumn) - 1933.444 - Art Institute of Chicago.jpg']
+          },
+          {
+            title: 'Stacks of Wheat (Sunset, Snow Effect)', year: 1890.9, date: '1890–91', collection: 'Art Institute of Chicago',
+            desc: 'Snow covers the field and the tops of the stacks; the setting sun turns the whole scene to rose, orange and violet.',
+            files: ['Claude Monet - Stacks of Wheat (Sunset, Snow Effect) - 1922.431 - Art Institute of Chicago.jpg']
+          },
+          {
+            title: 'Stack of Wheat (Snow Effect, Overcast Day)', year: 1891, date: '1890–91', collection: 'Art Institute of Chicago',
+            desc: 'A grey winter day without sun: no strong shadows, only subtle differences of blue, lilac and grey between snow, stack and sky.',
+            files: ['Claude Monet - Stack of Wheat (Snow Effect, Overcast Day) - 1933.1155 - Art Institute of Chicago.jpg']
+          },
+          {
+            title: 'Stack of Wheat (Thaw, Sunset)', year: 1891.1, date: '1890–91', collection: 'Art Institute of Chicago',
+            desc: 'The snow is melting; patches of green and brown field reappear under a warm sunset that sets the edges of the stack alight.',
+            files: ['Claude Monet - Stack of Wheat (Thaw, Sunset) - 1983.166 - Art Institute of Chicago.jpg']
+          },
+          {
+            title: 'Wheatstacks, Snow Effect, Morning', year: 1891.2, date: '1891', collection: 'J. Paul Getty Museum, Los Angeles',
+            desc: 'Early morning after snowfall: pale, cold light, long blue shadows stretching across the white field.',
+            files: ['Claude Monet - Meules, Effet de Neige, Le Matin (1891) - Getty Center.jpg']
+          },
+          {
+            title: 'Grainstack, Sun in the Mist', year: 1891.4, date: '1891', collection: 'Minneapolis Institute of Art',
+            desc: 'The sun breaks through mist and the stack nearly dissolves: everything is reduced to vibrating strokes of orange, pink and blue.',
+            files: ['Claude Monet - Grainstack, Sun in the Mist - Google Art Project.jpg']
+          }
+        ]
+      },
+      {
+        id: 'rouen',
+        title: 'Rouen Cathedral',
+        short: 'Rouen Cathedral',
+        date: '1892–94',
+        intro:
+          'In February 1892, and again in 1893, Monet rented rooms opposite the west façade of Rouen Cathedral and painted it more than thirty times, from early morning to dusk, in sunshine and in grey weather. He reworked the canvases in his studio at Giverny, and in 1895 showed twenty of them together at Durand-Ruel\'s gallery.',
+        look:
+          'The façade hardly moves from one canvas to the next; what changes is the colour of the stone — white and blue in the morning, gold and blue in full sun, orange and violet at the end of the day. The paint is thick and crusted, almost like the carved stone itself.',
+        works: [
+          {
+            title: 'Rouen Cathedral, the Portal, Grey Weather', year: 1892.2, date: '1892', collection: 'Musée d\'Orsay, Paris',
+            desc: 'A cloudy day: without direct sun, the Gothic portal is a muted mass of greys, mauves and greens.',
+            files: ['Claude Monet - The Cathedral in Rouen. The portal, Grey Weather - Google Art Project.jpg']
+          },
+          {
+            title: 'Rouen Cathedral, the Portal, Morning Sun (Harmony in Blue)', year: 1893, date: '1893', collection: 'Musée d\'Orsay, Paris',
+            desc: 'Early morning: the façade is still largely in shadow, bathed in cool blues, with the first light touching the stone.',
+            files: ['Claude Monet - Cathédrale de Rouen. Harmonie bleue.jpg']
+          },
+          {
+            title: 'Rouen Cathedral, the Portal and the Tour Saint-Romain, Morning Effect (Harmony in White)', year: 1893.1, date: '1893', collection: 'Musée d\'Orsay, Paris',
+            desc: 'Morning light whitens the stone: a pale harmony of whites, creams and soft blues in which the carved details dissolve.',
+            files: ['Claude Monet - Cathédrale de Rouen. Harmonie blanche.jpg']
+          },
+          {
+            title: 'Rouen Cathedral, the Portal and the Tour Saint-Romain, Full Sunlight (Harmony in Blue and Gold)', year: 1893.2, date: '1893', collection: 'Musée d\'Orsay, Paris',
+            desc: 'Full sunlight: the façade glows gold against a deep blue sky, the shadows in the porches a strong contrasting blue.',
+            files: ['Claude Monet - Cathédrale de Rouen. Harmonie bleue et or.jpg']
+          },
+          {
+            title: 'Rouen Cathedral, West Façade, Sunlight', year: 1894, date: '1894', collection: 'National Gallery of Art, Washington',
+            desc: 'The west front in sunshine, painted in thick, encrusted touches of cream, yellow and blue that mimic the texture of weathered stone.',
+            files: ['Claude Monet, Rouen Cathedral, West Façade, Sunlight, 1894, NGA 46654.jpg']
+          },
+          {
+            title: 'The Portal of Rouen Cathedral in Morning Light', year: 1894.1, date: '1894', collection: 'J. Paul Getty Museum, Los Angeles',
+            desc: 'Morning light from the side picks out the portal and tower in soft pinks and blues.',
+            files: ['Claude Monet - The Portal of Rouen Cathedral in Morning Light (1894) - Getty Center 2001.33.jpg']
+          },
+          {
+            title: 'Rouen Cathedral in the Evening', year: 1894.2, date: '1894', collection: 'Pushkin Museum, Moscow',
+            desc: 'Evening: the façade sinks into dusk, the stone turning to deep blues and violets with a last warm glow at the top.',
+            files: ['Claude Monet - Rouen Cathedral in the evening (1894) - Pushkin Museum Ж-3312.jpg']
+          }
+        ]
+      },
+      {
+        id: 'bridge',
+        title: 'The Japanese Bridge',
+        short: 'Japanese Bridge',
+        date: '1895–1922',
+        intro:
+          'In 1893 Monet bought land beside his house at Giverny, diverted a stream to make a pond, planted water lilies and built a wooden footbridge in the Japanese style, inspired by the prints he collected. In 1899 the bridge became a series of its own; after the First World War, with his eyesight failing from cataracts, he painted it again in a last group of canvases.',
+        look:
+          'Follow the bridge from canvas to canvas: in 1899 it is a precise green arch framed by willows and water lilies; around 1920 it dissolves into a tangle of hot reds, oranges and greens, painted by a half-blind artist. The motif is the same — the eyes, and the idea of painting, have changed.',
+        works: [
+          {
+            title: 'Japanese Footbridge, Giverny (first version)', year: 1895, date: '1895', collection: 'Philadelphia Museum of Art',
+            desc: 'The first time Monet painted his new footbridge, a few years after it was built — before the bridge became a series.',
+            files: ['Japanese Footbridge, Giverny (1895) Claude Monet - Philadelphia Museum of Art - Inv.1993-151-2 (W 1419).jpg']
+          },
+          {
+            title: 'The Japanese Footbridge', year: 1899.1, date: '1899', collection: 'National Gallery of Art, Washington',
+            desc: 'The arch of the bridge crosses the square canvas from side to side, above a pond carpeted with water lilies and framed by dense greenery.',
+            files: ['Claude Monet, The Japanese Footbridge, 1899, NGA 74796.jpg']
+          },
+          {
+            title: 'The Japanese Footbridge and the Water Lily Pool, Giverny', year: 1899.2, date: '1899', collection: 'Philadelphia Museum of Art',
+            desc: 'Another view of the same motif in the same year: the bridge, the floating lilies and the reflections of the willows on the water.',
+            files: ['Claude Monet, French - The Japanese Footbridge and the Water Lily Pool, Giverny - Google Art Project.jpg']
+          },
+          {
+            title: 'Water Lily Pond', year: 1900, date: '1900', collection: 'Art Institute of Chicago',
+            desc: 'The bridge seen straight on, filling the width of the canvas above a pond crowded with lilies — one of the canvases Monet showed in 1900 as a group.',
+            files: ['Claude Monet - Water Lily Pond - 1933.441 - Art Institute of Chicago.jpg']
+          },
+          {
+            title: 'The Japanese Bridge (1918)', year: 1918, date: '1918', collection: 'Musée Marmottan Monet, Paris',
+            desc: 'Twenty years later: the bridge is now a loose arc of colour, barely separated from the vegetation around it.',
+            files: ['Claude Monet - Le Pont japonais W1913 - Musée Marmottan-Monet.jpg']
+          },
+          {
+            title: 'The Footbridge over the Water-Lily Pond', year: 1919, date: '1919',
+            desc: 'Thick, rapid strokes of red, orange and green: the bridge is still recognisable, but the painting is above all a surface of colour and gesture.',
+            files: ['Monet - La passerelle sur le bassin aux nymphéas, 1919.jpg']
+          },
+          {
+            title: 'The Japanese Footbridge (late version)', year: 1922, date: 'c. 1922', collection: 'Museum of Fine Arts, Houston',
+            desc: 'One of the last versions: the bridge almost disappears in a dense web of colour — a painting that looks forward to abstraction.',
+            files: ['Claude Monet - The Japanese Footbridge (Museum of Fine Arts, Houston).jpg']
+          }
+        ]
+      },
+      {
+        id: 'waterlilies',
+        title: 'Water Lilies',
+        short: 'Water Lilies',
+        date: '1903–1920s',
+        intro:
+          'From 1903 until his death in 1926 Monet painted the surface of his water-lily pond about 250 times. The bank and the bridge gradually disappear; only water, floating flowers and reflections of sky and trees remain. In his last years he worked on huge panels meant to surround the viewer, now installed in the Orangerie in Paris.',
+        look:
+          'Look at what is missing: there is no horizon, no sky except its reflection, no fixed point of view. Up and down become uncertain. Follow the canvases from the clear, crisp pads of 1905 to the thick, almost abstract strokes of the late 1910s.',
+        works: [
+          {
+            title: 'Water Lilies (1905)', year: 1905, date: '1905',
+            desc: 'Lily pads float in clusters on dark water that mirrors the sky and the trees on the bank — the bank itself is no longer shown.',
+            files: ['Claude Monet - Nymphéas (1905).jpg']
+          },
+          {
+            title: 'Pond with Water Lilies', year: 1907, date: '1907',
+            desc: 'A tall, narrow canvas: the reflections of the trees fall vertically through the water, crossed by horizontal bands of lilies.',
+            files: ['Claude Monet - Pond with Water Lilies - Google Art Project.jpg']
+          },
+          {
+            title: 'Water Lilies (1908)', year: 1908, date: '1908',
+            desc: 'A round of floating flowers and reflected light, painted in the years when Monet tried circular and square formats to escape the idea of a window onto a landscape.',
+            files: ['Claude Monet - Nymphéas (1908).jpg']
+          },
+          {
+            title: 'Water Lilies (c. 1914–17)', year: 1915, date: 'c. 1914–17',
+            desc: 'Painted during the First World War, when Monet began working on a much larger scale: the strokes grow broad and loose, the colours deep.',
+            files: ['Claude Monet - Nymphéas (Waterlilies) - Google Art Project.jpg']
+          },
+          {
+            title: 'Water Lilies, Reflections of Weeping Willows', year: 1916, date: '1916', collection: 'National Museum of Western Art, Tokyo',
+            desc: 'The long green strands of the willows hang into the water as reflections; the lilies float across them.',
+            files: ['Water Lilies, Reflections of Weeping Willows (1916) Claude Monet - NMWA, Tokyo (W 1971).jpg']
+          },
+          {
+            title: 'The Water Lily Pond (c. 1917–19)', year: 1918, date: 'c. 1917–19',
+            desc: 'A wide canvas with no edges or focus: the pond becomes a field of colour, painted with heavy, rapid brushstrokes.',
+            files: ['Claude Monet - The Water Lily Pond, c. 1917-19 - Google Art Project.jpg']
+          },
+          {
+            title: 'Reflections of Clouds on the Water-Lily Pond', year: 1920, date: 'c. 1920',
+            desc: 'Clouds drift across the water as reflections, among dark patches of lilies — part of the late, panoramic work on the pond.',
+            files: ['Claude Monet - Reflections of Clouds on the Water-Lily Pond.jpg']
+          }
+        ]
       }
     ]
   },
@@ -325,16 +521,55 @@ export const ARTISTS = [
         search: { q: 'Pissarro Apple Picking Eragny', all: ['pissarro', 'apple|pommes'] }
       },
       {
-        title: 'Boulevard Montmartre, Spring', year: 1897, date: '1897',
-        desc: 'The boulevard seen from a hotel window high above: carriages and crowds stream between rows of trees in fresh green leaf. Pissarro painted this same view more than a dozen times, at different hours and in different weather.',
+        title: 'Boulevard Montmartre, Spring', year: 1897.4, date: '1897', series: 'montmartre',
+        desc: 'Spring: the trees along the boulevard are in fresh green leaf, and carriages and crowds stream down the avenue under a pale, luminous sky.',
         article: 'Boulevard Montmartre, Spring',
         search: { q: 'Pissarro Boulevard Montmartre spring', all: ['pissarro', 'montmartre', 'spring|printemps'] }
       },
       {
-        title: 'The Boulevard Montmartre at Night', year: 1897.5, date: '1897', collection: 'National Gallery, London',
+        title: 'The Boulevard Montmartre at Night', year: 1897.5, date: '1897', collection: 'National Gallery, London', series: 'montmartre',
         desc: 'His only night scene: wet pavements reflecting gas and electric lamps. The modern city becomes pure flickering light.',
         files: ['Camille Pissarro, The Boulevard Montmartre at Night, 1897.jpg'],
         article: 'The Boulevard Montmartre at Night'
+      }
+    ],
+    series: [
+      {
+        id: 'montmartre',
+        title: 'The Boulevard Montmartre',
+        short: 'Boulevard Montmartre',
+        date: '1897',
+        intro:
+          'In February 1897 Pissarro, then 66 and suffering from an eye infection that made it hard to paint outdoors, took a room at the Grand Hôtel de Russie in Paris with a view straight down the Boulevard Montmartre. From that window he painted the boulevard fourteen times over the following weeks — in fog, in grey winter light, in spring sunshine, during the Mardi Gras parade and once at night.',
+        look:
+          'The view never changes: the long avenue runs away to a point, lined with trees and tall buildings. Watch the weather, the hour and the crowd instead — the grey haze of a winter morning, the scattered bright colour of the carnival, the blurred lamps of the night.',
+        works: [
+          {
+            title: 'Boulevard Montmartre, Morning, Cloudy Weather', year: 1897.1, date: '1897', collection: 'National Gallery of Victoria, Melbourne',
+            desc: 'A grey winter morning: the avenue is wet and muted, traffic and pedestrians reduced to small dark touches of paint.',
+            files: ['Camille Pissarro - Boulevard Montmartre, morning, cloudy weather - Google Art Project.jpg']
+          },
+          {
+            title: 'Boulevard Montmartre, Morning Fog', year: 1897.15, date: '1897',
+            desc: 'Fog softens everything: the buildings fade into a pale haze and the far end of the boulevard disappears.',
+            files: ['Camille Pissarro - Le Boulevard Montmartre, brume du matin (PD 1162).jpg']
+          },
+          {
+            title: 'Boulevard Montmartre, Afternoon, Sunshine', year: 1897.2, date: '1897', collection: 'Hermitage Museum, St Petersburg',
+            desc: 'Afternoon sun lights one side of the street; shadows fall across the pavement and the crowd is busy and bright.',
+            files: ['Camille Pissarro - Boulevard Montmartre - 1897 - Eremitage.jpg']
+          },
+          {
+            title: 'Boulevard Montmartre, Mardi Gras, Sunset', year: 1897.25, date: '1897', collection: 'Kunstmuseum Winterthur',
+            desc: 'The carnival parade fills the boulevard at sunset: a dense, festive crowd rendered in flickering touches of colour.',
+            files: ['Camille Pissarro - Boulevard Montmartre, Mardi Gras, au coucher du soleil - Kunstmuseum Winterthur.jpg']
+          },
+          {
+            title: 'Boulevard Montmartre, Twilight', year: 1897.3, date: '1897',
+            desc: 'End of the day: the light fades, the first lamps glow and the boulevard turns to blues and violets.',
+            files: ['Camille Pissarro - Le Boulevard Montmartre, fin de journée (PD 1170).jpg']
+          }
+        ]
       }
     ]
   },
@@ -414,7 +649,7 @@ export const ARTISTS = [
         search: { q: 'Cézanne Bay of Marseille seen from L\'Estaque', all: ['cezanne', 'estaque'] }
       },
       {
-        title: 'Mont Sainte-Victoire with Large Pine', year: 1887, date: 'c. 1887', collection: 'Courtauld Gallery, London',
+        title: 'Mont Sainte-Victoire with Large Pine', year: 1887, date: 'c. 1887', collection: 'Courtauld Gallery, London', series: 'victoire', files: ['Cezanne - Mont Sainte-Victoire, Courtauld.jpg'],
         desc: 'The mountain he painted more than sixty times. A pine branch frames the valley, which is laid in as a patchwork of green and ochre planes, near and far held together on the surface.',
         search: { q: 'Cézanne Mont Sainte-Victoire large pine', all: ['cezanne', 'victoire', 'pine'] }
       },
@@ -425,8 +660,8 @@ export const ARTISTS = [
         search: { q: 'Cézanne Boy in a Red Waistcoat', all: ['cezanne', 'waistcoat|red vest|gilet rouge'] }
       },
       {
-        title: 'The Card Players', year: 1892, date: '1890–95', collection: 'Musée d\'Orsay, Paris',
-        desc: 'Two peasants face each other across a table, a bottle between them, silent and monumental as statues. Cézanne painted five versions of the subject, gradually reducing it from several figures to these two.',
+        title: 'The Card Players', year: 1892.9, date: '1890–95', series: 'cardplayers', collection: 'Musée d\'Orsay, Paris',
+        desc: 'Two peasants face each other across a table, a bottle between them, silent and monumental as statues — the most pared-down of the versions.',
         files: ['Les Joueurs de cartes, par Paul Cézanne.jpg'],
         article: 'The Card Players'
       },
@@ -449,9 +684,85 @@ export const ARTISTS = [
         search: { q: 'Cézanne Still Life with Apples and Oranges', all: ['cezanne', 'apples and oranges|pommes et oranges'] }
       },
       {
-        title: 'Mont Sainte-Victoire (late version)', year: 1904, date: '1904–06',
+        title: 'Mont Sainte-Victoire (late version)', year: 1904, date: '1902–06', series: 'victoire', files: ['Paul Cézanne - Mont Sainte-Victoire - Google Art Project.jpg'],
         desc: 'The mountain rises above a plain laid in as a mosaic of separate patches of green, ochre and violet, with parts of the canvas left bare. Near and far are no longer separated by perspective; both are built from the same blocks of colour.',
         search: { q: 'Cézanne Mont Sainte-Victoire 1904 1906', all: ['cezanne', 'victoire', '190[4-6]'] }
+      }
+    ],
+    series: [
+      {
+        id: 'victoire',
+        title: 'Mont Sainte-Victoire',
+        short: 'Sainte-Victoire',
+        date: '1878–1906',
+        intro:
+          'The limestone mountain east of Aix-en-Provence appears in more than sixty of Cézanne\'s paintings and watercolours. In the 1880s he painted it from his brother-in-law\'s land above the Arc valley, framed by pines and a railway viaduct; from 1902, from the hill of Les Lauves near his new studio, he returned to it again and again until his death in 1906.',
+        look:
+          'Watch the space flatten over almost thirty years. In the early canvases the valley recedes in an orderly perspective toward the mountain; in the last ones, foreground, plain and peak are built from the same separate patches of colour, and the picture becomes a structure of colour on the surface.',
+        works: [
+          {
+            title: 'Toward Mont Sainte-Victoire', year: 1878, date: 'c. 1878', collection: 'Barnes Foundation, Philadelphia',
+            desc: 'An early view: fields and a road lead the eye toward the distant mountain, laid in with the patient, parallel strokes Cézanne developed after working with Pissarro.',
+            files: ['Paul Cézanne - Toward Mont Sainte-Victoire (Vers la Montagne Sainte-Victoire) - BF300 - Barnes Foundation.jpg']
+          },
+          {
+            title: 'Mont Sainte-Victoire and the Viaduct of the Arc River Valley', year: 1883, date: '1882–85', collection: 'Metropolitan Museum of Art, New York',
+            desc: 'Farmland and a railway viaduct lead across the broad valley of the Arc to the mountain on the horizon — a classical, panoramic composition.',
+            files: ['Paul Cézanne - Mont Sainte-Victoire and the Viaduct of the Arc River Valley (Metropolitan Museum of Art).jpg']
+          },
+          {
+            title: 'Mont Sainte-Victoire (c. 1892–95)', year: 1893, date: 'c. 1892–95', collection: 'Barnes Foundation, Philadelphia',
+            desc: 'The mountain\'s mass is built from interlocking planes of blue, ochre and green; the landscape below is simplified into broad blocks.',
+            files: ['Paul Cézanne - Mont Sainte-Victoire (La Montagne Sainte-Victoire) - BF13 - Barnes Foundation.jpg']
+          },
+          {
+            title: 'Mont Sainte-Victoire Seen from the Bibémus Quarry', year: 1897, date: 'c. 1897', collection: 'Baltimore Museum of Art',
+            desc: 'From the abandoned Bibémus quarry, the peak rises above blocks of orange stone — a landscape that already looks like geometry.',
+            files: ['La Montagne Sainte-Victoire vue de la carrière Bibémus, par Paul Cézanne.jpg']
+          },
+          {
+            title: 'Mont Sainte-Victoire (1902–06)', year: 1903, date: '1902–06', collection: 'Metropolitan Museum of Art, New York',
+            desc: 'One of the late views: the plain is a patchwork of green and ochre strokes, and the mountain a dense blue form against the sky.',
+            files: ['Cézanne - Mont Sainte-Victoire 1902-06 Met.jpg']
+          },
+          {
+            title: 'Mont Sainte-Victoire and Château Noir', year: 1904.5, date: 'c. 1904–06', collection: 'Artizon Museum, Tokyo',
+            desc: 'The mountain glimpsed above dark trees and the ochre walls of Château Noir, where Cézanne rented a room; foliage and sky merge into one woven surface.',
+            files: ['Paul Cezanne - Mont Sainte-Victoire and Château Noir - Google Art Project.jpg']
+          },
+          {
+            title: 'Mont Sainte-Victoire Seen from Les Lauves', year: 1905, date: '1904–06', collection: 'Kunsthaus Zürich',
+            desc: 'Among the very last: the plain below is a mosaic of separate patches of colour, the mountain a blue-violet silhouette, parts of the canvas left bare.',
+            files: ['Paul Cézanne - La Montagne Sainte-Victoire - 1946-0014 - Kunsthaus Zürich.jpg']
+          }
+        ]
+      },
+      {
+        id: 'cardplayers',
+        title: 'The Card Players',
+        short: 'Card Players',
+        date: '1890–95',
+        intro:
+          'In the early 1890s Cézanne painted five versions of card players, using farm workers from the Jas de Bouffan, his family\'s estate near Aix, as his models. The first versions show several players and onlookers in a room; the later ones are reduced to two men facing each other across a small table.',
+        look:
+          'Count the figures: as the series goes on, Cézanne cuts away the anecdote — the onlookers, the pipes on the wall, the room itself — until only two still, monumental figures remain, balanced on either side of the table like the two halves of a single structure.',
+        works: [
+          {
+            title: 'The Card Players (with three players)', year: 1890.5, date: '1890–92', collection: 'Metropolitan Museum of Art, New York',
+            desc: 'Three men play at a table while a fourth stands watching, pipe in mouth: one of the larger early versions, with a whole scene set in a room.',
+            files: ['Cezanne The Card Players Metmuseum.jpg']
+          },
+          {
+            title: 'The Card Players (Qatar version)', year: 1892.5, date: '1892–93', collection: 'Private collection, Qatar',
+            desc: 'Two players face each other in warm, earthy colours; one of the two-figure versions, sold privately in 2011 to the royal family of Qatar.',
+            files: ['Les Joueurs de cartes, par Paul Cézanne, collection Al-Thani, Yorck.jpg']
+          },
+          {
+            title: 'The Card Players (Courtauld version)', year: 1894, date: '1892–96', collection: 'Courtauld Gallery, London',
+            desc: 'The most compact of the two-figure versions: the bottle on the table marks the central axis, and the two players mirror each other on either side.',
+            files: ['Paul Cézanne, 1892-95, Les joueurs de carte (The Card Players), 60 x 73 cm, oil on canvas, Courtauld Institute of Art, London.jpg']
+          }
+        ]
       }
     ]
   },
@@ -589,8 +900,9 @@ export const ARTISTS = [
         search: { q: 'Van Gogh self-portrait grey felt hat', all: ['gogh', 'gr[ae]y felt hat'] }
       },
       {
-        title: 'Sunflowers', year: 1888, date: '1888',
-        desc: 'Painted to decorate Gauguin\'s room in the Yellow House at Arles: yellow on yellow, a near-impossible test of colour, in thick, sculpted paint.',
+        title: 'Sunflowers', year: 1888.6, date: '1888', collection: 'National Gallery, London', series: 'sunflowers',
+        desc: 'Fifteen sunflowers in a yellow vase against a yellow wall, from fresh blooms to heads gone to seed: yellow on yellow, a near-impossible test of colour, in thick, sculpted paint.',
+        files: ['Vincent van Gogh - Sunflowers (1888, National Gallery London).jpg'],
         article: 'Sunflowers (Van Gogh series)',
         search: { q: 'Van Gogh Sunflowers 1888 vase', all: ['gogh', 'sunflowers'] }
       },
@@ -635,6 +947,45 @@ export const ARTISTS = [
         desc: 'One of his last paintings, at Auvers. Three paths lead nowhere under a stormy sky. He wrote of painting "vast fields of wheat under troubled skies" to express "sadness, extreme loneliness".',
         article: 'Wheatfield with Crows',
         search: { q: 'Van Gogh Wheatfield with Crows', all: ['gogh', 'crows|kraaien'] }
+      }
+    ],
+    series: [
+      {
+        id: 'sunflowers',
+        title: 'Sunflowers',
+        short: 'Sunflowers',
+        date: '1887–89',
+        intro:
+          'Van Gogh first painted sunflowers in Paris in 1887: cut flower heads lying on a table, seen close up. In Arles in August 1888, while waiting for Gauguin to join him, he painted four vases of sunflowers to decorate the Yellow House. In January 1889 he made repetitions of the best of them, for his brother Theo and for himself.',
+        look:
+          'Compare the dark, close-up Paris canvases with the Arles vases: yellow on yellow, thick paint, flowers at every stage from bud to seed. In the repetitions Van Gogh changed the background colour and the brushwork, testing how far a single colour could carry a picture.',
+        works: [
+          {
+            title: 'Two Cut Sunflowers', year: 1887, date: '1887', collection: 'Metropolitan Museum of Art, New York',
+            desc: 'Two cut sunflower heads lying on the ground, one showing its seed-filled centre, the other its back — a close-up still life of dying flowers, painted in Paris.',
+            files: ['Vincent van Gogh - Sunflowers (Metropolitan Museum of Art).jpg']
+          },
+          {
+            title: 'Sunflowers Gone to Seed', year: 1887.5, date: '1887', collection: 'Van Gogh Museum, Amsterdam',
+            desc: 'Faded sunflower heads with curling petals, painted with the brighter palette and broken strokes Van Gogh had adopted in Paris.',
+            files: ['Uitgebloeide zonnebloemen - s0121V1962 - Van Gogh Museum.jpg']
+          },
+          {
+            title: 'Three Sunflowers', year: 1888.5, date: '1888', collection: 'Private collection',
+            desc: 'The first of the Arles vases, painted in August 1888: three flowers in a vase against a blue-green background.',
+            files: ['Vincent Van Gogh - Three Sunflowers F453.jpg']
+          },
+          {
+            title: 'Vase with Twelve Sunflowers (repetition)', year: 1889, date: 'January 1889', collection: 'Philadelphia Museum of Art',
+            desc: 'A repetition, painted in January 1889, of the twelve-flower vase of the previous summer, set against a turquoise background.',
+            files: ['Vincent Willem van Gogh, Dutch - Sunflowers - Google Art Project.jpg']
+          },
+          {
+            title: 'Vase with Fifteen Sunflowers (repetition)', year: 1889.05, date: 'January 1889', collection: 'Van Gogh Museum, Amsterdam',
+            desc: 'Van Gogh\'s own repetition of the fifteen-flower vase, painted after his breakdown in December 1888 — yellow on yellow, the paint applied even more thickly.',
+            files: ['Zonnebloemen - s0031V1962 - Van Gogh Museum.jpg']
+          }
+        ]
       }
     ]
   },

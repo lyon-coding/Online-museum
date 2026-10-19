@@ -6,6 +6,7 @@ const headers = { 'User-Agent': 'OnlineMuseum/1.0 (series discovery script)' };
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const strip = (h) => String(h || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 
+// Usage: node scripts/discover-series.mjs [series ids...]
 const SERIES = [
   ['haystacks', ['Monet Stacks of Wheat', 'Monet Haystacks', 'Monet Meules', 'Monet Grainstack', 'Monet Wheatstacks'], ['monet', 'wheat|haystack|grainstack|meule|stack']],
   ['rouen', ['Monet Rouen Cathedral', 'Monet cathédrale de Rouen'], ['monet', 'rouen']],

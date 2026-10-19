@@ -440,7 +440,7 @@ export function doorSign({ kind, name, years, color, dark }) {
 }
 
 /** Glowing panel at the end of a doorway passage. */
-export function portalTexture({ name, color, wall }) {
+export function portalTexture({ name, color, wall, low = false }) {
   const W = 512;
   const H = 768;
   const c = canvas(W, H);
@@ -455,8 +455,9 @@ export function portalTexture({ name, color, wall }) {
   r.addColorStop(1, 'rgba(255,255,255,0)');
   ctx.fillStyle = r;
   ctx.fillRect(0, 0, W, H);
+  const ty = low ? H * 0.9 : H * 0.57;
   ctx.fillStyle = color;
-  ctx.fillRect(W * 0.3, H * 0.62, W * 0.4, 6);
+  ctx.fillRect(W * 0.3, ty + H * 0.05, W * 0.4, 6);
   ctx.textAlign = 'center';
   ctx.fillStyle = isDark(wall) ? '#fff' : '#1d1a17';
   let size = 84;
@@ -465,7 +466,7 @@ export function portalTexture({ name, color, wall }) {
     size -= 4;
     ctx.font = `600 ${size}px ${SERIF}`;
   }
-  ctx.fillText(name, W / 2, H * 0.57);
+  ctx.fillText(name, W / 2, ty);
   return finish(c);
 }
 
