@@ -23,7 +23,7 @@ export const ARTISTS = [
       'He never exhibited with the Impressionists, seeking success at the official Salon instead — yet his scandalous pictures of modern Paris made him their hero and figurehead.',
     roots:
       'Velázquez\'s flat backgrounds, Goya\'s blacks, Courbet\'s Realism, Japanese prints, and Old Masters he quoted openly — Titian, Raphael.',
-    room: { wall: '#5b2a2c', floor: 'herringbone', frame: 'gilt', light: '#ffe0b5', props: ['bar', 'bench'] },
+    room: { wall: '#7a3337', floor: 'herringbone', frame: 'gilt', light: '#ffe0b5', props: ['bar', 'bench'] },
     paintings: [
       {
         title: 'Music in the Tuileries', year: 1862, date: '1862',
@@ -135,10 +135,11 @@ export const ARTISTS = [
         search: { q: 'Claude Monet Rouen Cathedral facade', all: ['monet', 'rouen'] }
       },
       {
-        title: 'Bridge over a Pond of Water Lilies', year: 1899, date: '1899', collection: 'Metropolitan Museum of Art, New York',
+        title: 'Bridge over a Pond of Water Lilies', year: 1899, date: '1899',
         desc: 'Monet created his own motif: a water garden with a Japanese-style footbridge at his house in Giverny. For the rest of his life it would be almost his only subject.',
         files: ['Claude Monet - Bridge over a Pond of Water Lilies.jpg'],
-        article: 'Bridge over a Pond of Water Lilies'
+        article: 'Bridge over a Pond of Water Lilies',
+        search: { q: 'Claude Monet Bridge over a Pond of Water Lilies 1899', all: ['monet', 'bridge over a pond|japanese footbridge|pont japonais', '1899'] }
       },
       {
         title: 'Water Lilies', year: 1906, date: '1906', collection: 'Art Institute of Chicago',
@@ -171,6 +172,7 @@ export const ARTISTS = [
       },
       {
         title: 'La Loge', year: 1874, date: '1874', collection: 'Courtauld Gallery, London',
+        search: { q: 'Renoir La Loge 1874 Courtauld', all: ['renoir', '\\bloge\\b', 'courtauld|1874|theatre box'] },
         desc: 'Shown at the first Impressionist exhibition. A fashionable couple in a theatre box: she is on display, he looks elsewhere through his opera glasses. The black-and-white stripes are painted with a bravura that recalls Manet.',
         files: ['Pierre-Auguste Renoir - La Loge (The Theatre Box) - Google Art Project.jpg'],
         article: 'La Loge (Renoir)'
@@ -212,7 +214,8 @@ export const ARTISTS = [
         search: { q: 'Renoir Large Bathers Philadelphia', all: ['renoir', 'large bathers|grandes baigneuses'] }
       },
       {
-        title: 'Young Girls at the Piano', year: 1892, date: '1892', collection: 'Musée d\'Orsay, Paris',
+        title: 'Young Girls at the Piano', year: 1892, date: '1892',
+        search: { q: 'Renoir Young Girls at the Piano 1892', all: ['renoir', 'piano'] },
         desc: 'Bought by the French state — Renoir\'s first official recognition. The softer, warmer late style that Matisse would later admire is already here.',
         files: ['Pierre-Auguste Renoir - Jeunes filles au piano.jpg'],
         article: 'Young Girls at the Piano'
@@ -317,7 +320,7 @@ export const ARTISTS = [
         search: { q: 'Pissarro red roofs 1877', all: ['pissarro', 'red roofs|toits rouges'] }
       },
       {
-        title: 'Apple Picking at Éragny-sur-Epte', year: 1888, date: '1888', collection: 'Dallas Museum of Art',
+        title: 'Apple Picking', year: 1887, date: 'c. 1886–88',
         desc: 'In 1886 Pissarro, then 56, adopted Seurat\'s divisionist technique — the only Impressionist to do so. The fruit pickers are built from tiny touches of pure colour that vibrate in the eye.',
         search: { q: 'Pissarro Apple Picking Eragny', all: ['pissarro', 'apple|pommes'] }
       },
@@ -503,9 +506,10 @@ export const ARTISTS = [
         search: { q: 'Seurat Young Woman Powdering Herself', all: ['seurat', 'powdering|poudrant'] }
       },
       {
-        title: 'The Channel of Gravelines', year: 1890, date: '1890',
+        title: 'The Channel of Gravelines, Grand Fort-Philippe', year: 1890, date: '1890', collection: 'Musée de l\'Annonciade, Saint-Tropez',
         desc: 'Seurat spent his summers on the Channel coast. Emptied of people, these seascapes are made of light alone — some of his most serene works.',
-        search: { q: 'Seurat Gravelines', all: ['seurat', 'gravelines'] }
+        files: ['Seurat-Gravelines-Annonciade.jpg'],
+        search: { q: 'Seurat Gravelines Annonciade', all: ['seurat', 'gravelines'] }
       },
       {
         title: 'The Circus', year: 1891, date: '1891', collection: 'Musée d\'Orsay, Paris',
@@ -605,8 +609,7 @@ export const ARTISTS = [
       {
         title: 'Starry Night Over the Rhône', year: 1888.75, date: '1888', collection: 'Musée d\'Orsay, Paris',
         desc: 'The gas lamps of Arles reflected in the river beneath the Great Bear, a couple strolling in the foreground. Painted outdoors, at night.',
-        article: 'Starry Night Over the Rhône',
-        search: { q: 'Van Gogh Starry Night over the Rhône', all: ['gogh', 'rhone'] }
+        search: { q: 'Van Gogh Starry Night over the Rhône', all: ['gogh|starry night over the rhone', 'rhone'] }
       },
       {
         title: 'Bedroom in Arles', year: 1888.8, date: '1888',
@@ -728,6 +731,11 @@ export const ARTISTS = [
         article: 'The Scream'
       },
       {
+        title: 'Vampire (Love and Pain)', year: 1893.8, date: '1893–95',
+        desc: 'A woman bends over a man, her red hair flowing over him. Munch called it "Love and Pain"; a writer friend gave it the title "Vampire".',
+        search: { q: 'Edvard Munch Vampire love and pain', all: ['munch', 'vampire|vampyr'] }
+      },
+      {
         title: 'Madonna', year: 1894, date: '1894',
         desc: 'Part Virgin, part lover, crowned with a red halo. Munch painted several versions; the lines around her body radiate like an aura.',
         article: 'Madonna (Munch)',
@@ -738,11 +746,6 @@ export const ARTISTS = [
         desc: 'The same blood-red sky and fjord as The Scream, now with a procession of pale, staring faces walking toward the viewer.',
         article: 'Anxiety (Munch)',
         search: { q: 'Edvard Munch Anxiety 1894', all: ['munch', 'anxiety|angst'] }
-      },
-      {
-        title: 'Vampire (Love and Pain)', year: 1895, date: '1895',
-        desc: 'A woman bends over a man, her red hair flowing over him. Munch called it "Love and Pain"; a writer friend gave it the title "Vampire".',
-        search: { q: 'Edvard Munch Vampire love and pain', all: ['munch', 'vampire|vampyr'] }
       },
       {
         title: 'The Dance of Life', year: 1899, date: '1899–1900', collection: 'National Museum, Oslo',
@@ -779,7 +782,13 @@ export const ARTISTS = [
         search: { q: 'Henri Matisse Luxe Calme et Volupté', all: ['matisse', 'luxe'] }
       },
       {
-        title: 'Woman with a Hat', year: 1905, date: '1905', collection: 'San Francisco Museum of Modern Art',
+        title: 'Portrait of André Derain', year: 1905.2, date: '1905', collection: 'Tate, London',
+        desc: 'Painted at Collioure in the summer of 1905, when Matisse and Derain worked side by side. The face is built from slabs of green, red and blue — colour freed from description, weeks before the word "Fauves" was coined.',
+        files: ['André Derain, par Henri Matisse.jpg'],
+        search: { q: 'Henri Matisse portrait of André Derain 1905', all: ['matisse', "andre derain, par henri matisse|portrait of andre derain"] }
+      },
+      {
+        title: 'Woman with a Hat', year: 1905.4, date: '1905', collection: 'San Francisco Museum of Modern Art',
         desc: 'Madame Matisse with green and violet shadows across her face. At the 1905 Salon d\'Automne it caused an uproar; the critic Louis Vauxcelles called the painters in that room "fauves" — wild beasts.',
         article: 'Woman with a Hat',
         search: { q: 'Henri Matisse Woman with a Hat 1905', all: ['matisse', 'woman with a hat|femme au chapeau'] }
@@ -809,8 +818,8 @@ export const ARTISTS = [
         search: { q: 'Henri Matisse Harmony in Red', all: ['matisse', 'harmony in red|la desserte|red room'] }
       },
       {
-        title: 'Dance', year: 1910, date: '1910', collection: 'Hermitage Museum, St Petersburg',
-        desc: 'Commissioned by the Moscow collector Sergei Shchukin. Five figures in three colours — red, blue, green. Painting reduced to rhythm and pure colour.',
+        title: 'Dance', year: 1910, date: '1909–10',
+        desc: 'A ring of five dancers, painted for the Moscow collector Sergei Shchukin, who also commissioned its companion, Music. Figures, ground and sky are reduced to a few flat colours: painting as pure rhythm.',
         article: 'Dance (Matisse)',
         search: { q: 'Henri Matisse La Danse 1910 Hermitage', all: ['matisse', 'dance|danse', '1910|hermitage'] }
       },
@@ -850,7 +859,7 @@ export const ARTISTS = [
       {
         title: 'Portrait of Henri Matisse', year: 1905.5, date: '1905', collection: 'Tate, London',
         desc: 'Matisse\'s face and beard built from bold strokes of red, green and orange. That summer at Collioure the two friends painted each other.',
-        search: { q: 'André Derain portrait of Henri Matisse 1905', all: ['derain', 'matisse'] }
+        search: { q: 'André Derain portrait of Henri Matisse 1905', all: ['derain', "henri matisse, par andre derain|portrait of (henri )?matisse|portrait (de |d.)henri matisse"] }
       },
       {
         title: 'Charing Cross Bridge', year: 1906, date: '1906',
@@ -902,9 +911,10 @@ export const ARTISTS = [
         search: { q: 'Kandinsky Der Blaue Reiter 1903', all: ['kandinsky', 'blue rider|blaue reiter', '1903'] }
       },
       {
-        title: 'Murnau landscape', year: 1909, date: 'c. 1909',
-        desc: 'Summers in the Bavarian village of Murnau with Gabriele Münter. Fauvist colour applied in flat patches; houses, hills and road begin to lose their outlines.',
-        search: { q: 'Kandinsky Murnau 1909', all: ['kandinsky', 'murnau'] }
+        title: 'Railway near Murnau', year: 1909, date: '1909', collection: 'Lenbachhaus, Munich',
+        desc: 'A train crosses the Bavarian landscape at Murnau, where Kandinsky spent his summers with Gabriele Münter. Fauvist colour laid in flat patches; the forms are already loosening their outlines.',
+        files: ['Kandinsky Eisenbahn bei Murnau PA291090.jpg'],
+        search: { q: 'Kandinsky Eisenbahn bei Murnau', all: ['kandinsky', 'eisenbahn|railway'] }
       },
       {
         title: 'Composition IV', year: 1911, date: '1911', collection: 'Kunstsammlung Nordrhein-Westfalen, Düsseldorf',
@@ -1086,9 +1096,10 @@ export const ARTISTS = [
         search: { q: 'Robert Delaunay Simultaneous Windows', all: ['robert delaunay', 'window|fenetre'] }
       },
       {
-        title: 'Circular Forms', year: 1912.7, date: '1912–13',
+        title: 'Circular Forms, Moon No. 3', year: 1913, date: '1913',
         desc: 'Sun and moon reduced to concentric rings of contrasting colour — among the first entirely non-figurative paintings made in Paris.',
-        search: { q: 'Robert Delaunay Formes circulaires', all: ['robert delaunay', 'circular|circulaire'] }
+        files: ['Robert Delaunay - Circular Forms, Moon No. 3 - 1913 - Private collection.jpg'],
+        search: { q: 'Robert Delaunay Formes circulaires lune', all: ['robert delaunay', 'circular|circulaire'] }
       },
       {
         title: 'Homage to Blériot', year: 1914, date: '1914', collection: 'Kunstmuseum Basel',
@@ -1207,9 +1218,10 @@ export const ARTISTS = [
         search: { q: 'Malevich Suprematist Composition Airplane Flying', all: ['malevi|malewi', 'airplane|aeroplane'] }
       },
       {
-        title: 'Supremus composition', year: 1916, date: '1916',
-        desc: 'In the "Supremus" series, dozens of overlapping coloured forms seem to drift and rotate, as if seen from far above the earth.',
-        search: { q: 'Malevich Supremus 1916', all: ['malevi|malewi', 'supremus'] }
+        title: 'Supremus No. 55', year: 1916, date: '1916',
+        desc: 'In the "Supremus" series, overlapping coloured forms seem to drift and rotate, as if seen from far above the earth.',
+        files: ['Supremus 55 (Malevich, 1916).jpg'],
+        search: { q: 'Malevich Supremus 55', all: ['malevi|malewi', 'supremus 55'] }
       },
       {
         title: 'Suprematist Composition: White on White', year: 1918, date: '1918', collection: 'Museum of Modern Art, New York',
@@ -1253,7 +1265,7 @@ export const INFLUENCES = [
   { from: 'degas', to: 'gauguin', text: 'Degas was among the first to buy Gauguin\'s work and defended him when others mocked him. Gauguin admired Degas\'s drawing and his bold, cropped compositions.' },
   { from: 'renoir', to: 'matisse', text: 'Renoir\'s late, sensuous colour and decorative nudes were admired by Matisse, who visited the elderly painter at his home in Cagnes in 1917–18.' },
 
-  { from: 'cezanne', to: 'matisse', text: 'In 1899 Matisse bought a small Cézanne, Three Bathers, with money he could not spare. He kept it for 37 years, calling it his source of faith and perseverance.' },
+  { from: 'cezanne', to: 'matisse', text: 'In 1899 Matisse bought a small painting of bathers by Cézanne with money he could not spare. He kept it for 37 years, calling it his source of faith and perseverance.' },
   { from: 'cezanne', to: 'gris', text: 'Cézanne built pictures from planes of colour and shifting viewpoints. After his 1907 memorial retrospective, Picasso and Braque turned these ideas into Cubism, and Juan Gris gave Cubism its most rigorous, architectural form.' },
   { from: 'cezanne', to: 'delaunay', text: 'Delaunay went through a "Cézannian" period in 1906–09 before breaking up the city of Paris into faceted, light-filled planes.' },
   { from: 'cezanne', to: 'malevich', text: 'Malevich\'s path to the pure square began with Cézanne: around 1909–10 he painted in a "Cézannist" manner, then moved through Cubism and Cubo-Futurism.' },
