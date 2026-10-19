@@ -17,13 +17,29 @@ const SERIES = [
   ['sunflowers', ['Van Gogh Sunflowers', 'Van Gogh tournesols', 'Van Gogh zonnebloemen'], ['gogh', 'sunflower|tournesol|zonnebloem']]
 ];
 
+const only = process.argv.slice(2);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+async function getJson(u) {
+  for (let i = 0; i < 5; i++) {
+    const res = await fetch(u, { headers });
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch {
+      await sleep(5000 * (i + 1)); // rate limited: wait and retry
+    }
+  }
+  return {};
+}
+
 for (const [id, queries, all] of SERIES) {
+  if (only.length && !only.includes(id)) continue;
   const seen = new Map();
   for (const q of queries) {
     const u = new URL(API);
     Object.entries({ action: 'query', format: 'json', formatversion: '2', generator: 'search', gsrsearch: q, gsrnamespace: '6', gsrlimit: '50', prop: 'imageinfo', iiprop: 'size|mime|extmetadata', iiextmetadatafilter: 'ObjectName|DateTimeOriginal|Credit' }).forEach(([k, v]) => u.searchParams.set(k, v));
-    const res = await fetch(u, { headers });
-    const data = await res.json();
+    await sleep(1500);
+    const data = await getJson(u);
     for (const p of (data.query && data.query.pages) || []) {
       const n = norm(p.title);
       if (!all.every((re) => new RegExp(re).test(n))) continue;
