@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-verify-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit tests
+        run: npm test
+      - name: Check every painting on Wikimedia Commons
+        run: node scripts/verify-images.mjs
+      - name: Upload verified image list
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: images-json
+          path: data/images.json
+          if-no-files-found: ignore

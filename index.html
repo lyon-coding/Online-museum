@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>From Impression to Abstraction — a virtual museum</title>
+    <meta name="description" content="Walk through a 3D museum of modern painting, from Manet and the Impressionists to Cubism and the first abstract paintings, and discover how each movement grew out of the last." />
+    <meta name="theme-color" content="#1a1816" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="importmap">
+      { "imports": { "three": "./vendor/three.module.min.js" } }
+    </script>
+  </head>
+  <body>
+    <canvas id="scene" aria-label="3D museum view"></canvas>
+
+    <header id="hud">
+      <button id="roomBtn" class="hud-room" title="About this room (I)">
+        <span id="hud-chip" class="chip">…</span>
+        <span id="hud-name">Loading</span>
+      </button>
+      <div class="hud-actions">
+        <button id="timelineBtn" class="btn hud-btn" title="Timeline (T)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M6 8v8M12 6v12M18 9v6" /></svg>
+          <span>Timeline</span>
+        </button>
+        <button id="lobbyBtn" class="icon-btn hud-icon" title="Entrance hall" aria-label="Entrance hall">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10" /></svg>
+        </button>
+        <button id="helpBtn" class="icon-btn hud-icon" title="Help" aria-label="Help">?</button>
+      </div>
+    </header>
+
+    <aside id="roomcard" aria-live="polite"></aside>
+    <div id="tooltip" role="tooltip"></div>
+    <div id="toast" role="status"></div>
+    <div id="joystick" aria-hidden="true"><div class="knob"></div></div>
+
+    <!-- Welcome / help -->
+    <section id="intro">
+      <div class="intro-box">
+        <div class="intro-kicker">A virtual museum of modern painting · 1860–1930</div>
+        <h1>From Impression <em>to</em> Abstraction</h1>
+        <p class="intro-question">How does one movement become another? What are the roots of each new way of painting?</p>
+        <p>
+          Walk from Manet and the Impressionists, through Seurat, Cézanne, Van Gogh and Gauguin, to the Fauves, Cubism and the first abstract paintings of Kandinsky, Mondrian and Malevich.
+          Every artist has a room. Doors <strong>behind you</strong> lead to their roots, doors <strong>ahead</strong> to the painters who followed, and <strong>side doors</strong> to contemporaries of the same movement.
+        </p>
+        <div class="intro-controls">
+          <div class="ctl ctl-desktop">
+            <h3>On a computer</h3>
+            <ul>
+              <li><kbd>Drag</kbd> to look around</li>
+              <li><kbd>W A S D</kbd> or arrows to walk, <kbd>Shift</kbd> to walk faster</li>
+              <li><kbd>Click</kbd> a painting to enlarge it, or the floor to walk there</li>
+              <li><kbd>T</kbd> timeline · <kbd>I</kbd> room info · <kbd>Esc</kbd> close</li>
+            </ul>
+          </div>
+          <div class="ctl ctl-touch">
+            <h3>On a phone or tablet</h3>
+            <ul>
+              <li>Drag to look around</li>
+              <li>Use the joystick (bottom left), or tap the floor to walk there</li>
+              <li>Tap a painting to enlarge it, tap a door to see where it leads</li>
+            </ul>
+          </div>
+        </div>
+        <div class="load">
+          <div class="load-track"><div id="loadBar" class="load-bar"></div></div>
+          <div id="loadStatus" class="load-status">Preparing the galleries…</div>
+        </div>
+        <button id="enterBtn" class="btn primary big" disabled>Loading…</button>
+        <p class="intro-foot">All images are public-domain or freely licensed files from Wikimedia Commons, credited with each painting. Works without a free image are not shown.</p>
+      </div>
+    </section>
+
+    <!-- Painting viewer -->
+    <section id="viewer" class="modal viewer"></section>
+
+    <!-- Door: where does it lead? -->
+    <section id="doorcard" class="modal">
+      <div class="modal-box doorcard-box" role="dialog" aria-modal="true" aria-label="Doorway">
+        <button class="icon-btn modal-close" data-dismiss aria-label="Close">✕</button>
+        <div class="dc-body"></div>
+        <div class="dc-actions">
+          <button class="btn ghost" data-dismiss>Stay here</button>
+          <button class="btn primary" data-go>Go</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Room information -->
+    <section id="info" class="sheet">
+      <div class="sheet-panel info-panel" role="dialog" aria-modal="true" aria-label="About this room">
+        <button class="icon-btn modal-close" data-dismiss aria-label="Close">✕</button>
+        <div class="info-body"></div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline" class="sheet timeline"></section>
+
+    <div id="fade"></div>
+
+    <noscript><p class="noscript">This museum needs JavaScript and WebGL.</p></noscript>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
