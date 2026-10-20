@@ -1,10 +1,10 @@
 # From Impression to Abstraction — a 3D virtual museum
 
-A walkable 3D museum of modern painting, from Manet and the Impressionists to Cubism and the first abstract paintings (about 1860–1930). It runs in any modern browser, on a computer or a phone.
+A walkable 3D museum of modern painting, from Manet and the Impressionists through Cubism and the first abstract paintings to Dada, the Bauhaus and Surrealism (about 1860–1935). It runs in any modern browser, on a computer or a phone.
 
 The visit is organised around one question: **how does one movement become another?**
 
-- **One room per artist** (20 artists), each with its own wall colour, floor, lighting and objects: Monet's water-lily pond, Cézanne's apples next to a cylinder, a sphere and a cone, Van Gogh's chair and sunflowers, Kandinsky's floating shapes, Malevich's floating squares, and more.
+- **One room per artist** (30 artists), each with its own wall colour, floor, lighting and objects: Monet's water-lily pond, Cézanne's apples next to a cylinder, a sphere and a cone, Van Gogh's chair and sunflowers, Kandinsky's floating shapes, Malevich's floating squares, Picabia's machine gears, a Merz column for Schwitters, Triadic Ballet figures for Schlemmer, a Miró-like mobile, Tanguy's dream forms, and more.
 - **Paintings hang in chronological order**: numbered labels, alternating left and right as you walk forward.
 - **Doors show how art changed**:
   - doors **behind you** (the entrance wall) lead to the artist's **roots**;
@@ -29,8 +29,11 @@ The visit is organised around one question: **how does one movement become anoth
 | Fauvism | Henri Matisse, André Derain |
 | Cubism & Orphism | Juan Gris, Robert Delaunay |
 | Abstraction | Wassily Kandinsky, Piet Mondrian, Kazimir Malevich |
+| Constructivism, De Stijl & the Bauhaus | Paul Klee, El Lissitzky, Lyubov Popova, Theo van Doesburg, Oskar Schlemmer |
+| Dada | Francis Picabia, Kurt Schwitters, Sophie Taeuber-Arp |
+| Surrealism | Joan Miró, Yves Tanguy |
 
-Picasso and Braque are mentioned in the texts, but their paintings are still under copyright and have no free images, so none are shown.
+Picasso and Braque are mentioned in the texts, but their paintings are still under copyright and have no free images, so none are shown. The same goes for most of Miró's work: his room shows only the few pictures hosted on Wikimedia Commons, and it disappears automatically if they are removed. Max Ernst, Dalí and Magritte have no free images and are left out.
 
 ## Images: free Wikimedia Commons files only
 

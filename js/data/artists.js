@@ -1583,6 +1583,490 @@ export const ARTISTS = [
       }
     ]
   }
+  ,
+  // ——— Constructivism, De Stijl & the Bauhaus ———
+  {
+    id: 'klee',
+    name: 'Paul Klee',
+    short: 'Klee',
+    born: 1879,
+    died: 1940,
+    nationality: 'Swiss-German',
+    movement: 'constructivism',
+    bio:
+      'Born near Bern to a German music teacher and a Swiss singer, Klee was a fine violinist before he chose painting. He exhibited with Der Blaue Reiter in Munich, discovered colour on a journey to Tunisia in 1914, ' +
+      'and from 1921 to 1931 taught at the Bauhaus, where his lessons on form and colour became legendary. Dismissed by the Nazis from his teaching post in Düsseldorf in 1933, he returned to Bern.',
+    roots: "Children's drawings, music, Cézanne (\"my teacher par excellence\", he wrote in 1909), Delaunay's colour, and his friends of the Blaue Reiter, Kandinsky and Marc.",
+    room: { wall: '#e9dfcb', floor: 'herringbone', frame: 'wood', light: '#fff4e2', props: ['colorgrid', 'bench'] },
+    paintings: [
+      {
+        title: 'Kairouan, before the Gate', year: 1914, date: '1914', collection: 'Moderna Museet, Stockholm',
+        desc: 'A watercolour painted in April 1914 on a trip to Tunisia with August Macke and Louis Moilliet. The gate and domes of the city dissolve into transparent patches of colour. In his diary Klee wrote: "Colour has taken possession of me… Colour and I are one. I am a painter."',
+        files: ['Kairuan, vor dem Thor, Paul Klee (1914).jpg']
+      },
+      {
+        title: 'The Full Moon', year: 1919, date: '1919', collection: 'Pinakothek der Moderne, Munich',
+        desc: 'Klee began painting in oils only after the war, in 1919. Moon, sky and landscape are built from small planes of colour — the lesson of Delaunay\'s "windows", which Klee had admired in Paris.',
+        files: ['Paul Klee - Vollmond - 15249 - Bavarian State Painting Collections.jpg']
+      },
+      {
+        title: 'Rose Garden', year: 1920, date: '1920', collection: 'Lenbachhaus, Munich',
+        desc: 'Houses, trees and flowers reduced to little signs and set in layers, like lines of writing. Klee described drawing as "taking a line for a walk"; here line and colour build a whole garden.',
+        files: ['Klee Rosengarten 1290085.jpg']
+      },
+      {
+        title: 'Angelus Novus', year: 1920.5, date: '1920', collection: 'Israel Museum, Jerusalem',
+        desc: 'A small oil-transfer drawing with watercolour: an angel with staring eyes and raised wings. The philosopher Walter Benjamin owned it and saw in it the "angel of history": facing the ruins of the past, blown backwards into the future by the storm we call progress.',
+        files: ['Paul Klee ~ Angelus Novus ~ 1920.jpg']
+      },
+      {
+        title: 'Crystal Gradation', year: 1921, date: '1921', collection: 'Kunstmuseum Basel',
+        desc: 'Translucent rectangles laid over one another, graded from dark to light, like stacked crystals. Painted in the year Klee started teaching at the Bauhaus, where such colour gradations became exercises for his students.',
+        files: ['Kristall-Stufung, Paul Klee (1921).jpg']
+      },
+      {
+        title: 'Ghost of a Genius', year: 1922, date: '1922', collection: 'Scottish National Gallery of Modern Art, Edinburgh',
+        desc: 'A thin, upright figure, half portrait and half caricature. Klee liked to poke fun at the Romantic cult of the artist as "genius" — including, perhaps, himself.',
+        files: ['Paul Klee - Gespenst eines Genies (Ghost of a Genius) - Google Art Project.jpg']
+      },
+      {
+        title: 'Bird Garden', year: 1924, date: '1924', collection: 'Pinakothek der Moderne, Munich',
+        desc: 'Birds and plants drawn with the simplified, childlike signs that made Klee a hero for the young Surrealists: they included him in their first group exhibition in Paris in 1925.',
+        files: ['Paul Klee - Vogelgarten - 15251 - Bavarian State Painting Collections.jpg']
+      },
+      {
+        title: 'Highways and Byways', year: 1929, date: '1929', collection: 'Museum Ludwig, Cologne',
+        desc: 'Painted after a journey to Egypt in the winter of 1928–29: a central "main road" runs up the canvas between narrow strips of colour, like irrigated fields along the Nile seen from above.',
+        files: ['Hauptweg und Nebenwege - Paul Klee - Museum Ludwig-7026 (cropped).jpg']
+      },
+      {
+        title: 'Monuments at G.', year: 1929.5, date: '1929', collection: 'Metropolitan Museum of Art, New York',
+        desc: 'Another memory of Egypt — "G." is Giza. The pyramids are suggested by tapering bands of colour, built up in stripes like the fields of the Nile valley.',
+        files: ['Monuments at G., 1929 - Paul Klee, MET DT7818.jpg']
+      },
+      {
+        title: 'Colour Table "Qu 1"', year: 1930, date: '1930', collection: 'Kunstmuseum Basel',
+        desc: 'A grid of soft-edged rectangles of colour. The "colour table" was one of Klee\'s teaching tools at the Bauhaus; here it becomes a picture in its own right, with a rhythm close to music.',
+        files: ['Farbtafel Qu 1, 1930 - Paul Klee.jpg']
+      }
+    ]
+  },
+  {
+    id: 'lissitzky',
+    name: 'El Lissitzky',
+    short: 'Lissitzky',
+    born: 1890,
+    died: 1941,
+    nationality: 'Russian',
+    movement: 'constructivism',
+    bio:
+      'Lazar "El" Lissitzky trained as an architect in Darmstadt and illustrated Yiddish children\'s books before Malevich converted him to Suprematism at the Vitebsk art school in 1919. ' +
+      'His "Prouns" tried to turn painting into architecture. In the 1920s he carried Russian Constructivism to Berlin and Western Europe, and reinvented the book, the poster and the exhibition room.',
+    roots: "Malevich's Suprematism, his training as an architect and engineer, Jewish folk art, and the Russian Revolution's call for an art useful to the new society.",
+    room: { wall: '#eeece6', floor: 'concrete', frame: 'none', light: '#ffffff', props: ['proun'] },
+    paintings: [
+      {
+        title: 'Proun P23, No. 6', year: 1919, date: '1919', collection: 'Van Abbemuseum, Eindhoven',
+        desc: '"Proun" — "project for the affirmation of the new" — was Lissitzky\'s word for works that were neither painting nor architecture, but "an interchange station" between the two. Geometric volumes float in space, seen from several angles at once.',
+        files: ['El Lissitzky I84361.jpg']
+      },
+      {
+        title: 'Beat the Whites with the Red Wedge', year: 1919.5, date: '1919–20',
+        desc: 'A poster for the Russian Civil War: a sharp red triangle drives into a white circle. Malevich\'s language of pure shapes, put to work to tell a political story that anyone in the street could read.',
+        files: ['Beat the Whites with the Red Wedge.jpg']
+      },
+      {
+        title: 'Proun 23 N', year: 1920.5, date: '1920–21',
+        desc: 'Painted in tempera, pencil and textured materials on wood. Lissitzky treated the surface like a building site: flat planes, solid blocks and rough textures assembled with an engineer\'s precision.',
+        files: ['El Lissitzky, Proun 23 N (B 111), 1920-21.jpg']
+      },
+      {
+        title: 'Proun 5A', year: 1923, date: '1923',
+        desc: 'In 1921 Lissitzky moved to Berlin, where his Prouns became a bridge between Russian Constructivism and the Western avant-garde — De Stijl and the Bauhaus.',
+        files: ['El Lissitzky - Proun 5A.jpg']
+      },
+      {
+        title: 'Proposal for a PROUN Street Celebration', year: 1923.5, date: '1923',
+        desc: 'A Proun imagined at the scale of the city, as a decoration for a revolutionary street festival. For Lissitzky, painting was a rehearsal for designing the real environment.',
+        files: ['El Lissitzky - Proposal for a PROUN street celebration - Google Art Project.jpg']
+      },
+      {
+        title: 'Proun 99', year: 1924, date: 'c. 1923–25', collection: 'Yale University Art Gallery',
+        desc: 'One of the last Prouns. By the mid-1920s Lissitzky was turning to exhibition design, typography and photography, where the same floating planes reappear in real space.',
+        files: ['El Lissitzky - Proun 99 - 1941.548 - Yale University Art Gallery.jpg']
+      }
+    ]
+  },
+  {
+    id: 'popova',
+    name: 'Lyubov Popova',
+    short: 'Popova',
+    born: 1889,
+    died: 1924,
+    nationality: 'Russian',
+    movement: 'constructivism',
+    bio:
+      'From a wealthy family of textile merchants, Popova studied Cubism in Paris in 1912–13, saw Futurism in Italy, and returned to Moscow to become one of the boldest painters of the Russian avant-garde. ' +
+      'In 1921 she declared easel painting finished and turned to textiles, books and stage design. She died of scarlet fever in 1924, aged 35.',
+    roots: 'Cubism, learned in Paris at La Palette academy; Italian Futurism; Russian icons; and Malevich\'s Suprematism, whose Supremus group she joined in 1916.',
+    room: { wall: '#e8dccb', floor: 'darkwood', frame: 'black', light: '#fff6ea', props: ['cubistblocks'] },
+    paintings: [
+      {
+        title: 'The Model (Standing Figure)', year: 1913, date: '1913', collection: 'Tretyakov Gallery, Moscow',
+        desc: 'Painted after her year in Paris, where she studied with the Cubists Jean Metzinger and Henri Le Fauconnier: the nude body is built from cylinders and faceted planes.',
+        files: ['1913 Popova Das Modell anagoria.JPG']
+      },
+      {
+        title: 'The Traveller', year: 1915, date: '1915', collection: 'Norton Simon Museum, Pasadena',
+        desc: 'A traveller broken into fragments of planes, colours and letters. Popova combines Cubist fragmentation with Futurist speed — "Cubo-Futurism", the Russian avant-garde\'s own blend.',
+        files: ["'The Traveler' by Liubov Popova, Norton Simon Museum.JPG"]
+      },
+      {
+        title: 'Lady with a Guitar', year: 1915.5, date: '1915',
+        desc: 'The guitar, the favourite instrument of Cubism, and a woman merge into a single construction of curves and planes — a Moscow answer to the still lifes of Picasso and Braque.',
+        files: ['Lyubov Popova, Lady with a Guitar, 1915.webp']
+      },
+      {
+        title: 'Architectonic Painting', year: 1917, date: '1917', collection: 'Los Angeles County Museum of Art',
+        desc: 'In her "Painterly Architectonics" Popova stacks bold, overlapping planes of colour as solid as building materials. From Malevich she took the flat geometric shape; she gave it weight and construction.',
+        files: ["'Architectonic Painting' by Lyubov Popova, 1917, LACMA.JPG"]
+      },
+      {
+        title: 'Painterly Architectonics', year: 1918, date: '1918', collection: 'Dallas Museum of Art',
+        desc: 'The planes now seem to tilt and overlap in shallow space, with no subject left at all. Popova called these works architectonic: built, not depicted.',
+        files: ['Lyubov Popova - Painterly Architectonics - 1982.10 - Dallas Museum of Art.jpg']
+      },
+      {
+        title: 'Composition (Red-Black-Gold)', year: 1920, date: '1920',
+        desc: 'Painted in the years of the Civil War, when the avant-garde ran the new Soviet art schools. Painting is becoming an experiment in pure construction.',
+        files: ['Liubov Sergeievna Popova - Composition (Red-Black-Gold) - Google Art Project.jpg']
+      },
+      {
+        title: 'Space-Force Construction', year: 1921, date: '1921', collection: 'Tretyakov Gallery, Moscow',
+        desc: 'Crossing lines of force on a board. In 1921, at the exhibition "5 × 5 = 25", Popova and her colleagues announced the end of easel painting; Constructivists were to leave the studio for the factory. She spent her last years designing fabrics, books and stage sets.',
+        files: ['1921 Popova Raum-und-Kraft-Konstruktion anagoria.jpg']
+      }
+    ]
+  },
+  {
+    id: 'vandoesburg',
+    name: 'Theo van Doesburg',
+    short: 'Van Doesburg',
+    born: 1883,
+    died: 1931,
+    nationality: 'Dutch',
+    movement: 'constructivism',
+    bio:
+      'Painter, poet, critic, architect and tireless promoter, van Doesburg founded the magazine De Stijl in Leiden in 1917. He spread its ideas across Europe — his lectures at Weimar in 1922 shook the young Bauhaus — ' +
+      'and in 1924 introduced the diagonal into the strict geometry of Neo-Plasticism. He died in Davos in 1931, aged 47.',
+    roots: "Mondrian's Neo-Plasticism, Cubism, and the dream of uniting painting and architecture in a single environment.",
+    room: { wall: '#f4f3ee', floor: 'white', frame: 'none', light: '#ffffff', props: ['colorblocks'] },
+    paintings: [
+      {
+        title: 'Girl with Buttercups', year: 1914, date: '1914',
+        desc: 'A figurative painting from before De Stijl, when van Doesburg was still a painter and critic looking for his way — the starting point of his road to abstraction.',
+        files: ['Theo van Doesburg - Girl with Ranunculus - Google Art Project.jpg']
+      },
+      {
+        title: 'Dancers', year: 1916, date: '1916', collection: 'Kröller-Müller Museum, Otterlo',
+        desc: 'Dancing figures turned into a rhythm of flat, angular shapes. Van Doesburg called this process "abstraction": distilling a motif step by step into its essential forms.',
+        files: ['Otterloo kroller muller van doesburg danseuses.jpg']
+      },
+      {
+        title: 'Composition XX', year: 1920, date: '1920', collection: 'Museo Thyssen-Bornemisza, Madrid',
+        desc: 'Only rectangles and right angles: the Neo-Plastic language that van Doesburg shared with Mondrian in the pages of De Stijl.',
+        files: ['Theo van Doesburg Composition XX.jpg']
+      },
+      {
+        title: 'Counter-Composition V', year: 1924, date: '1924', collection: 'Stedelijk Museum, Amsterdam',
+        desc: 'In 1924 van Doesburg tilted the grid by 45 degrees. The diagonal, he argued, brought tension and movement into Neo-Plasticism. Mondrian refused it and broke with De Stijl.',
+        files: ['Theo van Doesburg Counter-CompositionV (1924).jpg']
+      },
+      {
+        title: 'Counter-Composition XIII', year: 1925.5, date: '1925–26',
+        desc: 'Planes of colour and black lines set on the diagonal against the square edge of the canvas — van Doesburg\'s "Elementarism", where opposing directions create a dynamic balance.',
+        files: ['Counter-Composition XIII by Theo van Doesburg.jpg']
+      },
+      {
+        title: 'Composition in Half-Tones', year: 1928, date: '1928', collection: 'Kunstmuseum Basel',
+        desc: 'Painted in Paris in 1928, when van Doesburg was finishing the Aubette interiors in Strasbourg with Hans Arp and Sophie Taeuber-Arp. Arp later gave the painting to the museum in Basel.',
+        files: ['Komposition in Halbtönen, Theo van Doesburg, 1928.jpg']
+      }
+    ]
+  },
+  {
+    id: 'schlemmer',
+    name: 'Oskar Schlemmer',
+    short: 'Schlemmer',
+    born: 1888,
+    died: 1943,
+    nationality: 'German',
+    movement: 'constructivism',
+    bio:
+      'Painter, sculptor, choreographer and teacher, Schlemmer led the Bauhaus stage workshop and created the Triadic Ballet, in which dancers in geometric costumes became moving sculptures. ' +
+      'In his paintings, figures reduced to clear volumes stand and move in calm, architectural spaces. The Nazis branded his work "degenerate"; he died in 1943.',
+    roots: 'His teacher Adolf Hölzel in Stuttgart, Cézanne and Seurat, the classical figures of early Italian painting, and the Bauhaus ideal of uniting art, craft and technology.',
+    room: { wall: '#d9d4ca', floor: 'parquet', frame: 'wood', light: '#fff8ec', props: ['triadic'] },
+    paintings: [
+      {
+        title: 'Paracelsus (The Lawgiver)', year: 1923, date: '1923', collection: 'Staatsgalerie Stuttgart',
+        desc: 'A single figure built from simple, rounded volumes. Schlemmer\'s people are not individuals but human "types" — the figure as an ideal form, standing in an ordered space.',
+        files: ['Oskar Schlemmer (Der Gesetzgeber).jpg']
+      },
+      {
+        title: 'Figures in a Room (Roman)', year: 1925, date: '1925',
+        desc: 'Figures placed at measured distances in a deep room, like actors on a stage. Space, for Schlemmer, was something the body measures.',
+        files: ['Oskar Schlemmer - Vier Figuren im Raum 1925.jpg']
+      },
+      {
+        title: 'Red Facing Each Other', year: 1928, date: '1928', collection: 'Osthaus Museum, Hagen',
+        desc: 'Painted in oil and tempera, the year before Schlemmer left the Bauhaus. His figures have become rounded, simplified volumes, as calm and timeless as statues.',
+        files: ['1928 Schlemmer Rot Gegeneinander.jpg']
+      },
+      {
+        title: 'Group of Youths in Brown', year: 1928.9, date: '1928',
+        desc: 'A preparatory work for the cycle of murals Schlemmer painted in 1928–30 for the rotunda of the Museum Folkwang in Essen: a group of young men, reduced to a few warm tones, standing together in a tall, narrow space.',
+        files: ['Oskar Schlemmer Jünglingsgruppe in Braun 1928.jpg']
+      },
+      {
+        title: "The Women's School", year: 1930, date: '1930',
+        desc: 'Women figures grouped in a geometric interior. Schlemmer liked to choreograph figures in his pictures as he did on stage, balancing near and far, light and dark.',
+        files: ['1930 Schlemmer-Frauenschule.JPG']
+      },
+      {
+        title: 'Group of Four with Grey', year: 1930.5, date: '1930',
+        desc: 'Watercolour and gouache on board: four figures turned into soft, simplified silhouettes, held together by grey — figure painting reduced almost to an abstract composition.',
+        files: ['Oskar Schlemmer Vierergruppe mit Grau 1930.jpg']
+      },
+      {
+        title: 'Bauhaus Stairway', year: 1932, date: '1932', collection: 'Museum of Modern Art, New York',
+        desc: 'Painted after the Nazis closed the Bauhaus building in Dessau in 1932: students climb the school\'s staircase toward the light of the great windows — a farewell to the Bauhaus. The architect Philip Johnson bought it in 1933 and gave it to MoMA.',
+        files: ['Oskar Schlemmer - Bauhaustreppe 1932.jpg']
+      }
+    ]
+  },
+  // ——— Dada ———
+  {
+    id: 'picabia',
+    name: 'Francis Picabia',
+    short: 'Picabia',
+    born: 1879,
+    died: 1953,
+    nationality: 'French',
+    movement: 'dada',
+    bio:
+      'Son of a Cuban-born diplomat and a French mother, Picabia was a wealthy, restless provocateur. He went from Impressionist landscapes to Cubism and abstraction, caused a sensation at the 1913 Armory Show in New York, ' +
+      'then turned machines into portraits and became a leading figure of Dada in New York, Barcelona and Paris. He never stopped changing style, mocking every rule — including his own.',
+    roots: 'Impressionism (he began by painting like Sisley and Monet), Cubism and Orphism, his friendship with Marcel Duchamp, and the machine age he discovered in New York.',
+    room: { wall: '#e6dfd0', floor: 'concrete', frame: 'black', light: '#fff6e6', props: ['gears'] },
+    paintings: [
+      {
+        title: 'Caoutchouc', year: 1909, date: 'c. 1909', collection: 'Centre Pompidou, Paris',
+        desc: 'Watercolour, gouache and ink on cardboard: round, bouncing forms and patches of colour, with no recognisable subject — the title means "rubber". Often counted among the very first abstract pictures, by a painter who until then had sold Impressionist landscapes.',
+        files: ['Francis Picabia - Caoutchouc.jpg']
+      },
+      {
+        title: 'Haystacks', year: 1911, date: 'c. 1911', collection: 'Private collection',
+        desc: 'Haystacks — Monet\'s great motif — painted by Picabia around 1911, in the years when he was leaving Impressionism behind for Cubism and abstraction.',
+        files: ['Francis Picabia - Les Meules (circa 1911).jpg']
+      },
+      {
+        title: 'Udnie (Young American Girl; The Dance)', year: 1913, date: '1913', collection: 'Centre Pompidou, Paris',
+        desc: 'A huge canvas, three metres wide, inspired by a dancer Picabia watched on the ship to New York. Curved and angular planes swirl and collide: what remains is the movement of the dance, not the dancer.',
+        files: ['Francis Picabia, 1913, Udnie (Young American Girl, The Dance), oil on canvas, 290 x 300 cm, Musée National d’Art Moderne, Centre Georges Pompidou, Paris..jpg']
+      },
+      {
+        title: 'Catch as Catch Can', year: 1913.5, date: '1913', collection: 'Philadelphia Museum of Art',
+        desc: 'Painted in 1913, the year of the Armory Show in New York, where Picabia was the most talked-about European. The subject, a wrestling match, has burst into overlapping, interlocking planes; only the energy of the struggle is left.',
+        files: ['Francis Picabia, 1913, Catch as Catch Can, oil on canvas, 100.6 x 81.6 cm, Philadelphia Museum of Art.jpg']
+      },
+      {
+        title: 'I See Again in Memory My Dear Udnie', year: 1914, date: '1914', collection: 'Museum of Modern Art, New York',
+        desc: 'A year later, the memory of the dancer has become a tangle of soft forms, some organic, some like machine parts. A picture of a feeling rather than of a person — and the first sign of the machines of Picabia\'s Dada years.',
+        files: ['Francis Picabia, I See Again in Francis Picabia, I See Again in Memory My Dear UdnieMemory My Dear Udnie (50393143873).jpg']
+      },
+      {
+        title: 'Le Lierre unique eunuque', year: 1920, date: '1920', collection: 'Kunsthaus Zürich',
+        desc: 'A work from the height of Paris Dada, with a nonsense-pun title of the kind Picabia and his friends traded in their reviews. Dada mocked art, taste and reason, the values that had not prevented the war.',
+        files: ['Francis Picabia - Le Lierre unique eunuque - 1985-0007 - Kunsthaus Zürich.jpg']
+      },
+      {
+        title: 'The Fig Leaf', year: 1922, date: '1922', collection: 'Tate, London',
+        desc: 'A two-metre canvas in oil and household enamel paint, shown at the 1922 Salon d\'Automne. The title mocks the prudery of the official art world, and the cheap house paint mocks the cult of fine painting.',
+        files: ['Francis Picabia, 1922 - La Feuille de vigne.jpg']
+      },
+      {
+        title: 'Mardi Gras (The Kiss)', year: 1925, date: '1925',
+        desc: 'After Dada, Picabia went on attacking good taste with deliberately garish figures — kissing couples, carnival masks — painted in shiny commercial paint: "bad" painting on purpose, decades before Pop Art.',
+        files: ['Francis Picabia, 1925 - Mardi gras.jpg']
+      },
+      {
+        title: 'The Sphinx', year: 1929, date: '1929',
+        desc: 'One of the "Transparencies" of 1928–30, in which Picabia layered outlines of faces, bodies, plants and figures from old art on top of one another, so that several images show through at once — a dreamlike effect close to the Surrealists.',
+        files: ['Francis Picabia, 1929 - Le Sphinx.jpg']
+      }
+    ]
+  },
+  {
+    id: 'schwitters',
+    name: 'Kurt Schwitters',
+    short: 'Schwitters',
+    born: 1887,
+    died: 1948,
+    nationality: 'German',
+    movement: 'dada',
+    bio:
+      'In his home town of Hanover, Schwitters created a one-man movement, "Merz": pictures, poems, sound poetry (the Ursonate) and finally a whole sculpted interior, the Merzbau, all made from what others threw away. ' +
+      'Branded "degenerate" by the Nazis, he fled to Norway in 1937 and then to England, where he died in 1948.',
+    roots: "Expressionist abstraction seen at Herwarth Walden's Der Sturm gallery in Berlin, Cubist collage, and the Dada spirit of Zurich and Berlin — though Berlin Dada refused to let him join.",
+    room: { wall: '#cfc3ad', floor: 'darkwood', frame: 'wood', light: '#fff1dc', props: ['merz'] },
+    paintings: [
+      {
+        title: 'Abstraction 26: Delicate Symphony', year: 1918, date: '1918',
+        desc: 'Before Merz, Schwitters painted Expressionist abstractions like this one and showed them at Der Sturm in Berlin, the gallery of Kandinsky, Marc and Delaunay. The musical title echoes Kandinsky\'s idea of painting as music.',
+        files: ['Abtraction 26. Delicate Symphony.jpg']
+      },
+      {
+        title: 'Merz Picture 1A (The Psychiatrist)', year: 1919, date: '1919', collection: 'Museo Thyssen-Bornemisza, Madrid',
+        desc: 'Paint, wood, cardboard and found scraps assembled into a picture. "Merz" — a fragment of the word Commerzbank cut from an advertisement — became Schwitters\'s name for art made from anything, out of the debris of post-war Germany.',
+        files: ['Merzbild 1A (The Psychiatrist) (1919).jpg']
+      },
+      {
+        title: 'Merz Picture 9b (The Big I Picture)', year: 1919.5, date: '1919', collection: 'Museum Ludwig, Cologne',
+        desc: 'Printed paper, tickets, labels and paint are packed into a dense, whirling composition. Scraps of everyday reading — words, letters, numbers — become part of the picture\'s rhythm.',
+        files: ["Merz-Painting 9b (also known as 'The Big Me-Painting').jpg"]
+      },
+      {
+        title: 'Merz Picture Kijkduin', year: 1923, date: '1923', collection: 'Museo Thyssen-Bornemisza, Madrid',
+        desc: 'Named after a seaside resort near The Hague, it dates from 1923, when Schwitters toured Holland with Theo van Doesburg giving Dada performances. Under the influence of De Stijl, his collages grew cleaner and more geometric.',
+        files: ['Merzbild Kijkduin (1923).jpg']
+      },
+      {
+        title: 'Merz 1925, 1: Relief in the Blue Square', year: 1925, date: '1925', collection: 'Museo Thyssen-Bornemisza, Madrid',
+        desc: 'By the mid-1920s Schwitters was building with pieces of painted wood. The rubbish of 1919 has given way to Constructivist order: a few flat elements balanced around a blue square.',
+        files: ['Merz 1925, 1. Relief in Blue Square 1925.jpg']
+      }
+    ]
+  },
+  {
+    id: 'taeuber',
+    name: 'Sophie Taeuber-Arp',
+    short: 'Taeuber-Arp',
+    born: 1889,
+    died: 1943,
+    nationality: 'Swiss',
+    movement: 'dada',
+    bio:
+      'Artist, dancer, designer and teacher, Sophie Taeuber taught textile design at the Zurich School of Applied Arts from 1916 while dancing in masks at the Dada soirées. ' +
+      'With Hans Arp, whom she married in 1922, she made some of the earliest geometric abstract works anywhere, and in the 1920s she designed interiors such as the Aubette in Strasbourg. Her portrait appeared on the Swiss 50-franc note.',
+    roots: 'Training in textile and applied arts in St. Gallen and at the Debschitz School in Munich, the grids of weaving and embroidery, and the Zurich Dada circle of Hans Arp, Hugo Ball and Tristan Tzara.',
+    room: { wall: '#ece6da', floor: 'parquet', frame: 'white', light: '#ffffff', props: ['dadahead'] },
+    paintings: [
+      {
+        title: 'Composition with Arches (Horizontal-Vertical Composition)', year: 1918, date: '1918', collection: 'Musée d\'Art moderne et contemporain, Strasbourg',
+        desc: 'A tiny gouache, 13 × 17 cm, built from horizontal and vertical bands and small arches. In Zurich during the Dada years, Taeuber made such strict geometric designs — in embroidery, weaving and paint — while her friends recited nonsense poems at the Cabaret Voltaire.',
+        files: ["Sophie Taeuber-Arp, Composition à motifs d'arceaux ou Composition Horizontale-Verticale.jpg"]
+      },
+      {
+        title: 'Triptych: Vertical-Horizontal Composition with Reciprocal Triangles', year: 1918.5, date: '1918', collection: 'Kunsthaus Zürich',
+        desc: 'Three panels of interlocking triangles and rectangles, each shape answered by its "reciprocal" in another colour. Her geometric works of 1916–18 are among the first fully abstract compositions made in Switzerland.',
+        files: ['Sophie Taeuber-Arp - Triptyque. Composition verticale-horizontale à triangles réciproques - 1958-0023.a-c - Kunsthaus Zürich.jpg']
+      },
+      {
+        title: 'Design for the Aubette Tea Room', year: 1927, date: '1927', collection: 'Musée d\'Art moderne et contemporain, Strasbourg',
+        desc: 'A design for the tea room of the Aubette in Strasbourg, the café, dance hall and cinema that Taeuber-Arp decorated in 1926–28 with Hans Arp and Theo van Doesburg. Seen from above at an angle, walls and ceiling become one abstract painting you could walk into.',
+        files: ['Sophie Taeuber-Arp, Aubette 127.jpg']
+      },
+      {
+        title: 'Design for the Aubette Foyer-Bar', year: 1927.5, date: '1927', collection: 'Musée d\'Art moderne et contemporain, Strasbourg',
+        desc: 'The walls of the first-floor foyer-bar, drawn "unfolded" flat: rectangles of colour that would run around the whole room. Abstraction leaves the canvas and becomes architecture.',
+        files: ['Sophie Taeuber-Arp, Aubette 182.jpg']
+      },
+      {
+        title: 'Composition', year: 1931, date: '1931', collection: 'Muzeum Sztuki, Łódź',
+        desc: 'One of the works given by Western artists to the Polish avant-garde group "a.r." for the international collection of modern art they founded in Łódź in 1931 — one of the first museums of modern art in Europe.',
+        files: ['Sophie Taeuber-Arp - Kompozycja r.jpg']
+      }
+    ]
+  },
+  // ——— Surrealism ———
+  {
+    id: 'miro',
+    name: 'Joan Miró',
+    short: 'Miró',
+    born: 1893,
+    died: 1983,
+    nationality: 'Catalan (Spanish)',
+    movement: 'surrealism',
+    bio:
+      'Born in Barcelona, Miró felt rooted all his life in the Catalan countryside around his family\'s farm at Mont-roig. In Paris from 1920 he met the Dada poets and, from 1924, the Surrealists, and invented a language of floating signs — stars, eyes, birds, women — ' +
+      'that made André Breton call him "the most Surrealist of us all". Most of his work is still under copyright and has no free image, so only a few pictures can be shown here.',
+    roots: 'Catalan folk art and Romanesque frescoes, Van Gogh and the Fauves (his first pictures blaze with their colour), Cubism, the Dada poets in Paris — and Klee, whose freedom with signs he admired.',
+    room: { wall: '#f3ecdc', floor: 'terracotta', frame: 'white', light: '#fff8ea', props: ['mirostars'] },
+    paintings: [
+      {
+        title: 'The Carnival of Harlequin', year: 1924.5, date: '1924–25', collection: 'Buffalo AKG Art Museum',
+        desc: 'A room crowded with tiny creatures — insects, a cat playing with a ball of yarn, musical notes, a ladder — celebrating carnival. Miró said the images came from hallucinations brought on by hunger, when he was too poor to eat.',
+        files: ["Carnaval d'Arlequin (Carnival of Harlequin), 1924-1925.jpg"]
+      },
+      {
+        title: 'Composition', year: 1927, date: '1927', collection: 'Pushkin Museum of Fine Arts, Moscow',
+        desc: 'From 1925 to 1927 Miró painted his so-called "dream paintings", cutting the picture down to a few signs, lines and patches floating on open fields of colour — painting as close as possible to automatic writing. Around this time he said he wanted to "murder painting".',
+        files: ['Joan Miró — Composition (1927).jpg']
+      },
+      {
+        title: '…And the Breasts Were Dying…', year: 1927.5, date: '1927', collection: 'Berardo Collection, Lisbon',
+        desc: 'Indian ink on cardboard. Its title reads like a line of Surrealist poetry: Miró was closer to the poets of the group than to its painters, and in these years he even wrote words straight into his pictures.',
+        files: ['Et les seins mouraient... (1927) - Joan Miró (1893-1983) (45065322815).jpg']
+      }
+    ]
+  },
+  {
+    id: 'tanguy',
+    name: 'Yves Tanguy',
+    short: 'Tanguy',
+    born: 1900,
+    died: 1955,
+    nationality: 'French',
+    movement: 'surrealism',
+    bio:
+      'A former merchant sailor, Tanguy had never painted until, in 1923, he saw a picture by Giorgio de Chirico in a Paris gallery window from a bus and decided to become a painter. ' +
+      'Self-taught, he joined the Surrealists in 1925 and created a world of his own: endless plains or sea floors scattered with soft, bone-like and pebble-like forms under a hazy light. In 1939 he left for the United States with the painter Kay Sage.',
+    roots: 'Giorgio de Chirico\'s "metaphysical" dream spaces, memories of the rocky coast of Brittany where he spent his childhood holidays, and the Surrealist practice of automatism.',
+    room: { wall: '#3b4153', floor: 'stone', frame: 'black', light: '#dfe6ff', props: ['biomorphs'] },
+    paintings: [
+      {
+        title: 'The Storm (Black Landscape)', year: 1926, date: '1926', collection: 'Philadelphia Museum of Art',
+        desc: 'One of Tanguy\'s first Surrealist canvases, painted barely three years after he picked up a brush. A dark, stormy space without a clear horizon, where strange forms drift as in a dream.',
+        files: ['Yves tanguy, la tempesta (paesaggio nero), 1926.jpg']
+      },
+      {
+        title: 'Mama, Papa Is Wounded!', year: 1927, date: '1927', collection: 'Museum of Modern Art, New York',
+        desc: 'A vast plain that could be the floor of the sea, with a few strange objects casting long shadows. The title, Tanguy said, came from a case history in a book on psychiatry — the Surrealists\' fascination with the unconscious.',
+        files: ['Mama, Papa is Wounded!.jpg']
+      },
+      {
+        title: 'Death Watching His Family', year: 1927.5, date: '1927', collection: 'Museo Thyssen-Bornemisza, Madrid',
+        desc: 'Pale, ghost-like shapes in a deep space with no clear ground. Tanguy painted without a plan, letting the forms appear as he worked — Surrealist "automatism" applied to oil paint.',
+        files: ['Yves tanguy, la morte guardando la sua famiglia, 1927.jpg']
+      },
+      {
+        title: 'The Dark Garden', year: 1928, date: '1928', collection: 'Kunstsammlung Nordrhein-Westfalen, Düsseldorf',
+        desc: 'By 1928 Tanguy\'s world had taken shape: a smooth, misty ground that melts into the sky, and small, carefully modelled forms that look solid and real, though they resemble nothing we know.',
+        files: ['Yves Tanguy - Le jardin sombre (1928).jpg']
+      },
+      {
+        title: 'Outside', year: 1929, date: '1929', collection: 'Scottish National Gallery of Modern Art, Edinburgh',
+        desc: 'Objects that seem half mineral and half alive rest on an endless plain. The precise, almost academic technique makes the impossible scene feel true — the dream painted with the clarity of a photograph.',
+        files: ['Yves tanguy, fuori, 1929 (edimburgo, scottish ng of ma).jpg']
+      },
+      {
+        title: 'The Similar Splendour', year: 1930, date: '1930', collection: 'Kunstmuseum Basel',
+        desc: 'Smooth, carefully modelled forms gather on a plain that melts into the sky. Tanguy\'s silent dream spaces later fascinated the young American painters in New York, where he settled in 1939.',
+        files: ['Yves Tanguy La splendeur semblable 1930.jpg']
+      }
+    ]
+  }
 ];
 
 // The lobby is a special room with no paintings: the start of the visit.
@@ -1639,7 +2123,25 @@ export const INFLUENCES = [
   { from: 'derain', to: 'gris', text: 'From 1907 Derain, close to Picasso, turned from Fauve colour to Cézanne-like structure — the same turn that produced Cubism, which Juan Gris would systematise.' },
 
   { from: 'gris', to: 'mondrian', text: 'Mondrian moved to Paris in 1912 and absorbed Cubism, mainly through the work of Picasso and Braque — the circle in which Gris worked. He broke his trees into grids of lines that led straight to abstraction.' },
-  { from: 'gris', to: 'malevich', text: 'Malevich learned Cubism from the Paris pictures in Moscow collections and fused it with Futurist movement — Cubo-Futurism, his last step before Suprematism.' }
+  { from: 'gris', to: 'malevich', text: 'Malevich learned Cubism from the Paris pictures in Moscow collections and fused it with Futurist movement — Cubo-Futurism, his last step before Suprematism.' },
+
+  // into the 1920s: Constructivism, De Stijl & the Bauhaus
+  { from: 'delaunay', to: 'klee', text: 'In April 1912 Klee visited Delaunay in Paris, and that winter he translated Delaunay\'s essay "On Light" for the Berlin review Der Sturm. Delaunay\'s transparent, overlapping planes of colour showed Klee how a picture could be built from colour alone.' },
+  { from: 'malevich', to: 'lissitzky', text: 'In 1919 Malevich arrived at the Vitebsk art school where Lissitzky taught, and converted him to Suprematism. Together they founded the UNOVIS group. Lissitzky\'s Prouns gave Malevich\'s floating forms depth and volume — a step from painting toward architecture.' },
+  { from: 'malevich', to: 'popova', text: 'In 1916 Popova joined Malevich\'s Supremus group. She took his flat, coloured planes and gave them weight and overlap — her "Painterly Architectonics" — before leaving painting for design.' },
+  { from: 'gris', to: 'popova', text: 'In 1912–13 Popova studied in Paris at La Palette with the Cubists Jean Metzinger and Henri Le Fauconnier — the Cubism of the Section d\'Or, the circle in which Juan Gris worked. Back in Moscow she fused it with Futurist motion.' },
+  { from: 'mondrian', to: 'vandoesburg', text: 'In 1917 van Doesburg founded the magazine De Stijl, with Mondrian as its leading voice. He spread Mondrian\'s Neo-Plasticism — horizontals, verticals and primary colours — across Europe, and in 1924 provoked a break by tilting it onto the diagonal.' },
+  { from: 'seurat', to: 'schlemmer', text: 'Schlemmer admired Seurat above all modern painters: the motionless, simplified figures and the calm, measured space of pictures like A Sunday on La Grande Jatte. His own figures are people reduced to clear, ideal forms, standing in ordered space.' },
+
+  // Dada
+  { from: 'monet', to: 'picabia', text: 'Before he became the great provocateur of Dada, Picabia was a successful painter of Impressionist landscapes in the manner of Monet and Sisley. Around 1909–11 he turned against painting what the eye sees — and soon against art itself.' },
+  { from: 'delaunay', to: 'picabia', text: 'At the Section d\'Or exhibition of 1912, the poet Apollinaire grouped Picabia with Delaunay under the name "Orphism": painters of colour and rhythm rather than objects. Picabia\'s great canvases of 1913 grew from it.' },
+  { from: 'kandinsky', to: 'schwitters', text: 'Schwitters found his way to modern art in 1917–18 at Herwarth Walden\'s Der Sturm gallery in Berlin, home of Kandinsky and the Blaue Reiter. His first abstractions follow their idea of painting as music.' },
+  { from: 'gris', to: 'schwitters', text: 'Merz grew from Cubist papier collé — the newspaper, wallpaper and labels glued into pictures by Picasso, Braque and Juan Gris from 1912. Schwitters glued in the whole rubbish of the street: tickets, wood, wire, buttons.' },
+
+  // Surrealism
+  { from: 'picabia', to: 'miro', text: 'Picabia brought Dada to Barcelona in 1917 with his review 391, published there while the young Miró was at work in the city. In Paris from 1920, Miró met the Dada circle; its freedom helped him leave careful observation behind for the dream images of 1924–25.' },
+  { from: 'klee', to: 'miro', text: 'Around 1925 Miró and his friend André Masson discovered Klee\'s work in Paris, and the Surrealists showed Klee in their first group exhibition that year, alongside Miró. Klee\'s childlike signs and freedom of line encouraged Miró\'s own language of signs.' }
 ];
 
 // Same generation / same movement: side doors in the middle of the long walls.
@@ -1658,7 +2160,15 @@ export const CONTEMPORARIES = [
   { a: 'marc', b: 'delaunay', text: 'Delaunay showed at the first Blaue Reiter exhibition in 1911, and in 1912 Marc visited him in Paris. Delaunay\'s prismatic colour broke Marc\'s animals into crystalline planes.' },
   { a: 'gris', b: 'delaunay', text: 'Both showed Cubist work at the 1912 Salon des Indépendants. The poet Apollinaire coined the term "Orphism" for Delaunay\'s colourful branch of Cubism.' },
   { a: 'kandinsky', b: 'malevich', text: 'After 1914 both worked in Moscow\'s new revolutionary art institutions. Two Russian-born pioneers, arriving at abstraction by very different roads — music and emotion for one, geometry for the other.' },
-  { a: 'mondrian', b: 'malevich', text: 'Between 1915 and 1917, independently — Malevich in Russia, Mondrian in neutral Holland — both reduced painting to flat geometric elements: Suprematism and De Stijl.' }
+  { a: 'mondrian', b: 'malevich', text: 'Between 1915 and 1917, independently — Malevich in Russia, Mondrian in neutral Holland — both reduced painting to flat geometric elements: Suprematism and De Stijl.' },
+  { a: 'kandinsky', b: 'klee', text: 'Friends since the Blaue Reiter years in Munich, then colleagues at the Bauhaus, where from 1926 they lived in the two halves of a masters\' house in Dessau. Both wrote theories of form and colour that are still taught.' },
+  { a: 'klee', b: 'schlemmer', text: 'Masters at the Bauhaus together through the 1920s: Klee taught form and colour, Schlemmer the human figure and the stage. Both looked for a simple, universal language of signs for the human figure.' },
+  { a: 'lissitzky', b: 'popova', text: 'Both took Suprematism off the canvas and into everyday life — Lissitzky with books, posters and exhibitions, Popova with textiles, typography and stage sets: the Constructivist programme of "art into life".' },
+  { a: 'lissitzky', b: 'vandoesburg', text: 'They met in Berlin and, at the Düsseldorf Congress of International Progressive Artists in 1922, spoke together for an international Constructivism. De Stijl and the Russians shared one dream: an art for building a new society.' },
+  { a: 'vandoesburg', b: 'taeuber', text: 'From 1926 to 1928 Sophie Taeuber-Arp, Hans Arp and van Doesburg redesigned the Aubette in Strasbourg — a café, dance hall and cinema — as one walk-in abstract painting.' },
+  { a: 'vandoesburg', b: 'schwitters', text: 'In 1923 van Doesburg, his wife Nelly and Schwitters toured Holland with Dada performances. De Stijl\'s strict geometry and Dada\'s nonsense turned out to be close allies against tradition.' },
+  { a: 'picabia', b: 'taeuber', text: 'In January 1919 Picabia came to Zurich and met the Dada group of Tristan Tzara, Hans Arp and Sophie Taeuber; for a few weeks Zurich Dada and the Dada of Paris and New York joined forces.' },
+  { a: 'miro', b: 'tanguy', text: 'Both joined the Surrealists in Paris around 1925 and showed with the group. Two opposite answers to automatism: Miró\'s bright, flat, floating signs and Tanguy\'s deep, silent dream spaces.' }
 ];
 
 export const artistById = Object.fromEntries([LOBBY, ...ARTISTS].map((a) => [a.id, a]));

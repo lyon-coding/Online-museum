@@ -406,7 +406,7 @@ function openInfo() {
       <div class="connections">${linkList('Way out', l.back)}</div>`;
   } else if (currentId === 'lobby') {
     html = `<h2>From Impression to Abstraction</h2>
-      <p>This museum follows modern painting from Manet in the 1860s to the first abstract paintings of the 1910s. Each room is dedicated to one artist, with paintings hung in chronological order.</p>
+      <p>This museum follows modern painting from Manet in the 1860s, through the first abstract paintings of the 1910s, to Dada, the Bauhaus and Surrealism in the 1920s and 30s. Each room is dedicated to one artist, with paintings hung in chronological order.</p>
       <p>The central question: <em>how does one movement become another?</em> In every room, doors behind you lead to the artist's roots, doors ahead to the painters who followed, and side doors to contemporaries.</p>
       ${MOVEMENTS.map((mm) => `<div class="mv-row" style="--c:${mm.color}"><strong>${esc(mm.name)}</strong> <span class="muted">${mm.start}–${mm.end}</span><p>${esc(mm.roots)}</p></div>`).join('')}`;
   } else {

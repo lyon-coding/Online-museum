@@ -734,7 +734,7 @@ export function buildRoom(opts) {
   };
 
   if (isLobby) {
-    onWall('front', new THREE.Mesh(new THREE.PlaneGeometry(W * 0.86, 1.4), new THREE.MeshBasicMaterial({ map: wallLettering({ title: 'From Impression to Abstraction', subtitle: 'A walk through modern painting · 1860–1930', color: '#2a2520', accent: '#9a7b47', width: W * 0.86, height: 1.4 }), transparent: true })), 0, H - 0.95);
+    onWall('front', new THREE.Mesh(new THREE.PlaneGeometry(W * 0.86, 1.4), new THREE.MeshBasicMaterial({ map: wallLettering({ title: 'From Impression to Abstraction', subtitle: 'A walk through modern painting · 1860–1935', color: '#2a2520', accent: '#9a7b47', width: W * 0.86, height: 1.4 }), transparent: true })), 0, H - 0.95);
     const fp = sidePanels('front', links.front.length);
     if (fp.length) {
       panel('front', fp[0].x, fp[0].pw, 1.9, {
@@ -752,7 +752,7 @@ export function buildRoom(opts) {
       kicker: 'The question',
       title: 'How does one movement become another?',
       body: [
-        'Between 1860 and 1930 painting changed more than in the four centuries before. Each new movement grew out of the one before it — by extending it, or by rebelling against it.',
+        'Between 1860 and 1935 painting changed more than in the four centuries before. Each new movement grew out of the one before it — by extending it, or by rebelling against it.',
         'In every room, the doors behind you lead back to the artist\'s roots; the doors ahead lead to the painters who followed. Side doors in the middle of the room lead to contemporaries working in the same period and movement.'
       ]
     });

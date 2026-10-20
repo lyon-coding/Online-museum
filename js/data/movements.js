@@ -103,6 +103,48 @@ export const MOVEMENTS = [
       'Two roads: Expressionist colour and music-like composition (Kandinsky), and the Cubist grid and plane (Mondrian, Malevich). Around 1910–1915 several painters, independently, removed the recognisable object from painting.',
     became:
       'Geometric abstraction shaped the Bauhaus, modern design and architecture; Kandinsky\'s lyrical abstraction — and Monet\'s late Water Lilies — were rediscovered by the Abstract Expressionists in New York after 1945.'
+  },
+  {
+    id: 'constructivism',
+    name: 'Constructivism, De Stijl & the Bauhaus',
+    short: 'Constructivism & Bauhaus',
+    start: 1915,
+    end: 1933,
+    color: '#c0392b',
+    roots:
+      'Malevich\'s Suprematism and Mondrian\'s Neo-Plasticism, both born of Cubism, met the hopes of the Russian Revolution and of post-war Europe. ' +
+      'If pure form and colour could be the whole of a painting, the young artists asked, why not of a poster, a chair, a house or a city? ' +
+      'In Vitebsk, Moscow, Leiden and the new Bauhaus school at Weimar (1919), painting became a laboratory for building a new world.',
+    became:
+      'The Bauhaus moved to Dessau in 1925 and was closed by the Nazis in 1933; Stalin\'s Socialist Realism ended the Russian avant-garde. ' +
+      'Their teachers and students emigrated, and their ideas became the language of modern architecture, typography and design worldwide.'
+  },
+  {
+    id: 'dada',
+    name: 'Dada',
+    short: 'Dada',
+    start: 1916,
+    end: 1924,
+    color: '#b8962e',
+    roots:
+      'Disgust at the slaughter of the First World War. In neutral Zurich in 1916, at the Cabaret Voltaire, a group of refugee artists and poets declared war on reason, taste and "art" itself — the culture that had led to the trenches. ' +
+      'They borrowed Cubist collage, Futurist noise and provocation, and the abstract forms of the new painting, and added chance, nonsense and the machine.',
+    became:
+      'Dada spread to New York, Berlin, Cologne, Hanover and Paris, then burned itself out around 1922–24. ' +
+      'In Paris, André Breton kept its revolt but gave it a purpose — exploring the unconscious. His Manifesto of Surrealism of 1924 turned Dada into Surrealism.'
+  },
+  {
+    id: 'surrealism',
+    name: 'Surrealism',
+    short: 'Surrealism',
+    start: 1924,
+    end: 1950,
+    color: '#6a4c93',
+    roots:
+      'Dada\'s revolt, Sigmund Freud\'s theory of dreams and the unconscious, and the "metaphysical" paintings of Giorgio de Chirico, whose empty squares and long shadows seemed to come from a dream. ' +
+      'Breton defined Surrealism in 1924 as "pure psychic automatism": thought dictated without any control by reason.',
+    became:
+      'Fleeing the Second World War, the Surrealists reached New York. Their automatic drawing and dream space — Miró above all — showed the young American painters a way to let the hand and the unconscious lead: Abstract Expressionism, after 1945.'
   }
 ];
 
