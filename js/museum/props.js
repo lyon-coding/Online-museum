@@ -762,6 +762,254 @@ const THEMES = {
   }
 };
 
+// ───────────────────────── 20th-century movements ─────────────────────────
+
+Object.assign(THEMES, {
+  gears(ctx) {
+    // Dada / Picabia: mechanomorphic gears turning on a stand.
+    const z = -ctx.D * 0.18;
+    const g = new THREE.Group();
+    g.add(mesh(new THREE.BoxGeometry(1.6, 0.8, 0.6), M('#2b2b2b', 0.5), 0, 0.4, 0));
+    const metal = M('#a8a29a', 0.35, 0.85);
+    const brass = M('#b48a3c', 0.3, 0.9);
+    const gears = [];
+    [[-0.45, 1.45, 0.42, 14, metal], [0.2, 1.75, 0.3, 10, brass], [0.62, 1.3, 0.22, 8, metal]].forEach(([x, y, r, teeth, mat], i) => {
+      const gear = new THREE.Group();
+      gear.add(mesh(new THREE.CylinderGeometry(r, r, 0.06, 32), mat));
+      for (let t = 0; t < teeth; t++) {
+        const a = (t / teeth) * Math.PI * 2;
+        const tooth = mesh(new THREE.BoxGeometry(0.07, 0.06, 0.08), mat, Math.cos(a) * (r + 0.03), 0, Math.sin(a) * (r + 0.03));
+        tooth.rotation.y = -a;
+        gear.add(tooth);
+      }
+      gear.add(mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.12, 12), M('#1a1a1a', 0.4)));
+      gear.rotation.x = Math.PI / 2;
+      gear.position.set(x, y, 0);
+      g.add(gear);
+      gears.push({ gear, dir: i % 2 ? -1 : 1, speed: 0.4 / r });
+      g.add(mesh(new THREE.CylinderGeometry(0.02, 0.02, y - 0.8, 6), M('#1a1a1a', 0.4), x, (y + 0.8) / 2, -0.05));
+    });
+    ctx.animate.push((dt) => gears.forEach((o) => (o.gear.rotation.y += dt * o.dir * o.speed * 0.3)));
+    shadow(g, 0, 0, 2.4, 1.4);
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    ctx.addBox(0, z, 0.85, 0.35);
+    bench(ctx, 0, ctx.D * 0.2);
+  },
+
+  merz(ctx) {
+    // Schwitters: a Merz column assembled from found fragments.
+    const z = -ctx.D * 0.18;
+    const g = new THREE.Group();
+    const cols = ['#c9b48a', '#8a4b3a', '#2e3a4a', '#e8e2d6', '#b23a2a', '#4f6b3a', '#d8c24a'];
+    let y = 0;
+    for (let i = 0; i < 9; i++) {
+      const w = 0.35 + ((i * 37) % 10) / 22;
+      const h = 0.18 + ((i * 53) % 10) / 40;
+      const piece = mesh(new THREE.BoxGeometry(w, h, 0.3 + ((i * 29) % 10) / 30), M(cols[i % cols.length], 0.8), ((i * 7) % 5 - 2) * 0.05, y + h / 2, 0);
+      piece.rotation.y = i * 0.5;
+      g.add(piece);
+      y += h;
+    }
+    g.add(mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.25, 6), M('#7a5a35', 0.6), 0.05, y + 0.12, 0));
+    g.add(mesh(new THREE.TorusGeometry(0.16, 0.025, 8, 24), M('#9a9a9a', 0.4, 0.7), -0.1, y + 0.35, 0));
+    shadow(g, 0, 0, 1.6, 1.6);
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    ctx.addCircle(0, z, 0.55);
+    bench(ctx, 0, ctx.D * 0.2);
+  },
+
+  dadahead(ctx) {
+    // Taeuber-Arp: a turned and painted wooden head on a plinth.
+    const z = -ctx.D * 0.18;
+    const g = new THREE.Group();
+    pedestal(g, 0, 0, 0.7, 1.0, '#f1efe9');
+    const pts = [];
+    for (let i = 0; i <= 16; i++) {
+      const t = i / 16;
+      pts.push(new THREE.Vector2(0.03 + Math.sin(t * Math.PI) * 0.17 + (t < 0.15 ? 0.06 : 0), t * 0.5));
+    }
+    const head = new THREE.Mesh(new THREE.LatheGeometry(pts, 32), M('#e9d8b4', 0.6));
+    head.position.y = 1.02;
+    g.add(head);
+    [['#2b62c4', 0.12, 0.2], ['#d2452e', -0.1, 0.3], ['#1d1d1d', 0.0, 0.42]].forEach(([c, x, y]) => {
+      const dot = mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.01, 16), M(c, 0.5), x, 1.02 + y, 0.17);
+      dot.rotation.x = Math.PI / 2;
+      g.add(dot);
+    });
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    ctx.addCircle(0, z, 0.55);
+    bench(ctx, 0, ctx.D * 0.2);
+  },
+
+  biomorphs(ctx) {
+    // Tanguy: smooth, bone-like forms on a bare plain, with long shadows.
+    const z = -ctx.D * 0.05;
+    const g = new THREE.Group();
+    const stone = [M('#c9c2b6', 0.35), M('#9ea7ad', 0.35), M('#d9cdb8', 0.35), M('#7d8a92', 0.3)];
+    for (let i = 0; i < 7; i++) {
+      const f = new THREE.Group();
+      const body = mesh(new THREE.SphereGeometry(0.22 + (i % 3) * 0.08, 24, 16), stone[i % stone.length]);
+      body.scale.set(1, 1.6 + (i % 2) * 0.8, 0.8);
+      body.position.y = 0.35 + (i % 3) * 0.12;
+      f.add(body);
+      const tip = mesh(new THREE.ConeGeometry(0.06, 0.4, 16), stone[(i + 1) % stone.length], 0, body.position.y + 0.45 + (i % 2) * 0.2, 0);
+      f.add(tip);
+      const a = i * 0.9;
+      f.position.set(Math.cos(a) * (0.6 + (i % 3) * 0.45), 0, Math.sin(a) * (0.5 + (i % 2) * 0.4));
+      f.rotation.z = ((i % 3) - 1) * 0.15;
+      g.add(f);
+      shadow(g, f.position.x + 0.5, f.position.z + 0.3, 1.6, 0.6);
+    }
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    ctx.addCircle(0, z, 1.6);
+  },
+
+  mirostars(ctx) {
+    // In the spirit of Miró: a hanging mobile of stars, moons and coloured discs.
+    const z = -ctx.D * 0.1;
+    const g = new THREE.Group();
+    const cols = ['#d52b1e', '#1f4fa3', '#f2c12e', '#1d1d1d', '#2f8a4a'];
+    const arm = new THREE.Group();
+    arm.position.y = 4.6;
+    arm.add(mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.8, 4), M('#111', 0.5), 0, 0.4, 0));
+    const shapes = [];
+    for (let i = 0; i < 9; i++) {
+      const c = cols[i % cols.length];
+      let geo;
+      if (i % 3 === 0) {
+        const st = new THREE.Shape();
+        for (let k = 0; k < 10; k++) {
+          const r = k % 2 ? 0.07 : 0.18;
+          const a = (k / 10) * Math.PI * 2;
+          k ? st.lineTo(Math.cos(a) * r, Math.sin(a) * r) : st.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+        }
+        geo = new THREE.ExtrudeGeometry(st, { depth: 0.02, bevelEnabled: false });
+      } else if (i % 3 === 1) {
+        const mo = new THREE.Shape();
+        mo.absarc(0, 0, 0.16, 0, Math.PI * 2, false);
+        const hole = new THREE.Path();
+        hole.absarc(0.07, 0.03, 0.14, 0, Math.PI * 2, true);
+        mo.holes.push(hole);
+        geo = new THREE.ExtrudeGeometry(mo, { depth: 0.02, bevelEnabled: false });
+      } else geo = new THREE.CylinderGeometry(0.12 + (i % 2) * 0.06, 0.12 + (i % 2) * 0.06, 0.02, 32);
+      const m = mesh(geo, M(c, 0.5, 0, { side: THREE.DoubleSide }));
+      if (i % 3 === 2) m.rotation.x = Math.PI / 2;
+      const holder = new THREE.Group();
+      const len = 0.6 + (i % 4) * 0.35;
+      holder.add(mesh(new THREE.CylinderGeometry(0.004, 0.004, len, 4), M('#111', 0.5), 0, -len / 2, 0));
+      m.position.y = -len;
+      holder.add(m);
+      const a = (i / 9) * Math.PI * 2;
+      holder.position.set(Math.cos(a) * (0.5 + (i % 3) * 0.35), 0, Math.sin(a) * (0.5 + (i % 3) * 0.35));
+      arm.add(holder);
+      shapes.push({ holder, phase: i });
+    }
+    g.add(arm);
+    ctx.animate.push((dt, t) => {
+      arm.rotation.y = t * 0.08;
+      shapes.forEach(({ holder, phase }) => (holder.rotation.y = Math.sin(t * 0.5 + phase) * 0.6));
+    });
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    bench(ctx, 0, ctx.D * 0.22);
+  },
+
+  triadic(ctx) {
+    // Schlemmer: two figures in the geometric costumes of the Triadic Ballet.
+    const z = -ctx.D * 0.18;
+    const g = new THREE.Group();
+    g.add(mesh(new THREE.CylinderGeometry(1.2, 1.2, 0.15, 40), M('#1d1d1d', 0.5), 0, 0.075, 0));
+    const fig = (x, cols) => {
+      const f = new THREE.Group();
+      f.add(mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.7, 8), M('#e8e2d6', 0.5), -0.08, 0.5, 0));
+      f.add(mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.7, 8), M('#e8e2d6', 0.5), 0.08, 0.5, 0));
+      f.add(mesh(new THREE.ConeGeometry(0.4, 0.5, 24, 1, true), M(cols[0], 0.5, 0, { side: THREE.DoubleSide }), 0, 1.0, 0));
+      f.add(mesh(new THREE.SphereGeometry(0.2, 24, 16), M(cols[1], 0.4), 0, 1.35, 0));
+      f.add(mesh(new THREE.SphereGeometry(0.12, 24, 16), M('#f2efe9', 0.3), 0, 1.68, 0));
+      f.add(mesh(new THREE.CylinderGeometry(0.0, 0.14, 0.25, 4), M(cols[2], 0.4), 0, 1.88, 0));
+      for (const sx of [-1, 1]) {
+        const arm = mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.5, 8), M(cols[1], 0.4), sx * 0.3, 1.35, 0);
+        arm.rotation.z = sx * 1.1;
+        f.add(arm);
+        f.add(mesh(new THREE.SphereGeometry(0.06, 12, 8), M(cols[2], 0.4), sx * 0.52, 1.47, 0));
+      }
+      f.position.set(x, 0.15, 0);
+      return f;
+    };
+    const a = fig(-0.5, ['#d52b1e', '#f2c12e', '#1d1d1d']);
+    const b = fig(0.5, ['#1f4fa3', '#e8e2d6', '#d52b1e']);
+    g.add(a, b);
+    ctx.animate.push((dt, t) => {
+      a.rotation.y = Math.sin(t * 0.4) * 0.6;
+      b.rotation.y = -Math.sin(t * 0.4 + 1) * 0.6;
+    });
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    ctx.addCircle(0, z, 1.3);
+    bench(ctx, 0, ctx.D * 0.22);
+  },
+
+  proun(ctx) {
+    // Lissitzky / Constructivism: a floating 'Proun' of planes and volumes.
+    const z = -ctx.D * 0.12;
+    const g = new THREE.Group();
+    g.add(mesh(new THREE.BoxGeometry(1.4, 0.06, 1.4), M('#1d1d1d', 0.5), 0, 0.03, 0));
+    const parts = [
+      [new THREE.BoxGeometry(1.2, 0.08, 0.6), '#d9d4cb', 0, 1.6, 0, 0.2],
+      [new THREE.BoxGeometry(0.3, 0.3, 0.3), '#c72a1f', 0.35, 1.85, 0.1, 0.5],
+      [new THREE.CylinderGeometry(0.15, 0.15, 0.6, 24), '#1d1d1d', -0.4, 1.3, 0.1, 0.9],
+      [new THREE.BoxGeometry(0.05, 1.2, 0.05), '#1d1d1d', 0.1, 1.2, -0.2, -0.4],
+      [new THREE.ConeGeometry(0.22, 0.5, 3), '#c72a1f', -0.2, 2.2, 0.0, 1.2]
+    ];
+    const meshes = parts.map(([geo, c, x, y, zz, r]) => {
+      const m = mesh(geo, M(c, 0.5), x, y, zz);
+      m.rotation.set(r * 0.3, r, r * 0.5);
+      g.add(m);
+      return m;
+    });
+    ctx.animate.push((dt, t) => {
+      g.children.slice(1).forEach((m, i) => (m.position.y = parts[i][3] + Math.sin(t * 0.5 + i) * 0.04));
+      g.rotation.y = Math.sin(t * 0.15) * 0.3;
+    });
+    g.position.set(0, 0, z);
+    ctx.group.add(g);
+    ctx.addCircle(0, z, 0.85);
+    bench(ctx, 0, ctx.D * 0.22);
+  },
+
+  colorgrid(ctx) {
+    // Klee's 'magic squares': a rug of softly modulated colour squares.
+    const S = 512;
+    const c = document.createElement('canvas');
+    c.width = c.height = S;
+    const g2 = c.getContext('2d');
+    const pal = ['#c96d4a', '#e2b45c', '#7a8f5a', '#5a7fa3', '#a35a6d', '#d9c9a0', '#6b5a8f', '#c98f5a'];
+    const n = 8;
+    for (let i = 0; i < n; i++)
+      for (let j = 0; j < n; j++) {
+        g2.fillStyle = pal[(i * 3 + j * 5 + ((i * j) % 3)) % pal.length];
+        g2.fillRect((i * S) / n, (j * S) / n, S / n + 1, S / n + 1);
+      }
+    g2.globalAlpha = 0.15;
+    for (let k = 0; k < 3000; k++) {
+      g2.fillStyle = k % 2 ? '#fff' : '#000';
+      g2.fillRect(Math.random() * S, Math.random() * S, 2, 2);
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const rug = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 3.2), new THREE.MeshStandardMaterial({ map: tex, roughness: 1 }));
+    rug.rotation.x = -Math.PI / 2;
+    rug.position.set(0, 0.008, 0);
+    rug.userData.noShadow = true;
+    ctx.group.add(rug);
+    bench(ctx, 0, 0, 2.0);
+  }
+});
+
 export function buildProps(ctx, list) {
   for (const p of list) {
     const fn = THEMES[p];

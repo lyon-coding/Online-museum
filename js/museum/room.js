@@ -273,7 +273,7 @@ function movementChart(movements, width, height) {
   const pad = Wp * 0.05;
   ctx.fillStyle = '#c9a96e';
   ctx.font = `600 ${Math.round(Wp * 0.018)}px ${SANS}`;
-  ctx.fillText('THE ROAD FROM 1850 TO 1930', pad, pad + Wp * 0.015);
+  ctx.fillText(`THE ROAD FROM 1850 TO ${movements.length > 8 ? 1940 : 1930}`, pad, pad + Wp * 0.015);
   ctx.fillStyle = '#f3ede2';
   ctx.font = `600 ${Math.round(Wp * 0.045)}px ${SERIF}`;
   ctx.fillText('One movement grows out of another', pad, pad + Wp * 0.07);
@@ -282,14 +282,14 @@ function movementChart(movements, width, height) {
   const x0 = pad + Wp * 0.2;
   const x1 = Wp - pad;
   const yr0 = 1845;
-  const yr1 = 1935;
+  const yr1 = movements.length > 8 ? 1948 : 1935;
   const X = (y) => x0 + ((y - yr0) / (yr1 - yr0)) * (x1 - x0);
   const lane = (y1 - y0) / movements.length;
   ctx.strokeStyle = 'rgba(255,255,255,0.12)';
   ctx.lineWidth = 2;
   ctx.font = `500 ${Math.round(Wp * 0.014)}px ${SANS}`;
   ctx.fillStyle = 'rgba(255,255,255,0.5)';
-  for (let y = 1850; y <= 1930; y += 10) {
+  for (let y = 1850; y <= yr1 - 5; y += 10) {
     ctx.beginPath();
     ctx.moveTo(X(y), y0);
     ctx.lineTo(X(y), y1);
@@ -301,7 +301,7 @@ function movementChart(movements, width, height) {
     ctx.fillStyle = m.color;
     const r = lane * 0.35;
     const xa = X(m.start);
-    const xb = X(Math.min(m.end, 1932));
+    const xb = X(Math.min(m.end, yr1 - 3));
     ctx.beginPath();
     ctx.roundRect ? ctx.roundRect(xa, y, xb - xa, lane * 0.7, r) : ctx.rect(xa, y, xb - xa, lane * 0.7);
     ctx.fill();
@@ -770,8 +770,8 @@ export function buildRoom(opts) {
       ]
     });
     panel('back', W / 4, 3.2, 2.1, {
-      kicker: 'Seven steps',
-      title: 'From Realism to Abstraction',
+      kicker: `${['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'][movements.length] || movements.length} steps`,
+      title: `From ${movements[0].short} to ${movements[movements.length - 1].short}`,
       body: movements.map((m) => `${m.short}: ${m.start}–${m.end}`)
     });
   } else if (isWing) {
