@@ -15,7 +15,7 @@ async function api(params) {
     try {
       return JSON.parse(text);
     } catch {
-      await sleep(5000 * (i + 1));
+      await sleep(3000 * (i + 1));
     }
   }
   return {};
@@ -38,31 +38,21 @@ const ARTISTS = {
   'Umberto Boccioni': ['Paintings by Umberto Boccioni']
 };
 
-async function filesIn(cat) {
-  const d = await api({ action: 'query', generator: 'categorymembers', gcmtitle: 'Category:' + cat, gcmtype: 'file', gcmlimit: '200', prop: 'imageinfo', iiprop: 'size|mime|extmetadata', iiextmetadatafilter: 'ObjectName|DateTimeOriginal' });
+async function search(q) {
+  const d = await api({ action: 'query', generator: 'search', gsrsearch: q, gsrnamespace: '6', gsrlimit: '60', prop: 'imageinfo', iiprop: 'size|mime|extmetadata', iiextmetadatafilter: 'ObjectName|DateTimeOriginal' });
   return (d.query && d.query.pages) || [];
-}
-async function subcats(cat) {
-  const d = await api({ action: 'query', list: 'categorymembers', cmtitle: 'Category:' + cat, cmtype: 'subcat', cmlimit: '100' });
-  return ((d.query && d.query.categorymembers) || []).map((c) => c.title.replace(/^Category:/, ''));
 }
 
 for (const [name, cats] of Object.entries(ARTISTS)) {
   const seen = new Map();
-  let catsFound = 0;
-  for (const cat of cats) {
-    const subs = await subcats(cat);
-    const files = await filesIn(cat);
-    if (subs.length || files.length) catsFound++;
-    const all = [...files];
-    for (const sc of subs.slice(0, 25)) all.push(...(await filesIn(sc)));
-    for (const p of all) {
-      const ii = p.imageinfo && p.imageinfo[0];
-      if (!ii || !/jpeg|png|tiff|webp/.test(ii.mime) || ii.width < 700) continue;
-      const m = ii.extmetadata || {};
-      seen.set(p.title, `${p.title.replace(/^File:/, '')} | ${ii.width}x${ii.height} | ${strip(m.DateTimeOriginal && m.DateTimeOriginal.value).slice(0, 24)} | ${strip(m.ObjectName && m.ObjectName.value).slice(0, 70)}`);
-    }
+  // one search across the category tree (deepcat), plus a plain name search as a fallback
+  const pages = [...(await search(`deepcat:"${cats[0]}"`)), ...(await search(`${name} painting`))];
+  for (const p of pages) {
+    const ii = p.imageinfo && p.imageinfo[0];
+    if (!ii || !/jpeg|png|tiff|webp/.test(ii.mime) || ii.width < 700) continue;
+    const m = ii.extmetadata || {};
+    seen.set(p.title, `${p.title.replace(/^File:/, '')} | ${ii.width}x${ii.height} | ${strip(m.DateTimeOriginal && m.DateTimeOriginal.value).slice(0, 24)} | ${strip(m.ObjectName && m.ObjectName.value).slice(0, 70)}`);
   }
-  console.log(`\n### ${name} (${seen.size} files, ${catsFound} categories found)`);
+  console.log(`\n### ${name} (${seen.size} files)`);
   for (const line of [...seen.values()].sort().slice(0, 70)) console.log(line);
 }
