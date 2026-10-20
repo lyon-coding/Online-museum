@@ -869,8 +869,9 @@ Object.assign(THEMES, {
   },
 
   mirostars(ctx) {
-    // In the spirit of Miró: a hanging mobile of stars, moons and coloured discs.
-    const z = -ctx.D * 0.1;
+    // In the spirit of Miró: a hanging mobile of stars, moons and coloured discs,
+    // hung high and near the entrance so it doesn't hide the wall title.
+    const z = ctx.D * 0.06;
     const g = new THREE.Group();
     const cols = ['#d52b1e', '#1f4fa3', '#f2c12e', '#1d1d1d', '#2f8a4a'];
     const arm = new THREE.Group();
@@ -899,7 +900,7 @@ Object.assign(THEMES, {
       const m = mesh(geo, M(c, 0.5, 0, { side: THREE.DoubleSide }));
       if (i % 3 === 2) m.rotation.x = Math.PI / 2;
       const holder = new THREE.Group();
-      const len = 0.6 + (i % 4) * 0.35;
+      const len = 0.35 + (i % 4) * 0.2;
       holder.add(mesh(new THREE.CylinderGeometry(0.004, 0.004, len, 4), M('#111', 0.5), 0, -len / 2, 0));
       m.position.y = -len;
       holder.add(m);
@@ -915,7 +916,7 @@ Object.assign(THEMES, {
     });
     g.position.set(0, 0, z);
     ctx.group.add(g);
-    bench(ctx, 0, ctx.D * 0.22);
+    if (ctx.D > 15) bench(ctx, 0, ctx.D * 0.22); // short rooms keep the entrance clear
   },
 
   triadic(ctx) {
