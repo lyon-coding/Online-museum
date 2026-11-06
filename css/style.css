@@ -837,18 +837,23 @@ kbd {
   display: flex;
   align-items: flex-start;
   max-height: 52vh;
-  overflow-y: auto;
   margin-top: 1rem;
   border: 1px solid var(--line);
   border-radius: 12px;
-  overflow: hidden;
+  /* one scroller for both directions; the lane labels stay pinned on the left */
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background: rgba(0, 0, 0, 0.2);
 }
 .tl-labels {
+  position: sticky;
+  left: 0;
+  z-index: 2;
   flex: none;
   width: 128px;
   border-right: 1px solid var(--line);
-  background: rgba(0, 0, 0, 0.25);
+  background: #14110f;
 }
 .tl-label {
   --c: var(--gold);
@@ -876,9 +881,7 @@ kbd {
   font-size: 0.68rem;
 }
 .tl-scroll {
-  overflow-x: auto;
-  flex: 1;
-  -webkit-overflow-scrolling: touch;
+  flex: none;
 }
 .tl-svg {
   display: block;

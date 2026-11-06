@@ -48,7 +48,7 @@ export class Timeline {
     this.svg = root.querySelector('svg');
     this.labels = root.querySelector('.tl-labels');
     this.detail = root.querySelector('.tl-detail');
-    this.scroll = root.querySelector('.tl-scroll');
+    this.scroll = root.querySelector('.tl-body');
   }
 
   isOpen() {
@@ -180,8 +180,16 @@ export class Timeline {
     if (currentId && this.byId[currentId]) {
       this.select(currentId);
       const a = this.byId[currentId];
-      requestAnimationFrame(() => (this.scroll.scrollLeft = Math.max(0, this._x(a.start) - this.scroll.clientWidth / 3)));
-    } else this.selectMovement(this.movements[0].id);
+      requestAnimationFrame(() => {
+        const s = this.scroll;
+        const labelsW = this.labels.offsetWidth;
+        s.scrollLeft = Math.max(0, this._x(a.start) - (s.clientWidth - labelsW) / 3);
+        s.scrollTop = Math.max(0, a._y - s.clientHeight / 2);
+      });
+    } else {
+      this.selectMovement(this.movements[0].id);
+      this.scroll.scrollTop = 0;
+    }
     for (const [id, g] of Object.entries(this.barEls)) g.classList.toggle('current', id === currentId);
   }
 
